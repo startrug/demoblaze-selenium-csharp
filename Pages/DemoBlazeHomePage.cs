@@ -1,19 +1,17 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
-namespace demoblaze_selenium_csharp
+namespace demoblaze_selenium_csharp.Pages
 {
-    internal class DemoBlazeHomePage
+    public class DemoBlazeHomePage : BasePage
     {
-        private readonly IWebDriver _driver;
-
-        public DemoBlazeHomePage(IWebDriver driver)
-        {
-            _driver = driver;
-        }
-
+        public DemoBlazeHomePage(IWebDriver driver) : base(driver) { }
+        
         public string HomePageUrl => "https://www.demoblaze.com/index.html";
 
         public By NavbarLocator => By.Id("navbarExample");
+
+        public By ContactLickLocator => By.LinkText("Contact");
 
         public const string HomePageTitle = "STORE";
 
@@ -25,6 +23,11 @@ namespace demoblaze_selenium_csharp
         internal bool PageIsOpened() => _driver.FindElement(NavbarLocator).Displayed;
 
         internal bool PageTitleIsCorrect() => _driver.Title == HomePageTitle;
-        
+
+        internal ContactPage ClickContactLink()        {
+            
+            _driver.FindElement(ContactLickLocator).Click();
+            return new ContactPage(_driver);
+        }        
     }
 }
