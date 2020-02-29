@@ -1,5 +1,4 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp
 {
@@ -16,12 +15,16 @@ namespace demoblaze_selenium_csharp
 
         public By NavbarLocator => By.Id("navbarExample");
 
+        public const string HomePageTitle = "STORE";
+
         internal void GoTo()
         {
             _driver.Navigate().GoToUrl(HomePageUrl);
         }
 
         internal bool PageIsOpened() => _driver.FindElement(NavbarLocator).Displayed;
+
+        internal bool PageTitleIsCorrect() => _driver.Title == HomePageTitle;
         
     }
 }

@@ -24,12 +24,13 @@ namespace demoblaze_selenium_csharp
         }
 
         [Test]
-        public void GivenUrlAddress_WhenUserOpenHomepage_ThenHomePageIsOpened()
+        public void GivenUrlAddress_WhenUserOpenHomepage_ThenHomePageIsOpenedAndPageTitleIsCorrect()
         {
             DemoBlazeHomePage demoBlazeHomePage = new DemoBlazeHomePage(Driver);            
             demoBlazeHomePage.GoTo();
 
             Assert.That(demoBlazeHomePage.PageIsOpened(), Is.True);
+            Assert.That(demoBlazeHomePage.PageTitleIsCorrect(), Is.True);
         }
     }
 }
