@@ -12,11 +12,15 @@ namespace demoblaze_selenium_csharp.Pages
 
         public By NavbarLocator => By.Id("navbarExample");
 
-        public By ContactLinkLocator => By.LinkText("Contact");
+        public By ContactLocator => By.LinkText("Contact");
 
         public By AboutUsLocator => By.LinkText("About us");
 
         public By CartLocator => By.Id("cartur");
+
+        public By LogInLinkLocator => By.Id("login2");
+
+        public By SignUpLinkLocator => By.Id("signin2");
 
         public const string HomePageTitle = "STORE";
 
@@ -29,22 +33,34 @@ namespace demoblaze_selenium_csharp.Pages
 
         internal bool IsPageTitleCorrect() => _driver.Title == HomePageTitle;
 
-        internal ContactPage ClickContactLink()        {
+        internal ContactWindow ClickContactLink()        {
 
-            Click(ContactLinkLocator);            
-            return new ContactPage(_driver);
+            Click(ContactLocator);            
+            return new ContactWindow(_driver);
         }
 
-        internal AboutUsPage ClickAboutUsLink()
+        internal AboutUsWindow ClickAboutUsLink()
         {
             Click(AboutUsLocator);
-            return new AboutUsPage(_driver);
+            return new AboutUsWindow(_driver);
         }
 
         internal CartPage ClickCartLink()
         {
             Click(CartLocator);
             return new CartPage(_driver);
+        }
+
+        internal LogInWindow ClickLogInLink()
+        {
+            Click(LogInLinkLocator);
+            return new LogInWindow(_driver);
+        }
+
+        internal SignUpWindow ClickSignUpLink()
+        {
+            Click(SignUpLinkLocator);
+            return new SignUpWindow(_driver);
         }
     }
 }

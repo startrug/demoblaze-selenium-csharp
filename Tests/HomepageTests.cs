@@ -16,34 +16,51 @@ namespace demoblaze_selenium_csharp.Tests
         [Test, Order(2)]
         public void GivenNewContactPage_WhenUserOpensContactPage_ThenPageIsOpened()
         {            
-            ContactPage = DemoBlazeHomePage.ClickContactLink();
+            ContactWindow = DemoBlazeHomePage.ClickContactLink();
 
-            Assert.That(ContactPage.IsWindowOpened(), Is.True);
+            Assert.That(ContactWindow.IsWindowOpened(WindowType.Contact), Is.True);
         }
 
         [Test, Order(3)]
         public void GivenNewContactPage_WhenUserClosesContactPage_ThenPageIsClosed()
         {
-            ContactPage = DemoBlazeHomePage.ClickContactLink();
-            ContactPage.ClickClose();
+            ContactWindow = DemoBlazeHomePage.ClickContactLink();
+            ContactWindow.ClickClose();
 
-            Assert.That(ContactPage.IsWindowClosed(), Is.True);
+            Assert.That(ContactWindow.IsWindowClosed(), Is.True);
         }
 
         [Test, Order(4)]
-        public void GivenNewAboutUsPage_WhenUserOpensAboutUsPage_ThenVideoInPageIsAvailable()
+        public void GivenNewAboutUsPage_WhenUserOpensAboutUsPage_ThenWindowIsOpenedVideoIsAvailable()
         {
-            AboutUsPage = DemoBlazeHomePage.ClickAboutUsLink();
-            
-            Assert.That(AboutUsPage.IsVideoAvailable(), Is.True);
+            AboutUsWindow = DemoBlazeHomePage.ClickAboutUsLink();
+
+            Assert.That(AboutUsWindow.IsWindowOpened(WindowType.AboutUs), Is.True);
+            Assert.That(AboutUsWindow.IsVideoAvailable(), Is.True);
         }
 
-        [Test, Order(4)]
+        [Test, Order(5)]
         public void GivenNewCartPage_WhenUserOpensCartPage_ThenPageIsOpened()
         {
             CartPage = DemoBlazeHomePage.ClickCartLink();
 
             Assert.That(CartPage.IsCartPageOpened(), Is.True);
+        }
+
+        [Test, Order(6)]
+        public void GivenNewLogInWindow_WhenUserOpensLogInWindow_ThenWindowIsOpened()
+        {
+            LogInWindow = DemoBlazeHomePage.ClickLogInLink();
+
+            Assert.That(LogInWindow.IsWindowOpened(WindowType.LogIn), Is.True);
+        }
+
+        [Test, Order(7)]
+        public void GivenNewSignUpWindow_WhenUserOpensSignUpWindow_ThenWindowIsOpened()
+        {
+            SignUpWindow = DemoBlazeHomePage.ClickSignUpLink();
+
+            Assert.That(SignUpWindow.IsWindowOpened(WindowType.SignUp), Is.True);
         }
     }
 }

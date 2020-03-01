@@ -8,6 +8,6 @@ namespace demoblaze_selenium_csharp.Pages
 
         public By PlaceOrderButton => By.XPath("//button[text()='Place Order']");
 
-        internal bool IsCartPageOpened() => WaitForElement(PlaceOrderButton).Displayed;
+        internal bool IsCartPageOpened() => WaitForElementVisibility(PlaceOrderButton);
     }
 }

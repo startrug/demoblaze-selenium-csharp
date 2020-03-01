@@ -9,9 +9,11 @@ namespace demoblaze_selenium_csharp.Tests
     {
         public IWebDriver Driver { get; private set; }
         public DemoBlazeHomePage DemoBlazeHomePage { get; private set; }
-        public ContactPage ContactPage { get; set; }
-        public AboutUsPage AboutUsPage { get; set; }
+        public ContactWindow ContactWindow { get; set; }
+        public AboutUsWindow AboutUsWindow { get; set; }
         public CartPage CartPage { get; set; }
+        public LogInWindow LogInWindow { get; set; }
+        public SignUpWindow SignUpWindow { get; set; }
 
         [SetUp]
         public void SetupBeforeEverySingleTest()
