@@ -69,6 +69,7 @@
     <Compile Include="Pages\ContactPage.cs" />
     <Compile Include="Pages\AboutUsPage.cs" />
     <Compile Include="Tests\BaseTest.cs" />
+    <Compile Include="Pages\CartPage.cs" />
     <Compile Include="Tests\HomepageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

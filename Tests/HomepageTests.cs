@@ -6,13 +6,11 @@ namespace demoblaze_selenium_csharp.Tests
     [TestFixture]
     public class HomepageTests : BaseTest
     {
-        public AboutUsPage AboutUsPage { get; private set; }
-
         [Test, Order(1)]
         public void GivenUrlAddress_WhenUserOpensHomepage_ThenHomepageIsOpenedAndPageTitleIsCorrect()
         {           
-            Assert.That(DemoBlazeHomePage.PageIsOpened(), Is.True);
-            Assert.That(DemoBlazeHomePage.PageTitleIsCorrect(), Is.True);
+            Assert.That(DemoBlazeHomePage.IsPageOpened(), Is.True);
+            Assert.That(DemoBlazeHomePage.IsPageTitleCorrect(), Is.True);
         }
 
         [Test, Order(2)]
@@ -20,15 +18,32 @@ namespace demoblaze_selenium_csharp.Tests
         {            
             ContactPage = DemoBlazeHomePage.ClickContactLink();
 
-            Assert.That(ContactPage.ContactPageIsOpened(), Is.True);
+            Assert.That(ContactPage.IsWindowOpened(), Is.True);
         }
 
         [Test, Order(3)]
-        public void GivenNewAboutUsPage_WhenUserOpensAboutUsPage_ThenPageIsOpenedAndVideoIsAvailable()
+        public void GivenNewContactPage_WhenUserClosesContactPage_ThenPageIsClosed()
+        {
+            ContactPage = DemoBlazeHomePage.ClickContactLink();
+            ContactPage.ClickClose();
+
+            Assert.That(ContactPage.IsWindowClosed(), Is.True);
+        }
+
+        [Test, Order(4)]
+        public void GivenNewAboutUsPage_WhenUserOpensAboutUsPage_ThenVideoInPageIsAvailable()
         {
             AboutUsPage = DemoBlazeHomePage.ClickAboutUsLink();
+            
+            Assert.That(AboutUsPage.IsVideoAvailable(), Is.True);
+        }
 
-            Assert.That(AboutUsPage.AboutUsPageIsOpened(), Is.True);
+        [Test, Order(4)]
+        public void GivenNewCartPage_WhenUserOpensCartPage_ThenPageIsOpened()
+        {
+            CartPage = DemoBlazeHomePage.ClickCartLink();
+
+            Assert.That(CartPage.IsCartPageOpened(), Is.True);
         }
     }
 }

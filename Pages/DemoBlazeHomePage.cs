@@ -16,6 +16,8 @@ namespace demoblaze_selenium_csharp.Pages
 
         public By AboutUsLocator => By.LinkText("About us");
 
+        public By CartLocator => By.Id("cartur");
+
         public const string HomePageTitle = "STORE";
 
         internal void GoTo()
@@ -23,9 +25,9 @@ namespace demoblaze_selenium_csharp.Pages
             _driver.Navigate().GoToUrl(HomePageUrl);
         }
 
-        internal bool PageIsOpened() => _driver.FindElement(NavbarLocator).Displayed;
+        internal bool IsPageOpened() => _driver.FindElement(NavbarLocator).Displayed;
 
-        internal bool PageTitleIsCorrect() => _driver.Title == HomePageTitle;
+        internal bool IsPageTitleCorrect() => _driver.Title == HomePageTitle;
 
         internal ContactPage ClickContactLink()        {
 
@@ -37,6 +39,12 @@ namespace demoblaze_selenium_csharp.Pages
         {
             Click(AboutUsLocator);
             return new AboutUsPage(_driver);
+        }
+
+        internal CartPage ClickCartLink()
+        {
+            Click(CartLocator);
+            return new CartPage(_driver);
         }
     }
 }

@@ -8,8 +8,8 @@ namespace demoblaze_selenium_csharp.Tests
     {
         public AboutUsPage(IWebDriver driver) : base(driver) {}
 
-        public By ExampleVideoLocator => By.Id("example-video_html5_api");
+        public By ExampleVideoLocator => By.Id("example-video_html5_api");        
 
-        internal bool AboutUsPageIsOpened() => WaitForElement(ExampleVideoLocator).Displayed;        
+        internal bool IsVideoAvailable() => WaitForElement(ExampleVideoLocator).Displayed;                
     }
 }
