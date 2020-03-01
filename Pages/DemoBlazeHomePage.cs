@@ -1,4 +1,5 @@
 ﻿using System;
+using demoblaze_selenium_csharp.Tests;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -11,7 +12,9 @@ namespace demoblaze_selenium_csharp.Pages
 
         public By NavbarLocator => By.Id("navbarExample");
 
-        public By ContactLickLocator => By.LinkText("Contact");
+        public By ContactLinkLocator => By.LinkText("Contact");
+
+        public By AboutUsLocator => By.LinkText("About us");
 
         public const string HomePageTitle = "STORE";
 
@@ -25,9 +28,15 @@ namespace demoblaze_selenium_csharp.Pages
         internal bool PageTitleIsCorrect() => _driver.Title == HomePageTitle;
 
         internal ContactPage ClickContactLink()        {
-            
-            _driver.FindElement(ContactLickLocator).Click();
+
+            Click(ContactLinkLocator);            
             return new ContactPage(_driver);
-        }        
+        }
+
+        internal AboutUsPage ClickAboutUsLink()
+        {
+            Click(AboutUsLocator);
+            return new AboutUsPage(_driver);
+        }
     }
 }
