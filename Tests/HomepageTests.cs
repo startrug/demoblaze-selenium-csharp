@@ -7,31 +7,22 @@ namespace demoblaze_selenium_csharp.Tests
     public class HomepageTests : BaseTest
     {
         [Test, Order(1)]
-        public void GivenUrlAddress_WhenUserOpensHomepage_ThenHomepageIsOpenedAndPageTitleIsCorrect()
+        public void WhenUserOpensHomepage_ThenHomepageIsOpenedAndPageTitleIsCorrect()
         {           
             Assert.That(DemoBlazeHomePage.IsPageOpened(), Is.True);
             Assert.That(DemoBlazeHomePage.IsPageTitleCorrect(), Is.True);
         }
 
         [Test, Order(2)]
-        public void GivenNewContactPage_WhenUserOpensContactPage_ThenPageIsOpened()
+        public void WhenUserOpensContactPage_ThenPageIsOpened()
         {            
             ContactWindow = DemoBlazeHomePage.ClickContactLink();
 
             Assert.That(ContactWindow.IsWindowOpened(), Is.True);
         }
-
-        [Test, Order(3)]
-        public void GivenNewContactPage_WhenUserClosesContactPage_ThenPageIsClosed()
-        {
-            ContactWindow = DemoBlazeHomePage.ClickContactLink();
-            ContactWindow.ClickCloseWindow();
-
-            Assert.That(ContactWindow.IsWindowClosed(), Is.True);
-        }
-
+        
         [Test, Order(4)]
-        public void GivenNewAboutUsPage_WhenUserOpensAboutUsPage_ThenWindowIsOpenedVideoIsAvailable()
+        public void WhenUserOpensAboutUsPage_ThenWindowIsOpenedVideoIsAvailable()
         {
             AboutUsWindow = DemoBlazeHomePage.ClickAboutUsLink();
 
@@ -40,7 +31,7 @@ namespace demoblaze_selenium_csharp.Tests
         }
 
         [Test, Order(5)]
-        public void GivenNewCartPage_WhenUserOpensCartPage_ThenPageIsOpened()
+        public void WhenUserOpensCartPage_ThenPageIsOpened()
         {
             CartPage = DemoBlazeHomePage.ClickCartLink();
 
@@ -48,7 +39,7 @@ namespace demoblaze_selenium_csharp.Tests
         }
 
         [Test, Order(6)]
-        public void GivenNewLogInWindow_WhenUserOpensLogInWindow_ThenWindowIsOpened()
+        public void WhenUserOpensLogInWindow_ThenWindowIsOpened()
         {
             LogInWindow = DemoBlazeHomePage.ClickLogInLink();
 
@@ -56,7 +47,7 @@ namespace demoblaze_selenium_csharp.Tests
         }
 
         [Test, Order(7)]
-        public void GivenNewSignUpWindow_WhenUserOpensSignUpWindow_ThenWindowIsOpened()
+        public void WhenUserOpensSignUpWindow_ThenWindowIsOpened()
         {
             SignUpWindow = DemoBlazeHomePage.ClickSignUpLink();
 

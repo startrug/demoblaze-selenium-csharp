@@ -20,9 +20,15 @@ namespace demoblaze_selenium_csharp.Pages
             _driver.FindElement(locator).Click();
         }
 
-        protected IWebElement IsElementLocated(By locator) => _driver.FindElement(locator);
+        protected void SetText(By locator, string text)
+        {
+            IWebElement webElement = LocateElement(locator);
+            webElement.SendKeys(text);
+        }
 
-        protected bool IsElementDisplayed(By locator) => IsElementLocated(locator).Displayed;                      
+        protected IWebElement LocateElement(By locator) => _driver.FindElement(locator);
+
+        protected bool IsElementDisplayed(By locator) => LocateElement(locator).Displayed;                      
 
         protected bool WaitForElementVisibility(By locator)
         {

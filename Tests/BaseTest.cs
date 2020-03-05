@@ -14,6 +14,7 @@ namespace demoblaze_selenium_csharp.Tests
         public CartPage CartPage { get; set; }
         public LogInWindow LogInWindow { get; set; }
         public SignUpWindow SignUpWindow { get; set; }
+        public ContactFormData ContactFormData { get; set; }
 
         [SetUp]
         public void SetupBeforeEverySingleTest()
