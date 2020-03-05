@@ -65,11 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\BasePage.cs" />
+    <Compile Include="Pages\BaseWindow.cs" />
     <Compile Include="Pages\DemoBlazeHomePage.cs" />
     <Compile Include="Pages\ContactWindow.cs" />
     <Compile Include="Pages\AboutUsWindow.cs" />
     <Compile Include="Pages\LogInWindow.cs" />
-    <Compile Include="Pages\WindowType.cs" />
     <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="Pages\CartPage.cs" />
     <Compile Include="Tests\HomepageTests.cs" />

@@ -18,14 +18,14 @@ namespace demoblaze_selenium_csharp.Tests
         {            
             ContactWindow = DemoBlazeHomePage.ClickContactLink();
 
-            Assert.That(ContactWindow.IsWindowOpened(WindowType.Contact), Is.True);
+            Assert.That(ContactWindow.IsWindowOpened(), Is.True);
         }
 
         [Test, Order(3)]
         public void GivenNewContactPage_WhenUserClosesContactPage_ThenPageIsClosed()
         {
             ContactWindow = DemoBlazeHomePage.ClickContactLink();
-            ContactWindow.ClickClose();
+            ContactWindow.ClickCloseWindow();
 
             Assert.That(ContactWindow.IsWindowClosed(), Is.True);
         }
@@ -35,7 +35,7 @@ namespace demoblaze_selenium_csharp.Tests
         {
             AboutUsWindow = DemoBlazeHomePage.ClickAboutUsLink();
 
-            Assert.That(AboutUsWindow.IsWindowOpened(WindowType.AboutUs), Is.True);
+            Assert.That(AboutUsWindow.IsWindowOpened(), Is.True);
             Assert.That(AboutUsWindow.IsVideoAvailable(), Is.True);
         }
 
@@ -52,7 +52,7 @@ namespace demoblaze_selenium_csharp.Tests
         {
             LogInWindow = DemoBlazeHomePage.ClickLogInLink();
 
-            Assert.That(LogInWindow.IsWindowOpened(WindowType.LogIn), Is.True);
+            Assert.That(LogInWindow.IsWindowOpened(), Is.True);
         }
 
         [Test, Order(7)]
@@ -60,7 +60,7 @@ namespace demoblaze_selenium_csharp.Tests
         {
             SignUpWindow = DemoBlazeHomePage.ClickSignUpLink();
 
-            Assert.That(SignUpWindow.IsWindowOpened(WindowType.SignUp), Is.True);
-        }
+            Assert.That(SignUpWindow.IsWindowOpened(), Is.True);
+        }        
     }
 }
