@@ -1,5 +1,4 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -17,8 +16,8 @@ namespace demoblaze_selenium_csharp.Pages
         public virtual bool IsWindowClosed() => IsElementDisplayed(WindowLocator);
 
         public virtual string WindowXpath => "//div[@class='modal-content']";
-        public virtual By WindowLocator { get; set; }
         public virtual string CloseWindowXpath => "//*[@aria-label='Close']";
         public virtual By CloseWindowLocator { get; set; }
+        public virtual By WindowLocator { get; set; }
     }
 }
