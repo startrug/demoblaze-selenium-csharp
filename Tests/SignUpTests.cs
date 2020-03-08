@@ -13,7 +13,7 @@ namespace demoblaze_selenium_csharp.Tests
 
             SignUpWindow.FillOutForm(TestUserData);
 
-            Assert.That(SignUpWindow.IsUserSignedInSuccessfully, Is.True);
+            Assert.That(SignUpWindow.IsUserSignedInSuccessfullyAlert, Is.False);
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace demoblaze_selenium_csharp.Tests
 
             SignUpWindow.FillOutForm(TestUserData);
 
-            Assert.That(SignUpWindow.IsUserAlreadyExisting, Is.False);
+            Assert.That(SignUpWindow.IsUserAlreadyExistingAlert, Is.True);
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace demoblaze_selenium_csharp.Tests
 
             SignUpWindow.FillOutForm(TestUserWithMissingData);
 
-            Assert.That(SignUpWindow.IsUserDidNotEnterRequiredData, Is.True);
+            Assert.That(SignUpWindow.IsUserDidNotEnterRequiredDataAlert, Is.True);
         }
     }
 }

@@ -25,13 +25,13 @@ namespace demoblaze_selenium_csharp.Pages
         private void SetUserName(UserData userFormData)
             => SetText(SignInUserNameInputLocator, userFormData.Name);
 
-        public bool IsUserSignedInSuccessfully()
+        public bool IsUserSignedInSuccessfullyAlert()
             => Alert.IsBrowserAlertContainsExpectedMessage(SignUpSuccessfullMessage);
 
-        public bool IsUserAlreadyExisting()
+        public bool IsUserAlreadyExistingAlert()
             => Alert.IsBrowserAlertContainsExpectedMessage(UserExistsMessage);
 
-        public bool IsUserDidNotEnterRequiredData()
+        public bool IsUserDidNotEnterRequiredDataAlert()
             => Alert.IsBrowserAlertContainsExpectedMessage(MissingSignInDataMessage);
 
         public override string CurrentWindowId => "[id='signInModal']";

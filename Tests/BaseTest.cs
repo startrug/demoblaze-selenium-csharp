@@ -8,7 +8,7 @@ namespace demoblaze_selenium_csharp.Tests
     public class BaseTest
     {
         public IWebDriver Driver { get; private set; }
-        public DemoBlazeHomePage DemoBlazeHomePage { get; private set; }
+        public HomePage DemoBlazeHomePage { get; private set; }
         public ContactWindow ContactWindow { get; set; }
         public AboutUsWindow AboutUsWindow { get; set; }
         public CartPage CartPage { get; set; }
@@ -16,6 +16,7 @@ namespace demoblaze_selenium_csharp.Tests
         public SignUpWindow SignUpWindow { get; set; }
         public UserData TestUserData { get; private set; }
         public UserData TestUserWithMissingData { get; private set; }
+        public LoggedInUserHomePage LoggedInUserHomePage { get; set; }
 
         [SetUp]
         public void SetupBeforeEverySingleTest()
@@ -25,7 +26,7 @@ namespace demoblaze_selenium_csharp.Tests
 
             Driver = new ChromeDriver();
             Driver.Manage().Window.Maximize();
-            DemoBlazeHomePage = new DemoBlazeHomePage(Driver);
+            DemoBlazeHomePage = new HomePage(Driver);
             DemoBlazeHomePage.GoTo();
         }
 

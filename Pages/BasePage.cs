@@ -23,6 +23,11 @@ namespace demoblaze_selenium_csharp.Pages
             webElement.SendKeys(text);
         }
 
+        public string GetTextOfElement(By locator)
+        {
+            return LocateElement(locator).Text;
+        }
+
         protected IWebElement LocateElement(By locator) => _driver.FindElement(locator);
 
         protected bool IsElementDisplayed(By locator) => LocateElement(locator).Displayed;
