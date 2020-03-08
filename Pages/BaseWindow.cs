@@ -1,23 +1,38 @@
-﻿using OpenQA.Selenium;
+﻿using demoblaze_selenium_csharp.Helpers;
+using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
 {
-    public class BaseWindow : BasePage
+    public abstract class BaseWindow : BasePage
     {
-        public BaseWindow(IWebDriver driver) : base(driver) { }        
+        public BaseWindow(IWebDriver driver) : base(driver) 
+        {
+            Alert = new Alerts(driver);
+        }
+
+        public virtual void FillOutForm(UserData contactFormData)
+        {
+            WaitForElementVisibility(CurrentWindowLocator);
+            Click(SubmitWindowButtonLocator);
+        }
 
         public virtual void ClickCloseWindow()
         {
-            WaitForElementVisibility(CloseWindowLocator);
-            Click(CloseWindowLocator);
+            WaitForElementVisibility(CloseWindowButton);
+            Click(CloseWindowButton);
         }
 
-        public virtual bool IsWindowOpened() => IsElementDisplayed(WindowLocator);
-        public virtual bool IsWindowClosed() => IsElementDisplayed(WindowLocator);
+        public virtual bool IsWindowOpened() => IsElementDisplayed(CurrentWindowLocator);
+        public virtual bool IsWindowClosed() => IsElementDisplayed(CurrentWindowLocator);
 
-        public virtual string WindowXpath => "//div[@class='modal-content']";
-        public virtual string CloseWindowXpath => "//*[@aria-label='Close']";
-        public virtual By CloseWindowLocator { get; set; }
-        public virtual By WindowLocator { get; set; }
+        public virtual By CloseWindowButton => By.CssSelector($"{CurrentWindowId} [class='close']");
+        public virtual By CurrentWindowLocator => By.CssSelector($"{CurrentWindowId}[role='dialog']");
+        public virtual By SubmitWindowButtonLocator => By.CssSelector($"[onclick='{WindowSubmitAction}']");
+
+        public virtual string WindowSubmitAction {get; set;}
+
+        public virtual string CurrentWindowId { get; set; }
+
+        public Alerts Alert { get; set; }
     }
 }

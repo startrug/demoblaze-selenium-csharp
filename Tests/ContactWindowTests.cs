@@ -8,11 +8,9 @@ namespace demoblaze_selenium_csharp.Tests
     {
         [Test, Order(1)]
         public void GivenUserContactFormData_WhenUserFillOutContactFormAndClickSendMessageButton_ThenMessageIsSent()
-        {
-            ContactFormData = new ContactFormData("anowak@poczta.pl", "Anna Nowak", "Sample message");
-            
+        {           
             ContactWindow = DemoBlazeHomePage.ClickContactLink();
-            ContactWindow.FillOutContactForm(ContactFormData);
+            ContactWindow.FillOutForm(TestUserData);
 
             Assert.That(ContactWindow.IsMessageSentSuccessfully, Is.True);
         }
