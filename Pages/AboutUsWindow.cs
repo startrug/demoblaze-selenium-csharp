@@ -11,11 +11,7 @@ namespace demoblaze_selenium_csharp.Tests
 
         public override bool IsWindowOpened() => WaitForElementVisibility(CurrentWindowLocator);
 
-        public override void ClickCloseWindow()
-        {
-            WaitForElementVisibility(CloseWindowButton);
-            Click(CloseWindowButton);
-        }
+        public override void ClickCloseWindow() => base.ClickCloseWindow();
 
         public override string CurrentWindowId => "[id='videoModal']";
         public By ExampleVideoLocator => By.Id("example-video_html5_api");

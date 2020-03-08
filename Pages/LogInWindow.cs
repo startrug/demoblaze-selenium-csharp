@@ -8,11 +8,7 @@ namespace demoblaze_selenium_csharp.Pages
 
         public override bool IsWindowOpened() => WaitForElementVisibility(CurrentWindowLocator);
 
-        public override void ClickCloseWindow()
-        {
-            WaitForElementVisibility(CloseWindowButton);
-            Click(CloseWindowButton);
-        }
+        public override void ClickCloseWindow() => base.ClickCloseWindow();
 
         public override string CurrentWindowId => "[id='logInModal']";
     }

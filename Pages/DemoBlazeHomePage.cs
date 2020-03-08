@@ -1,5 +1,4 @@
-﻿using System;
-using demoblaze_selenium_csharp.Tests;
+﻿using demoblaze_selenium_csharp.Tests;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -7,7 +6,7 @@ namespace demoblaze_selenium_csharp.Pages
     public class DemoBlazeHomePage : BasePage
     {
         public DemoBlazeHomePage(IWebDriver driver) : base(driver) { }
-        
+
         public string HomePageUrl => "https://www.demoblaze.com/index.html";
 
         public By NavbarLocator => By.Id("navbarExample");
@@ -33,9 +32,10 @@ namespace demoblaze_selenium_csharp.Pages
 
         internal bool IsPageTitleCorrect() => _driver.Title == HomePageTitle;
 
-        internal ContactWindow ClickContactLink()        {
+        internal ContactWindow ClickContactLink()
+        {
 
-            Click(ContactLocator);            
+            Click(ContactLocator);
             return new ContactWindow(_driver);
         }
 

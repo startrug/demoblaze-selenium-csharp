@@ -15,10 +15,7 @@ namespace demoblaze_selenium_csharp.Pages
             _driver = driver;
         }
 
-        protected void Click(By locator)
-        {
-            _driver.FindElement(locator).Click();
-        }
+        protected void Click(By locator) => _driver.FindElement(locator).Click();
 
         protected void SetText(By locator, string text)
         {

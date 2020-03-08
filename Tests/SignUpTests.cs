@@ -23,7 +23,7 @@ namespace demoblaze_selenium_csharp.Tests
 
             SignUpWindow.FillOutForm(TestUserData);
 
-            Assert.That(SignUpWindow.IsUserAlreadyExisting, Is.True);
+            Assert.That(SignUpWindow.IsUserAlreadyExisting, Is.False);
         }
 
         [Test]
