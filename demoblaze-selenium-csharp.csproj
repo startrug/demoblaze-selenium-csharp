@@ -64,9 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Alerts.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\BaseWindow.cs" />
-    <Compile Include="Pages\ContactFormData.cs" />
+    <Compile Include="Pages\UserData.cs" />
     <Compile Include="Pages\DemoBlazeHomePage.cs" />
     <Compile Include="Pages\ContactWindow.cs" />
     <Compile Include="Pages\AboutUsWindow.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\SignUpWindow.cs" />
     <Compile Include="Tests\ContactWindowTests.cs" />
+    <Compile Include="Tests\SignUpTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

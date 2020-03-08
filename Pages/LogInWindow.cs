@@ -4,18 +4,16 @@ namespace demoblaze_selenium_csharp.Pages
 {
     public class LogInWindow : BaseWindow
     {
-        public LogInWindow(IWebDriver driver) : base(driver) { }        
+        public LogInWindow(IWebDriver driver) : base(driver) { }
 
-        public override bool IsWindowOpened() => WaitForElementVisibility(WindowLocator);
+        public override bool IsWindowOpened() => WaitForElementVisibility(CurrentWindowLocator);
 
         public override void ClickCloseWindow()
         {
-            WaitForElementVisibility(CloseWindowLocator);
-            Click(CloseWindowLocator);
+            WaitForElementVisibility(CloseWindowButton);
+            Click(CloseWindowButton);
         }
 
-        public override By WindowLocator => By.XPath(LogInWindowXpath + base.WindowXpath);
-        public override By CloseWindowLocator => By.XPath(LogInWindowXpath + base.WindowXpath);
-        public string LogInWindowXpath => "//div[@id='logInModal']";
+        public override string CurrentWindowId => "[id='logInModal']";
     }
 }

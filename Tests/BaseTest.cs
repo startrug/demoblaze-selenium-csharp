@@ -14,11 +14,15 @@ namespace demoblaze_selenium_csharp.Tests
         public CartPage CartPage { get; set; }
         public LogInWindow LogInWindow { get; set; }
         public SignUpWindow SignUpWindow { get; set; }
-        public ContactFormData ContactFormData { get; set; }
+        public UserData TestUserData { get; private set; }
+        public UserData TestUserWithMissingData { get; private set; }
 
         [SetUp]
         public void SetupBeforeEverySingleTest()
         {
+            TestUserData = new UserData("anowak@poczta.pl", "Anna Nowak", "Sample message", "Test123!");
+            TestUserWithMissingData = new UserData("", "", "", "");
+
             Driver = new ChromeDriver();
             Driver.Manage().Window.Maximize();
             DemoBlazeHomePage = new DemoBlazeHomePage(Driver);
