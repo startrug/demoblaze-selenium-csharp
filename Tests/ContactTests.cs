@@ -8,13 +8,13 @@ namespace demoblaze_selenium_csharp.Tests
     {
         public override void SetupBeforeEveryContactTest() => base.SetupBeforeEveryContactTest();
 
-        [Test, Order(1)]
+        [Test, Order(2)]
         public void WhenUserOpensContactPage_ThenPageIsOpened()
         {
             Assert.That(ContactWindow.IsWindowOpened(), Is.True);
         }
 
-        [Test, Order(2)]
+        [Test, Order(3)]
         public void GivenUserContactFormData_WhenUserFillOutContactFormAndClickSendMessageButton_ThenMessageIsSent()
         {
             ContactWindow.FillOutForm(TestUserData);
@@ -22,7 +22,7 @@ namespace demoblaze_selenium_csharp.Tests
             Assert.That(ContactWindow.IsMessageSentSuccessfully, Is.True);
         }
 
-        [Test, Order(3)]
+        [Test, Order(4)]
         public void WhenUserClosesContactPage_ThenPageIsClosed()
         {
             ContactWindow.ClickCloseWindow();

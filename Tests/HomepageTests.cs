@@ -14,7 +14,7 @@ namespace demoblaze_selenium_csharp.Tests
             Assert.That(DemoBlazeHomePage.IsPageTitleCorrect(), Is.True);
         }
 
-        [Test, Order(4)]
+        [Test, Order(5)]
         public void WhenUserOpensAboutUsPage_ThenWindowIsOpenedVideoIsAvailable()
         {
             AboutUsWindow = DemoBlazeHomePage.ClickLink<AboutUsWindow>(LinkText.AboutUs);
@@ -23,7 +23,7 @@ namespace demoblaze_selenium_csharp.Tests
             Assert.That(AboutUsWindow.IsVideoAvailable(), Is.True);
         }
 
-        [Test, Order(5)]
+        [Test, Order(6)]
         public void WhenUserOpensCartPage_ThenPageIsOpened()
         {
             CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);

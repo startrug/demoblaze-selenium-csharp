@@ -8,31 +8,31 @@ namespace demoblaze_selenium_csharp.Tests
     {
         public override void SetupBeforeEverySignUpTest() => base.SetupBeforeEverySignUpTest();
 
-        [Test]
+        [Test, Order(7)]
         public void GivenNonExistingUserNameAndPassword_WhenUserFilledOutSignUpForm_ThenSuccessfullSigningInAlertIsShowed()
         {
             SignUpWindow.FillOutForm(TestUserData);
 
-            Assert.That(SignUpWindow.IsUserSignedInSuccessfullyAlert, Is.False);
+            Assert.That(SignUpWindow.IsUserSignedInSuccessfullyAlertShowed, Is.False);
         }
 
-        [Test]
+        [Test, Order(8)]
         public void GivenExistingUserNameAndPassword_WhenUserFilledOutSignUpForm_ThenSuccessfullSigningInAlertIsShowed()
         {
             SignUpWindow.FillOutForm(TestUserData);
 
-            Assert.That(SignUpWindow.IsUserAlreadyExistingAlert, Is.True);
+            Assert.That(SignUpWindow.IsUserAlreadyExistaAlertShowed, Is.True);
         }
 
-        [Test]
-        public void WhenUserDidNotFillOutSignUpFormAndAcceptIt_ThenFailedSigningInAlertIsShowed()
+        [Test, Order(9)]
+        public void WhenUserDidNotFillOutSignUpFormAndAcceptIt_ThenRequestToCompleteFormAlertIsShowed()
         {
             SignUpWindow.FillOutForm(TestUserWithMissingData);
 
-            Assert.That(SignUpWindow.IsUserDidNotEnterRequiredDataAlert, Is.True);
+            Assert.That(SignUpWindow.IsRequestToCompleteFormAlertIsShowed, Is.True);
         }
 
-        [Test, Order(7)]
+        [Test, Order(10)]
         public void WhenUserOpensSignUpWindow_ThenWindowIsOpened()
         {
             Assert.That(SignUpWindow.IsWindowOpened(), Is.True);

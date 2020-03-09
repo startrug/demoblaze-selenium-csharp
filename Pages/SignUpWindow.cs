@@ -25,14 +25,14 @@ namespace demoblaze_selenium_csharp.Pages
         private void SetUserName(UserData userFormData)
             => SetText(SignInUserNameInputLocator, userFormData.Name);
 
-        public bool IsUserSignedInSuccessfullyAlert()
+        public bool IsUserSignedInSuccessfullyAlertShowed()
             => Alert.IsBrowserAlertContainsExpectedMessage(SignUpSuccessfullMessage);
 
-        public bool IsUserAlreadyExistingAlert()
+        public bool IsUserAlreadyExistaAlertShowed()
             => Alert.IsBrowserAlertContainsExpectedMessage(UserExistsMessage);
 
-        public bool IsUserDidNotEnterRequiredDataAlert()
-            => Alert.IsBrowserAlertContainsExpectedMessage(MissingSignInDataMessage);
+        public bool IsRequestToCompleteFormAlertIsShowed()
+            => Alert.IsBrowserAlertContainsExpectedMessage(RequestToCompleteFormAlert);
 
         public override string CurrentWindowId => "[id='signInModal']";
         public override string WindowSubmitAction => "register()";
@@ -42,6 +42,6 @@ namespace demoblaze_selenium_csharp.Pages
 
         public string SignUpSuccessfullMessage => "Sign up successful.";
         public string UserExistsMessage => "This user already exist.";
-        public string MissingSignInDataMessage => "Please fill out Username and Password.";
+        public string RequestToCompleteFormAlert => "Please fill out Username and Password.";
     }
 }

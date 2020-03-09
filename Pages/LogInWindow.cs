@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -26,6 +27,13 @@ namespace demoblaze_selenium_csharp.Pages
             return new LoggedInUserHomePage(Driver, userData);
         }
 
+        public bool IsWrongPasswordAlertShowed()
+            => Alert.IsBrowserAlertContainsExpectedMessage(WrongPasswordAlert);
+
+        internal bool IsRequestToCompleteFormAlertIsShowed()
+            => Alert.IsBrowserAlertContainsExpectedMessage(RequestToCompleteFormAlert);
+
+
         private void SetUserName(UserData userData)
             => SetText(LogInUserNameInputLocator, userData.Name);
 
@@ -38,5 +46,9 @@ namespace demoblaze_selenium_csharp.Pages
         private By LogInUserNameInputLocator => By.Id("loginusername");
 
         public override string WindowSubmitAction => "logIn()";
+
+        public string WrongPasswordAlert => "Wrong password.";
+
+        public string RequestToCompleteFormAlert => "Please fill out Username and Password.";
     }
 }
