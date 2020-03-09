@@ -23,7 +23,7 @@ namespace demoblaze_selenium_csharp.Pages
             WaitForElementVisibility(CurrentWindowLocator);
             SetInputValues(userData);
             Click(SubmitWindowButtonLocator);
-            return new LoggedInUserHomePage(_driver, userData);
+            return new LoggedInUserHomePage(Driver, userData);
         }
 
         private void SetUserName(UserData userData)

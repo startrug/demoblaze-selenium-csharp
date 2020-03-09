@@ -1,4 +1,6 @@
-﻿using demoblaze_selenium_csharp.Tests;
+﻿using System;
+using demoblaze_selenium_csharp.Enum;
+using demoblaze_selenium_csharp.Tests;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -9,40 +11,37 @@ namespace demoblaze_selenium_csharp.Pages
 
         public HomePage(IWebDriver driver) : base(driver) { }
 
-        internal void GoTo() => _driver.Navigate().GoToUrl(HomePageUrl);
+        internal void GoTo() => Driver.Navigate().GoToUrl(HomePageUrl);
 
-        internal bool IsPageOpened() => _driver.FindElement(HomeLinkLocator).Displayed;
+        internal bool IsPageOpened() => Driver.FindElement(HomeLinkLocator).Displayed;
 
-        internal bool IsPageTitleCorrect() => _driver.Title == HomePageTitle;
+        internal bool IsPageTitleCorrect() => Driver.Title == HomePageTitle;
 
-        internal ContactWindow ClickContactLink()
+        public T ClickLink<T>(LinkText link)
         {
-            Click(ContactLinkLocator);
-            return new ContactWindow(_driver);
-        }
-
-        internal AboutUsWindow ClickAboutUsLink()
-        {
-            Click(AboutUsLinkLocator);
-            return new AboutUsWindow(_driver);
-        }
-
-        internal CartPage ClickCartLink()
-        {
-            Click(CartLinkLocator);
-            return new CartPage(_driver);
-        }
-
-        internal LogInWindow ClickLogInLink()
-        {
-            Click(LogInLinkLocator);
-            return new LogInWindow(_driver);
-        }
-
-        internal SignUpWindow ClickSignUpLink()
-        {
-            Click(SignUpLinkLocator);
-            return new SignUpWindow(_driver);
+            switch (link)
+            {
+                case LinkText.Home:
+                    Click(HomeLinkLocator);
+                    return (T)Convert.ChangeType(new HomePage(Driver), typeof(T));
+                case LinkText.Contact:
+                    Click(ContactLinkLocator);
+                    return (T)Convert.ChangeType(new ContactWindow(Driver), typeof(T));
+                case LinkText.AboutUs:
+                    Click(AboutUsLinkLocator);
+                    return (T)Convert.ChangeType(new AboutUsWindow(Driver), typeof(T));
+                case LinkText.Cart:
+                    Click(CartLinkLocator);
+                    return (T)Convert.ChangeType(new CartPage(Driver), typeof(T));
+                case LinkText.LogIn:
+                    Click(LogInLinkLocator);
+                    return (T)Convert.ChangeType(new LogInWindow(Driver), typeof(T));
+                case LinkText.SignUp:
+                    Click(SignUpLinkLocator);
+                    return (T)Convert.ChangeType(new SignUpWindow(Driver), typeof(T));
+                default:
+                    throw new Exception("No such link text");
+            }
         }
 
         public string HomePageUrl => "https://www.demoblaze.com/index.html";

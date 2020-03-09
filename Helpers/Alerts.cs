@@ -15,7 +15,7 @@ namespace demoblaze_selenium_csharp.Helpers
 
         public string GetAlertTextAndAcceptAlert()
         {
-            IAlert alert = _driver.SwitchTo().Alert();
+            IAlert alert = Driver.SwitchTo().Alert();
             var alertMessage = alert.Text;
             alert.Accept();
             return alertMessage;

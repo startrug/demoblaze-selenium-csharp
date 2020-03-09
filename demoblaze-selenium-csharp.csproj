@@ -67,6 +67,7 @@
     <Compile Include="Helpers\Alerts.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\BaseWindow.cs" />
+    <Compile Include="Enum\LinkText.cs" />
     <Compile Include="Pages\LoggedInUserHomePage.cs" />
     <Compile Include="Pages\UserData.cs" />
     <Compile Include="Pages\HomePage.cs" />
@@ -78,9 +79,12 @@
     <Compile Include="Tests\HomepageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\SignUpWindow.cs" />
-    <Compile Include="Tests\ContactWindowTests.cs" />
+    <Compile Include="Tests\ContactTests.cs" />
+    <Compile Include="Tests\LogInBaseTest.cs" />
     <Compile Include="Tests\SignUpTests.cs" />
     <Compile Include="Tests\LogInTests.cs" />
+    <Compile Include="Tests\SignUpBaseTest.cs" />
+    <Compile Include="Tests\ContactBaseTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
