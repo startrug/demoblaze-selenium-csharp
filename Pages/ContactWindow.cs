@@ -11,17 +11,17 @@ namespace demoblaze_selenium_csharp.Pages
         public override bool IsWindowClosed() => IsElementDisplayed(CurrentWindowLocator);
 
         public override void FillOutForm(UserData contactFormData)
+            => base.FillOutForm(contactFormData);
+
+        public override void SetInputValues(UserData contactFormData)
         {
-            WaitForElementVisibility(CurrentWindowLocator);
             SetUserEmail(contactFormData);
             SetUserName(contactFormData);
             SetUserMessage(contactFormData);
-            Click(SubmitWindowButtonLocator);
-            WaitForBrowserAlert();
         }
 
         public bool IsMessageSentSuccessfully()
-            => Alert.IsBrowserAlertContainsExpectedMessage("Thanks for the message!!");
+            => Alert.IsBrowserAlertContainsExpectedMessage(MessageSentAlert);
 
         private void SetUserEmail(UserData contactFormData) =>
             SetText(EmailInputLocator, contactFormData.Email);
@@ -32,11 +32,7 @@ namespace demoblaze_selenium_csharp.Pages
         private void SetUserMessage(UserData contactFormData)
             => SetText(MessageInputLocator, contactFormData.Message);
 
-        public override void ClickCloseWindow()
-        {
-            WaitForElementVisibility(CloseWindowButton);
-            Click(CloseWindowButton);
-        }
+        public override void ClickCloseWindow() => base.ClickCloseWindow();
 
         public By EmailInputLocator => By.Id("recipient-email");
         public By NameInputLocator => By.Id("recipient-name");
@@ -44,5 +40,7 @@ namespace demoblaze_selenium_csharp.Pages
 
         public override string CurrentWindowId => "[id='exampleModal']";
         public override string WindowSubmitAction => "send()";
+
+        private string MessageSentAlert => "Thanks for the message!!";
     }
 }

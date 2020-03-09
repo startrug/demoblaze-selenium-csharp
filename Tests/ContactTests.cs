@@ -4,21 +4,27 @@ using NUnit.Framework;
 namespace demoblaze_selenium_csharp.Tests
 {
     [TestFixture]
-    public class ContactWindowTests : BaseTest
+    public class ContactTests : ContactBaseTest
     {
-        [Test, Order(1)]
+        public override void SetupBeforeEveryContactTest() => base.SetupBeforeEveryContactTest();
+
+        [Test, Order(2)]
+        public void WhenUserOpensContactPage_ThenPageIsOpened()
+        {
+            Assert.That(ContactWindow.IsWindowOpened(), Is.True);
+        }
+
+        [Test, Order(3)]
         public void GivenUserContactFormData_WhenUserFillOutContactFormAndClickSendMessageButton_ThenMessageIsSent()
-        {           
-            ContactWindow = DemoBlazeHomePage.ClickContactLink();
+        {
             ContactWindow.FillOutForm(TestUserData);
 
             Assert.That(ContactWindow.IsMessageSentSuccessfully, Is.True);
         }
 
-        [Test, Order(2)]
+        [Test, Order(4)]
         public void WhenUserClosesContactPage_ThenPageIsClosed()
         {
-            ContactWindow = DemoBlazeHomePage.ClickContactLink();
             ContactWindow.ClickCloseWindow();
 
             Assert.That(ContactWindow.IsWindowClosed(), Is.True);

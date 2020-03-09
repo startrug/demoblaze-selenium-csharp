@@ -7,18 +7,15 @@ namespace demoblaze_selenium_csharp.Pages
 {
     public class BasePage
     {
-        protected IWebDriver _driver;
-        protected WebDriverWait _wait;
+        protected IWebDriver Driver;
+        protected WebDriverWait Wait;
 
         public BasePage(IWebDriver driver)
         {
-            _driver = driver;
+            Driver = driver;
         }
 
-        protected void Click(By locator)
-        {
-            _driver.FindElement(locator).Click();
-        }
+        protected void Click(By locator) => Driver.FindElement(locator).Click();
 
         protected void SetText(By locator, string text)
         {
@@ -26,17 +23,22 @@ namespace demoblaze_selenium_csharp.Pages
             webElement.SendKeys(text);
         }
 
-        protected IWebElement LocateElement(By locator) => _driver.FindElement(locator);
+        public string GetTextOfElement(By locator)
+        {
+            return LocateElement(locator).Text;
+        }
+
+        protected IWebElement LocateElement(By locator) => Driver.FindElement(locator);
 
         protected bool IsElementDisplayed(By locator) => LocateElement(locator).Displayed;
 
         protected bool WaitForElementVisibility(By locator)
         {
-            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
-            _wait.Until(EC.ElementIsVisible(locator));
-            return _driver.FindElement(locator).Displayed;
+            Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
+            Wait.Until(EC.ElementIsVisible(locator));
+            return Driver.FindElement(locator).Displayed;
         }
 
-        protected void WaitForBrowserAlert() => _wait.Until(EC.AlertIsPresent());
+        protected void WaitForBrowserAlert() => Wait.Until(EC.AlertIsPresent());
     }
 }

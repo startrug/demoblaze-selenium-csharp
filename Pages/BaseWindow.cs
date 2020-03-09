@@ -5,7 +5,7 @@ namespace demoblaze_selenium_csharp.Pages
 {
     public abstract class BaseWindow : BasePage
     {
-        public BaseWindow(IWebDriver driver) : base(driver) 
+        public BaseWindow(IWebDriver driver) : base(driver)
         {
             Alert = new Alerts(driver);
         }
@@ -13,8 +13,12 @@ namespace demoblaze_selenium_csharp.Pages
         public virtual void FillOutForm(UserData contactFormData)
         {
             WaitForElementVisibility(CurrentWindowLocator);
+            SetInputValues(contactFormData);
             Click(SubmitWindowButtonLocator);
+            WaitForBrowserAlert();
         }
+
+        public virtual void SetInputValues(UserData contactFormData) { }
 
         public virtual void ClickCloseWindow()
         {

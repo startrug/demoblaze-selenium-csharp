@@ -4,36 +4,38 @@ using NUnit.Framework;
 namespace demoblaze_selenium_csharp.Tests
 {
     [TestFixture]
-    public class SignUpTests : BaseTest
+    public class SignUpTests : SignUpBaseTest
     {
-        [Test]
+        public override void SetupBeforeEverySignUpTest() => base.SetupBeforeEverySignUpTest();
+
+        [Test, Order(7)]
         public void GivenNonExistingUserNameAndPassword_WhenUserFilledOutSignUpForm_ThenSuccessfullSigningInAlertIsShowed()
         {
-            SignUpWindow = DemoBlazeHomePage.ClickSignUpLink();
-
             SignUpWindow.FillOutForm(TestUserData);
 
-            Assert.That(SignUpWindow.IsUserSignedInSuccessfully, Is.True);
+            Assert.That(SignUpWindow.IsUserSignedInSuccessfullyAlertShowed, Is.False);
         }
 
-        [Test]
+        [Test, Order(8)]
         public void GivenExistingUserNameAndPassword_WhenUserFilledOutSignUpForm_ThenSuccessfullSigningInAlertIsShowed()
         {
-            SignUpWindow = DemoBlazeHomePage.ClickSignUpLink();
-
             SignUpWindow.FillOutForm(TestUserData);
 
-            Assert.That(SignUpWindow.IsUserAlreadyExisting, Is.True);
+            Assert.That(SignUpWindow.IsUserAlreadyExistaAlertShowed, Is.True);
         }
 
-        [Test]
-        public void WhenUserDidNotFillOutSignUpFormAndAcceptIt_ThenFailedSigningInAlertIsShowed()
+        [Test, Order(9)]
+        public void WhenUserDidNotFillOutSignUpFormAndAcceptIt_ThenRequestToCompleteFormAlertIsShowed()
         {
-            SignUpWindow = DemoBlazeHomePage.ClickSignUpLink();
-
             SignUpWindow.FillOutForm(TestUserWithMissingData);
 
-            Assert.That(SignUpWindow.IsUserDidNotEnterRequiredData, Is.True);
+            Assert.That(SignUpWindow.IsRequestToCompleteFormAlertIsShowed, Is.True);
+        }
+
+        [Test, Order(10)]
+        public void WhenUserOpensSignUpWindow_ThenWindowIsOpened()
+        {
+            Assert.That(SignUpWindow.IsWindowOpened(), Is.True);
         }
     }
 }
