@@ -1,5 +1,4 @@
 ﻿using demoblaze_selenium_csharp.Enum;
-using demoblaze_selenium_csharp.Pages;
 using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests
@@ -21,14 +20,6 @@ namespace demoblaze_selenium_csharp.Tests
 
             Assert.That(AboutUsWindow.IsWindowOpened(), Is.True);
             Assert.That(AboutUsWindow.IsVideoAvailable(), Is.True);
-        }
-
-        [Test, Order(6)]
-        public void WhenUserOpensCartPage_ThenPageIsOpened()
-        {
-            CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
-
-            Assert.That(CartPage.IsCartPageOpened(), Is.True);
         }
     }
 }
