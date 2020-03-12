@@ -13,12 +13,12 @@ namespace demoblaze_selenium_csharp.Pages
             WaitForElementVisibility(ProductNameInCartLocator);
             return GetTextOfElement(ProductNameInCartLocator) == productName;
         }
-        public int TotalPrice => int.Parse(GetTextOfElement(TotalPriceLocator));
+        public int GetTotalPrice => int.Parse(GetTextOfElement(TotalPriceLocator));
 
         public By PlaceOrderButton => By.XPath("//button[text()='Place Order']");
 
         public By ProductNameInCartLocator => By.CssSelector("td:nth-child(2)");
-        public By TotalPriceLocator => By.CssSelector("td:nth-child(3)");
+        public By TotalPriceLocator => By.Id("totalp");
 
 
     }

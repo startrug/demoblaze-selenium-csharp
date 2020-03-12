@@ -44,10 +44,10 @@ namespace demoblaze_selenium_csharp.Pages
             }
         }
 
-        public ProductPage SelectProductAndOpenProductPage(Category category, string productName)
+        public ProductPage SelectProductAndOpenProductPage(Product product)
         {
-            SelectCategory(category);
-            WaitForElementAndClickOnIt(ProductLocator(productName));
+            SelectCategory(product.Category);
+            WaitForElementAndClickOnIt(ProductLocator(product.ProductName));
             return new ProductPage(Driver);
         }
 
