@@ -7,17 +7,6 @@ namespace demoblaze_selenium_csharp.Tests
 {
     public class BaseTest
     {
-        public IWebDriver Driver { get; private set; }
-        public HomePage DemoBlazeHomePage { get; private set; }
-        public ContactWindow ContactWindow { get; set; }
-        public AboutUsWindow AboutUsWindow { get; set; }
-        public CartPage CartPage { get; set; }
-        public LogInWindow LogInWindow { get; set; }
-        public SignUpWindow SignUpWindow { get; set; }
-        public UserData TestUserData { get; private set; }
-        public UserData TestUserWithMissingData { get; private set; }
-        public LoggedInUserHomePage LoggedInUserHomePage { get; set; }
-
         [SetUp]
         public void SetupBeforeEverySingleTest()
         {
@@ -36,5 +25,18 @@ namespace demoblaze_selenium_csharp.Tests
             Driver.Close();
             Driver.Quit();
         }
+
+        public IWebDriver Driver { get; private set; }
+        public HomePage DemoBlazeHomePage { get; private set; }
+        public ContactWindow ContactWindow { get; set; }
+        public AboutUsWindow AboutUsWindow { get; set; }
+        public CartPage CartPage { get; set; }
+        public LogInWindow LogInWindow { get; set; }
+        public SignUpWindow SignUpWindow { get; set; }
+        public UserData TestUserData { get; private set; }
+        public UserData TestUserWithMissingData { get; private set; }
+        public LoggedInUserHomePage LoggedInUserHomePage { get; set; }
+        public ProductPage ProductPage { get; set; }
+        public OrderWindow OrderWindow { get; set; }
     }
 }

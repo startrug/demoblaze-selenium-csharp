@@ -38,7 +38,7 @@ namespace demoblaze_selenium_csharp.Pages
         public By NameInputLocator => By.Id("recipient-name");
         public By MessageInputLocator => By.Id("message-text");
 
-        public override string CurrentWindowId => "[id='exampleModal']";
+        public override string CurrentWindowId => "#exampleModal";
         public override string WindowSubmitAction => "send()";
 
         private string MessageSentAlert => "Thanks for the message!!";

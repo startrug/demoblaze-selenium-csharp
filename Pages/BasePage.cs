@@ -1,4 +1,5 @@
 ﻿using System;
+using demoblaze_selenium_csharp.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using EC = SeleniumExtras.WaitHelpers.ExpectedConditions;
@@ -7,13 +8,16 @@ namespace demoblaze_selenium_csharp.Pages
 {
     public class BasePage
     {
-        protected IWebDriver Driver;
-        protected WebDriverWait Wait;
-
         public BasePage(IWebDriver driver)
         {
             Driver = driver;
+            Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            Alert = new Alerts(driver);
         }
+
+        protected IWebDriver Driver { get; set; }
+        protected WebDriverWait Wait { get; set; }
+        protected Alerts Alert { get; set; }
 
         protected void Click(By locator) => Driver.FindElement(locator).Click();
 
@@ -34,9 +38,26 @@ namespace demoblaze_selenium_csharp.Pages
 
         protected bool WaitForElementVisibility(By locator)
         {
-            Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
             Wait.Until(EC.ElementIsVisible(locator));
-            return Driver.FindElement(locator).Displayed;
+            return LocateElement(locator).Displayed;
+        }
+
+        public bool WaitForElementDisappear(By locator)
+        {
+            try
+            {
+                Wait.Until(EC.InvisibilityOfElementLocated(locator));
+                return true;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Element is still visible");
+            }
+        }
+
+        public void WaitForElementAndClickOnIt(By locator)
+        {
+            Wait.Until(EC.ElementIsVisible(locator)).Click();
         }
 
         protected void WaitForBrowserAlert() => Wait.Until(EC.AlertIsPresent());

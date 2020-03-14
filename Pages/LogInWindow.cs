@@ -1,5 +1,4 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -33,14 +32,13 @@ namespace demoblaze_selenium_csharp.Pages
         internal bool IsRequestToCompleteFormAlertIsShowed()
             => Alert.IsBrowserAlertContainsExpectedMessage(RequestToCompleteFormAlert);
 
-
         private void SetUserName(UserData userData)
             => SetText(LogInUserNameInputLocator, userData.Name);
 
         private void SetUserPassword(UserData userData)
             => SetText(LogInPasswordInputLocator, userData.Password);
 
-        public override string CurrentWindowId => "[id='logInModal']";
+        public override string CurrentWindowId => "#logInModal";
 
         private By LogInPasswordInputLocator => By.Id("loginpassword");
         private By LogInUserNameInputLocator => By.Id("loginusername");

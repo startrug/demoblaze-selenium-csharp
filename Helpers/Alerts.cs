@@ -1,11 +1,15 @@
-﻿using demoblaze_selenium_csharp.Pages;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Helpers
 {
-    public class Alerts : BasePage
+    public class Alerts
     {
-        public Alerts(IWebDriver driver) : base(driver) { }
+        protected IWebDriver Driver { get; set; }
+
+        public Alerts(IWebDriver driver)
+        {
+            Driver = driver;
+        }
 
         public bool IsBrowserAlertContainsExpectedMessage(string exepectedAlertMessage)
         {
