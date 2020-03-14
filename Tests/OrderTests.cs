@@ -1,4 +1,6 @@
-﻿using demoblaze_selenium_csharp.Enums;
+﻿using System;
+using System.Globalization;
+using demoblaze_selenium_csharp.Enums;
 using demoblaze_selenium_csharp.Pages;
 using NUnit.Framework;
 
@@ -20,9 +22,12 @@ namespace demoblaze_selenium_csharp.Tests
 
         private void ValidatePurchaseAlertMessage()
         {
+            var currentDate = DateTime.Today.AddMonths(-1).ToString("dd/M/yyyy", CultureInfo.CreateSpecificCulture("en-US"));
             Assert.That(PurchaseAlert.IsPurchaseAlertDisplayed(), Is.True);
             Assert.That(PurchaseAlert.GetPurchaseUserName() == TestUserData.Name, Is.True);
-            Assert.That(PurchaseAlert.GetPurchaseTotal() == TotalOrder + " USD", Is.True);
+            Assert.That(PurchaseAlert.GetPurchaseTotalAmount() == TotalOrder + " USD", Is.True);
+            Assert.That(PurchaseAlert.GetPurchaseCreditCardNumber() == TestUserData.CreditCardNumber, Is.True);
+            Assert.That(PurchaseAlert.GetPurchaseDate() == currentDate, Is.True);
         }
     }
 }

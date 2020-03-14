@@ -21,22 +21,16 @@ namespace demoblaze_selenium_csharp.Pages
             return purchaseMessage.Split(sep, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        internal string GetPurchaseId()
-        {
-            var idLine = GetPurchaseMessageInLines()[0];
-            return idLine.Substring(4);
-        }
+        internal string GetPurchaseId() => GetPurchaseData(0, 4);
+        internal string GetPurchaseTotalAmount() => GetPurchaseData(1, 8);
+        internal string GetPurchaseCreditCardNumber() => GetPurchaseData(2, 13);
+        internal string GetPurchaseDate() => GetPurchaseData(4, 6);
+        internal string GetPurchaseUserName() => GetPurchaseData(3, 6);
 
-        internal string GetPurchaseTotal()
+        internal string GetPurchaseData(int lineNumber, int startCharNumber)
         {
-            var idLine = GetPurchaseMessageInLines()[1];
-            return idLine.Substring(8);
-        }
-
-        internal string GetPurchaseUserName()
-        {
-            var idLine = GetPurchaseMessageInLines()[3];
-            return idLine.Substring(6);
+            var idLine = GetPurchaseMessageInLines()[lineNumber];
+            return idLine.Substring(startCharNumber);
         }
     }
 }
