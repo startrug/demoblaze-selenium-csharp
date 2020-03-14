@@ -15,8 +15,14 @@ namespace demoblaze_selenium_csharp.Tests
             OrderWindow = CartPage.PlaceOrder();
 
             PurchaseAlert = OrderWindow.FillOutFormAndPurchase(TestUserData);
+            ValidatePurchaseAlertMessage();
+        }
 
+        private void ValidatePurchaseAlertMessage()
+        {
             Assert.That(PurchaseAlert.IsPurchaseAlertDisplayed(), Is.True);
+            Assert.That(PurchaseAlert.GetPurchaseUserName() == TestUserData.Name, Is.True);
+            Assert.That(PurchaseAlert.GetPurchaseTotal() == TotalOrder + " USD", Is.True);
         }
     }
 }

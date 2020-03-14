@@ -19,7 +19,5 @@ namespace demoblaze_selenium_csharp.Tests
             }
             return productList;
         }
-
-        public int TotalOrder { get; set; } = 0;
     }
 }
