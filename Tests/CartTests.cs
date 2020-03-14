@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using demoblaze_selenium_csharp.Enum;
+﻿using demoblaze_selenium_csharp.Enum;
 using demoblaze_selenium_csharp.Pages;
 using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests
 {
     [TestFixture]
-    public class CartTests : BaseTest
+    public class CartTests : CartBaseTest
     {
-        public ProductPage ProductPage { get; set; }
-
         [Test, Order(6)]
         public void WhenUserOpensCartPage_ThenPageIsOpened()
         {
@@ -19,32 +15,54 @@ namespace demoblaze_selenium_csharp.Tests
         }
 
         [Test, Order(7)]
-        public void GivenProductName_WhenUserAddProductToCart_ThenProductAddedSuccesfullyAlertShowedAndProductIsPresentInCart()
+        public void GivenListOfProducts_WhenUserAddProductsToCart_ThenProductAddedSuccesfullyAlertShowedAndProductIsPresentInCartAndCorrectPriceIsDisplayed()
         {
             var productList = GnerateListOfProducts(NewMonitor, NewPhone);
-            var totalPriceOfProducts = 0;
 
             foreach (var product in productList)
             {
                 ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(product);
-                totalPriceOfProducts += ProductPage.GetProductPrice();
-                ProductPage.AddProductToCart();
+                TotalOrder += ProductPage.AddProductToCart();
                 Assert.That(ProductPage.IsProductAddedAlertShowed(), Is.True);
+
                 CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
                 Assert.That(CartPage.IsProductAddedToCart(product.ProductName), Is.True);
-                Assert.That(totalPriceOfProducts == CartPage.GetTotalPrice, Is.True);
+                Assert.That(TotalOrder == CartPage.GetTotalPrice, Is.True);
+
                 DemoBlazeHomePage.GoTo();
             }
         }
 
-        private static List<Product> GnerateListOfProducts(params Product[] products)
+        [Test, Order(8)]
+        public void GivenProduct_WhenUserAddsProductsToCartAndRemovesThem_ThenTotalOfTheOrderEqualsZero()
         {
-            List<Product> productList = new List<Product>();
-            foreach (var product in products)
-            {
-                productList.Add(product);
-            }
-            return productList;
+            ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(NewNotebook);
+
+            TotalOrder = ProductPage.AddProductToCart();
+            Assert.That(ProductPage.IsProductAddedAlertShowed(), Is.True);
+
+            CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
+            Assert.That(CartPage.IsProductAddedToCart(NewNotebook.ProductName), Is.True);
+
+            CartPage.RemoveProductFromCart();
+            Assert.That(CartPage.IsProductRemovedFromCart(NewNotebook.ProductName), Is.True);
+
+            Assert.That(CartPage.IsTotalOrderVisible(), Is.False);
+        }
+
+        [Test, Order(9)]
+        public void GivenProduct_WhenUserAddsProductToCartAndConfirmsOrder_ThenOrderWindowDisplayed()
+        {
+            ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(NewPhone);
+
+            TotalOrder = ProductPage.AddProductToCart();
+            Assert.That(ProductPage.IsProductAddedAlertShowed(), Is.True);
+
+            CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
+            Assert.That(CartPage.IsProductAddedToCart(NewPhone.ProductName), Is.True);
+
+            OrderWindow = CartPage.PlaceOrder();
+            Assert.That(OrderWindow.IsWindowOpened(), Is.True);
         }
     }
 }

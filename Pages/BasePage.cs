@@ -39,7 +39,20 @@ namespace demoblaze_selenium_csharp.Pages
         protected bool WaitForElementVisibility(By locator)
         {
             Wait.Until(EC.ElementIsVisible(locator));
-            return Driver.FindElement(locator).Displayed;
+            return LocateElement(locator).Displayed;
+        }
+
+        public bool WaitForElementDisappear(By locator)
+        {
+            try
+            {
+                Wait.Until(EC.InvisibilityOfElementLocated(locator));
+                return true;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Element is still visible");
+            }
         }
 
         public void WaitForElementAndClickOnIt(By locator)

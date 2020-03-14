@@ -84,6 +84,7 @@
     <Compile Include="Pages\SignUpWindow.cs" />
     <Compile Include="Tests\ContactTests.cs" />
     <Compile Include="Tests\LogInBaseTest.cs" />
+    <Compile Include="Pages\OrderWindow.cs" />
     <Compile Include="Tests\Product.cs" />
     <Compile Include="Tests\SignUpTests.cs" />
     <Compile Include="Tests\LogInTests.cs" />

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -8,11 +6,12 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public ProductPage(IWebDriver driver) : base(driver) { }
 
-        public void AddProductToCart()
+        public int AddProductToCart()
         {
+            var productPrice = GetProductPrice();
             WaitForElementAndClickOnIt(AddToCartButtonlocator);
-            GetProductPrice();
             WaitForBrowserAlert();
+            return productPrice;
         }
 
         public int GetProductPrice()

@@ -34,7 +34,7 @@ namespace demoblaze_selenium_csharp.Pages
         public bool IsRequestToCompleteFormAlertIsShowed()
             => Alert.IsBrowserAlertContainsExpectedMessage(RequestToCompleteFormAlert);
 
-        public override string CurrentWindowId => "[id='signInModal']";
+        public override string CurrentWindowId => "#signInModal";
         public override string WindowSubmitAction => "register()";
 
         public By SignInUserNameInputLocator => By.Id("sign-username");
