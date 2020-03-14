@@ -7,9 +7,9 @@ namespace demoblaze_selenium_csharp.Tests
     {
         public AboutUsWindow(IWebDriver driver) : base(driver) {}
 
-        internal bool IsVideoAvailable() => WaitForElementVisibility(ExampleVideoLocator);
+        internal bool IsVideoAvailable() => IsElementDisplayedAfterWaiting(ExampleVideoLocator);
 
-        public override bool IsWindowOpened() => WaitForElementVisibility(CurrentWindowLocator);
+        public override bool IsWindowOpened() => IsElementDisplayedAfterWaiting(CurrentWindowLocator);
 
         public override void ClickCloseWindow() => base.ClickCloseWindow();
 

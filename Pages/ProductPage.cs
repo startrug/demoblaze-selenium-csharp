@@ -9,14 +9,14 @@ namespace demoblaze_selenium_csharp.Pages
         public int AddProductToCart()
         {
             var productPrice = GetProductPrice();
-            WaitForElementAndClickOnIt(AddToCartButtonlocator);
+            ClickOnElementAfterWaiting(AddToCartButtonlocator);
             WaitForBrowserAlert();
             return productPrice;
         }
 
         public int GetProductPrice()
         {
-            WaitForElementVisibility(ProductPriceLocator);
+            IsElementDisplayedAfterWaiting(ProductPriceLocator);
             string priceText = GetTextOfElement(ProductPriceLocator).Substring(1, 3);
             return int.Parse(priceText);
         }

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using demoblaze_selenium_csharp.Values;
+using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -13,7 +14,7 @@ namespace demoblaze_selenium_csharp.Pages
 
         internal bool IsUserLoggedInSuccessfully()
         {
-            WaitForElementVisibility(WelcomeUserLocator);
+            IsElementDisplayedAfterWaiting(WelcomeUserLocator);
             return GetTextOfElement(WelcomeUserLocator) == WelcomeUserText;
         }
 

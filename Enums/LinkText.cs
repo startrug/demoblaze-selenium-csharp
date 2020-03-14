@@ -1,4 +1,4 @@
-﻿namespace demoblaze_selenium_csharp.Enum
+﻿namespace demoblaze_selenium_csharp.Enums
 {
     public enum LinkText
     {

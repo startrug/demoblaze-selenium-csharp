@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using demoblaze_selenium_csharp.Values;
+using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -6,12 +7,12 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public SignUpWindow(IWebDriver driver) : base(driver) { }
 
-        public override bool IsWindowOpened() => WaitForElementVisibility(CurrentWindowLocator);
+        public override bool IsWindowOpened() => IsElementDisplayedAfterWaiting(CurrentWindowLocator);
 
         public override void ClickCloseWindow() => base.ClickCloseWindow();
 
-        public override void FillOutForm(UserData contactFormData)
-            => base.FillOutForm(contactFormData);
+        public override void FillOutFormWithBrowserAlert(UserData contactFormData)
+            => base.FillOutFormWithBrowserAlert(contactFormData);
 
         public override void SetInputValues(UserData contactFormData)
         {

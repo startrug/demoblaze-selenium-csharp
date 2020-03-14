@@ -6,24 +6,24 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public CartPage(IWebDriver driver) : base(driver) { }
 
-        internal bool IsCartPageOpened() => WaitForElementVisibility(PlaceOrderButton);
+        internal bool IsCartPageOpened() => IsElementDisplayedAfterWaiting(PlaceOrderButtonLocator);
 
         internal bool IsProductAddedToCart(string productName)
-            => WaitForElementVisibility(ProductNameInCartLocator(productName));
+            => IsElementDisplayedAfterWaiting(ProductNameInCartLocator(productName));
 
-        public void RemoveProductFromCart() => WaitForElementAndClickOnIt(DeleteProductLocator);
+        public void RemoveProductFromCart() => ClickOnElementAfterWaiting(DeleteProductLocator);
 
         public By ProductNameInCartLocator(string productName)
             => By.XPath($"//td[text()='{productName}']");
 
         internal bool IsProductRemovedFromCart(string productName)
-            => WaitForElementDisappear(ProductNameInCartLocator(productName));
+            => IsElementDisappearedAfterWaiting(ProductNameInCartLocator(productName));
 
-        internal bool IsTotalOrderVisible() => IsElementDisplayed(TotalPriceLocator);
+        internal bool IsTotalOrderVisible() => IsElementDisplayedImmediately(TotalPriceLocator);
 
         public OrderWindow PlaceOrder()
         {
-            WaitForElementAndClickOnIt(PlaceOrderButton);
+            ClickOnElementAfterWaiting(PlaceOrderButtonLocator);
             return new OrderWindow(Driver);
         }
 
@@ -32,6 +32,6 @@ namespace demoblaze_selenium_csharp.Pages
 
         public int GetTotalPrice => int.Parse(GetTextOfElement(TotalPriceLocator));
 
-        public By PlaceOrderButton => By.CssSelector(".btn-success");
+        public By PlaceOrderButtonLocator => By.CssSelector(".btn-success");
     }
 }

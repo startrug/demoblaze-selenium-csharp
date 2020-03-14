@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using demoblaze_selenium_csharp.Values;
+using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -6,9 +7,9 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public BaseWindow(IWebDriver driver) : base(driver) { }
 
-        public virtual void FillOutForm(UserData contactFormData)
+        public virtual void FillOutFormWithBrowserAlert(UserData contactFormData)
         {
-            WaitForElementVisibility(CurrentWindowLocator);
+            IsElementDisplayedAfterWaiting(CurrentWindowLocator);
             SetInputValues(contactFormData);
             Click(SubmitWindowButtonLocator);
             WaitForBrowserAlert();
@@ -18,12 +19,12 @@ namespace demoblaze_selenium_csharp.Pages
 
         public virtual void ClickCloseWindow()
         {
-            WaitForElementVisibility(CloseWindowButton);
+            IsElementDisplayedAfterWaiting(CloseWindowButton);
             Click(CloseWindowButton);
         }
 
-        public virtual bool IsWindowOpened() => IsElementDisplayed(CurrentWindowLocator);
-        public virtual bool IsWindowClosed() => IsElementDisplayed(CurrentWindowLocator);
+        public virtual bool IsWindowOpened() => IsElementDisplayedImmediately(CurrentWindowLocator);
+        public virtual bool IsWindowClosed() => IsElementDisplayedImmediately(CurrentWindowLocator);
 
         public virtual By CloseWindowButton => By.CssSelector($"{CurrentWindowId} .close");
         public virtual By CurrentWindowLocator => By.CssSelector($"{CurrentWindowId} .modal-content");

@@ -1,4 +1,5 @@
 ﻿using demoblaze_selenium_csharp.Pages;
+using demoblaze_selenium_csharp.Values;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -10,8 +11,13 @@ namespace demoblaze_selenium_csharp.Tests
         [SetUp]
         public void SetupBeforeEverySingleTest()
         {
-            TestUserData = new UserData("anowak@poczta.pl", "Anna Nowak", "Sample message", "Test123!");
-            TestUserWithMissingData = new UserData("", "", "", "");
+            TestUserData = new UserData(
+                "anowak@poczta.pl",
+                "Anna Nowak",
+                "Sample message",
+                "Test123!",
+                "4551831919693310");
+            TestUserWithMissingData = new UserData("", "", "", "", "");
 
             Driver = new ChromeDriver();
             Driver.Manage().Window.Maximize();
@@ -38,5 +44,6 @@ namespace demoblaze_selenium_csharp.Tests
         public LoggedInUserHomePage LoggedInUserHomePage { get; set; }
         public ProductPage ProductPage { get; set; }
         public OrderWindow OrderWindow { get; set; }
+        public PurchaseAlert PurchaseAlert { get; set; }
     }
 }

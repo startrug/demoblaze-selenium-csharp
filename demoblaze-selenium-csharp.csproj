@@ -67,11 +67,12 @@
     <Compile Include="Helpers\Alerts.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\BaseWindow.cs" />
-    <Compile Include="Enum\LinkText.cs" />
-    <Compile Include="Enum\Category.cs" />
+    <Compile Include="Enums\LinkText.cs" />
+    <Compile Include="Enums\Category.cs" />
     <Compile Include="Pages\LoggedInUserHomePage.cs" />
     <Compile Include="Pages\ProductPage.cs" />
-    <Compile Include="Pages\UserData.cs" />
+    <Compile Include="Pages\PurchaseAlert.cs" />
+    <Compile Include="Values\UserData.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\ContactWindow.cs" />
     <Compile Include="Pages\AboutUsWindow.cs" />
@@ -85,12 +86,13 @@
     <Compile Include="Tests\ContactTests.cs" />
     <Compile Include="Tests\LogInBaseTest.cs" />
     <Compile Include="Pages\OrderWindow.cs" />
-    <Compile Include="Tests\Product.cs" />
+    <Compile Include="Values\Product.cs" />
     <Compile Include="Tests\SignUpTests.cs" />
     <Compile Include="Tests\LogInTests.cs" />
     <Compile Include="Tests\SignUpBaseTest.cs" />
     <Compile Include="Tests\ContactBaseTest.cs" />
     <Compile Include="Tests\CartTests.cs" />
+    <Compile Include="Tests\OrderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

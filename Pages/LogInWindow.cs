@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using demoblaze_selenium_csharp.Values;
+using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -6,11 +7,11 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public LogInWindow(IWebDriver driver) : base(driver) { }
 
-        public override bool IsWindowOpened() => WaitForElementVisibility(CurrentWindowLocator);
+        public override bool IsWindowOpened() => IsElementDisplayedAfterWaiting(CurrentWindowLocator);
 
         public override void ClickCloseWindow() => base.ClickCloseWindow();
 
-        public override void FillOutForm(UserData userData) => base.FillOutForm(userData);
+        public override void FillOutFormWithBrowserAlert(UserData userData) => base.FillOutFormWithBrowserAlert(userData);
 
         public override void SetInputValues(UserData userData)
         {
@@ -20,7 +21,7 @@ namespace demoblaze_selenium_csharp.Pages
 
         public LoggedInUserHomePage FillOutFormAndLogIn(UserData userData)
         {
-            WaitForElementVisibility(CurrentWindowLocator);
+            IsElementDisplayedAfterWaiting(CurrentWindowLocator);
             SetInputValues(userData);
             Click(SubmitWindowButtonLocator);
             return new LoggedInUserHomePage(Driver, userData);

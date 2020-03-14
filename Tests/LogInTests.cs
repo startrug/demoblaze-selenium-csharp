@@ -18,7 +18,7 @@ namespace demoblaze_selenium_csharp.Tests
         public void GivenSignedUpUserNameAndWrongPassword_WhenUserFilledOutLogInFormUsingIncorrectPassword_ThenFailedWrongPasswordAlertIsShowed()
         {
             TestUserData.Password = "qwerty123";
-            LogInWindow.FillOutForm(TestUserData);
+            LogInWindow.FillOutFormWithBrowserAlert(TestUserData);
 
             Assert.That(LogInWindow.IsWrongPasswordAlertShowed(), Is.True);
         }
@@ -26,7 +26,7 @@ namespace demoblaze_selenium_csharp.Tests
         [Test, Order(13)]
         public void WhenUserDidNotFillOutLogInFormAndAcceptIt_ThenRequestToCompleteFormAlertIsShowed()
         {
-            LogInWindow.FillOutForm(TestUserWithMissingData);
+            LogInWindow.FillOutFormWithBrowserAlert(TestUserWithMissingData);
 
             Assert.That(LogInWindow.IsRequestToCompleteFormAlertIsShowed(), Is.True);
         }

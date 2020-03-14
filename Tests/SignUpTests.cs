@@ -11,7 +11,7 @@ namespace demoblaze_selenium_csharp.Tests
         [Test, Order(7)]
         public void GivenNonExistingUserNameAndPassword_WhenUserFilledOutSignUpForm_ThenSuccessfullSigningInAlertIsShowed()
         {
-            SignUpWindow.FillOutForm(TestUserData);
+            SignUpWindow.FillOutFormWithBrowserAlert(TestUserData);
 
             Assert.That(SignUpWindow.IsUserSignedInSuccessfullyAlertShowed, Is.False);
         }
@@ -19,7 +19,7 @@ namespace demoblaze_selenium_csharp.Tests
         [Test, Order(8)]
         public void GivenExistingUserNameAndPassword_WhenUserFilledOutSignUpForm_ThenSuccessfullSigningInAlertIsShowed()
         {
-            SignUpWindow.FillOutForm(TestUserData);
+            SignUpWindow.FillOutFormWithBrowserAlert(TestUserData);
 
             Assert.That(SignUpWindow.IsUserAlreadyExistaAlertShowed, Is.True);
         }
@@ -27,7 +27,7 @@ namespace demoblaze_selenium_csharp.Tests
         [Test, Order(9)]
         public void WhenUserDidNotFillOutSignUpFormAndAcceptIt_ThenRequestToCompleteFormAlertIsShowed()
         {
-            SignUpWindow.FillOutForm(TestUserWithMissingData);
+            SignUpWindow.FillOutFormWithBrowserAlert(TestUserWithMissingData);
 
             Assert.That(SignUpWindow.IsRequestToCompleteFormAlertIsShowed, Is.True);
         }

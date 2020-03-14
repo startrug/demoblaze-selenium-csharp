@@ -1,4 +1,4 @@
-﻿using demoblaze_selenium_csharp.Enum;
+﻿using demoblaze_selenium_csharp.Enums;
 using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests

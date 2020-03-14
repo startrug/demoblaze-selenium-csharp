@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using demoblaze_selenium_csharp.Enum;
+using demoblaze_selenium_csharp.Enums;
+using demoblaze_selenium_csharp.Values;
 
 namespace demoblaze_selenium_csharp.Tests
 {

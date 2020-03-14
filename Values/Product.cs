@@ -1,6 +1,6 @@
-﻿using demoblaze_selenium_csharp.Enum;
+﻿using demoblaze_selenium_csharp.Enums;
 
-namespace demoblaze_selenium_csharp.Tests
+namespace demoblaze_selenium_csharp.Values
 {
     public class Product
     {
