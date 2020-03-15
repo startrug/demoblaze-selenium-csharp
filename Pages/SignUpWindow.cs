@@ -11,20 +11,20 @@ namespace demoblaze_selenium_csharp.Pages
 
         public override void ClickCloseWindow() => base.ClickCloseWindow();
 
-        public override void FillOutFormWithBrowserAlert(CustomerData contactFormData)
-            => base.FillOutFormWithBrowserAlert(contactFormData);
+        public override void FillOutFormWithBrowserAlert(CustomerData customerData)
+            => base.FillOutFormWithBrowserAlert(customerData);
 
-        public override void SetInputValues(CustomerData contactFormData)
+        public override void SetInputValues(CustomerData customerData)
         {
-            SetUserName(contactFormData);
-            SetUserPassword(contactFormData);
+            SetUserName(customerData);
+            SetUserPassword(customerData);
         }
 
-        private void SetUserPassword(CustomerData userFormData)
-            => SetText(SignInPasswordInputLocator, userFormData.Password);
+        private void SetUserPassword(CustomerData customerData)
+            => SetText(WindowInputLocator("sign-password"), customerData.Password);
 
-        private void SetUserName(CustomerData userFormData)
-            => SetText(SignInUserNameInputLocator, userFormData.Name);
+        private void SetUserName(CustomerData customerData)
+            => SetText(WindowInputLocator("sign-username"), customerData.Name);
 
         public bool IsUserSignedInSuccessfullyAlertShowed()
             => Alert.IsBrowserAlertContainsExpectedMessage(SignUpSuccessfullMessage);
@@ -37,9 +37,6 @@ namespace demoblaze_selenium_csharp.Pages
 
         public override string CurrentWindowId => "#signInModal";
         public override string WindowSubmitAction => "register()";
-
-        public By SignInUserNameInputLocator => By.Id("sign-username");
-        public By SignInPasswordInputLocator => By.Id("sign-password");
 
         public string SignUpSuccessfullMessage => "Sign up successful.";
         public string UserExistsMessage => "This user already exist.";

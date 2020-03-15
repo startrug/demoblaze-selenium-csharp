@@ -34,15 +34,12 @@ namespace demoblaze_selenium_csharp.Pages
             => Alert.IsBrowserAlertContainsExpectedMessage(RequestToCompleteFormAlert);
 
         private void SetUserName(CustomerData userData)
-            => SetText(LogInUserNameInputLocator, userData.Name);
+            => SetText(WindowInputLocator("loginusername"), userData.Name);
 
         private void SetUserPassword(CustomerData userData)
-            => SetText(LogInPasswordInputLocator, userData.Password);
+            => SetText(WindowInputLocator("loginpassword"), userData.Password);
 
         public override string CurrentWindowId => "#logInModal";
-
-        private By LogInPasswordInputLocator => By.Id("loginpassword");
-        private By LogInUserNameInputLocator => By.Id("loginusername");
 
         public override string WindowSubmitAction => "logIn()";
 

@@ -27,25 +27,23 @@ namespace demoblaze_selenium_csharp.Pages
             SetCustomerCreditCardExpirationYear(customerData);
         }
 
-        private By OrderInputLocator(string id) => By.Id($"{id}");
-
         private void SetCustomerCreditCardExpirationYear(CustomerData customerData)
-            => SetText(OrderInputLocator("year"), customerData.ExpirationYear);
+            => SetText(WindowInputLocator("year"), customerData.ExpirationYear);
 
         private void SetCustomerCreditCardExpirationMonth(CustomerData customerData)
-            => SetText(OrderInputLocator("month"), customerData.ExpirationMonth);
+            => SetText(WindowInputLocator("month"), customerData.ExpirationMonth);
 
         private void SetCustomerCity(CustomerData customerData)
-            => SetText(OrderInputLocator("city"), customerData.City);
+            => SetText(WindowInputLocator("city"), customerData.City);
 
         private void SetCustomerCountry(CustomerData customerData)
-            => SetText(OrderInputLocator("country"), customerData.Country);
+            => SetText(WindowInputLocator("country"), customerData.Country);
 
         private void SetCustomerCreditCard(CustomerData customerData)
-            => SetText(OrderInputLocator("card"), customerData.CreditCardNumber);
+            => SetText(WindowInputLocator("card"), customerData.CreditCardNumber);
 
         public void SetCustomerName(CustomerData customerData)
-            => SetText(OrderInputLocator("name"), customerData.Name);
+            => SetText(WindowInputLocator("name"), customerData.Name);
 
         public override string CurrentWindowId => "#orderModal";
 
