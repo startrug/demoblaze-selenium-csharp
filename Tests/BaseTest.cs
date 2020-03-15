@@ -1,4 +1,5 @@
-﻿using demoblaze_selenium_csharp.Pages;
+﻿using demoblaze_selenium_csharp.Enums;
+using demoblaze_selenium_csharp.Pages;
 using demoblaze_selenium_csharp.Values;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -8,16 +9,24 @@ namespace demoblaze_selenium_csharp.Tests
 {
     public class BaseTest
     {
+        protected Product NewMonitor = new Product(Category.Monitors, "ASUS Full HD");
+        protected Product NewPhone = new Product(Category.Phones, "Samsung galaxy s6");
+        protected Product NewNotebook = new Product(Category.Laptops, "MacBook Pro");
+
         [SetUp]
         public void SetupBeforeEverySingleTest()
         {
-            TestUserData = new UserData(
+            TestCustomerData = new CustomerData(
                 "anowak@poczta.pl",
                 "Anna Nowak",
                 "Sample message",
                 "Test123!",
-                "4551831919693310");
-            TestUserWithMissingData = new UserData("", "", "", "", "");
+                "4551831919693310",
+                "2",
+                "2025",
+                "Canada",
+                "Vancouver");
+            TestCustomerWithMissingData = new CustomerData("", "", "", "", "", "", "", "", "");
 
             Driver = new ChromeDriver();
             Driver.Manage().Window.Maximize();
@@ -39,8 +48,8 @@ namespace demoblaze_selenium_csharp.Tests
         public CartPage CartPage { get; set; }
         public LogInWindow LogInWindow { get; set; }
         public SignUpWindow SignUpWindow { get; set; }
-        public UserData TestUserData { get; private set; }
-        public UserData TestUserWithMissingData { get; private set; }
+        public CustomerData TestCustomerData { get; private set; }
+        public CustomerData TestCustomerWithMissingData { get; private set; }
         public LoggedInUserHomePage LoggedInUserHomePage { get; set; }
         public ProductPage ProductPage { get; set; }
         public OrderWindow OrderWindow { get; set; }

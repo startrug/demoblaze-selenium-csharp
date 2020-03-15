@@ -7,7 +7,7 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public BaseWindow(IWebDriver driver) : base(driver) { }
 
-        public virtual void FillOutFormWithBrowserAlert(UserData contactFormData)
+        public virtual void FillOutFormWithBrowserAlert(CustomerData contactFormData)
         {
             IsElementDisplayedAfterWaiting(CurrentWindowLocator);
             SetInputValues(contactFormData);
@@ -15,7 +15,7 @@ namespace demoblaze_selenium_csharp.Pages
             WaitForBrowserAlert();
         }
 
-        public virtual void SetInputValues(UserData contactFormData) { }
+        public virtual void SetInputValues(CustomerData contactFormData) { }
 
         public virtual void ClickCloseWindow()
         {

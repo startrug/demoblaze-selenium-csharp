@@ -15,8 +15,22 @@ namespace demoblaze_selenium_csharp.Tests
             CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
 
             OrderWindow = CartPage.PlaceOrder();
+            PurchaseAlert = OrderWindow.FillOutFormAndPurchase(TestCustomerData);
 
-            PurchaseAlert = OrderWindow.FillOutFormAndPurchase(TestUserData);
+            ValidatePurchaseAlertMessage();
+        }
+
+        [Test, Order(11)]
+        public void GivenProductAndAllCustomerData_WhenCustomerAddsProductToCartFillsOutOrderFormAndConfirmsIt_ThenPurchaseAlertWithInputtedDataIsShowed()
+        {
+            ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(NewMonitor);
+
+            TotalOrder = ProductPage.AddProductToCart();
+            Assert.That(ProductPage.IsProductAddedAlertShowed, Is.True);
+            CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
+            OrderWindow = CartPage.PlaceOrder();
+            PurchaseAlert = OrderWindow.FillOutFormAndPurchase(TestCustomerData);
+
             ValidatePurchaseAlertMessage();
         }
 
@@ -24,9 +38,9 @@ namespace demoblaze_selenium_csharp.Tests
         {
             var currentDate = DateTime.Today.AddMonths(-1).ToString("dd/M/yyyy", CultureInfo.CreateSpecificCulture("en-US"));
             Assert.That(PurchaseAlert.IsPurchaseAlertDisplayed(), Is.True);
-            Assert.That(PurchaseAlert.GetPurchaseUserName() == TestUserData.Name, Is.True);
+            Assert.That(PurchaseAlert.GetPurchaseUserName() == TestCustomerData.Name, Is.True);
             Assert.That(PurchaseAlert.GetPurchaseTotalAmount() == TotalOrder + " USD", Is.True);
-            Assert.That(PurchaseAlert.GetPurchaseCreditCardNumber() == TestUserData.CreditCardNumber, Is.True);
+            Assert.That(PurchaseAlert.GetPurchaseCreditCardNumber() == TestCustomerData.CreditCardNumber, Is.True);
             Assert.That(PurchaseAlert.GetPurchaseDate() == currentDate, Is.True);
         }
     }

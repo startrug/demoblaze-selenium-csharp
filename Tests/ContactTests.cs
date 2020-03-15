@@ -17,7 +17,7 @@ namespace demoblaze_selenium_csharp.Tests
         [Test, Order(3)]
         public void GivenUserContactFormData_WhenUserFillOutContactFormAndClickSendMessageButton_ThenMessageIsSent()
         {
-            ContactWindow.FillOutFormWithBrowserAlert(TestUserData);
+            ContactWindow.FillOutFormWithBrowserAlert(TestCustomerData);
 
             Assert.That(ContactWindow.IsMessageSentSuccessfully, Is.True);
         }

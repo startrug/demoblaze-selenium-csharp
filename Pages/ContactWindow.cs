@@ -11,10 +11,10 @@ namespace demoblaze_selenium_csharp.Pages
 
         public override bool IsWindowClosed() => IsElementDisplayedImmediately(CurrentWindowLocator);
 
-        public override void FillOutFormWithBrowserAlert(UserData contactFormData)
+        public override void FillOutFormWithBrowserAlert(CustomerData contactFormData)
             => base.FillOutFormWithBrowserAlert(contactFormData);
 
-        public override void SetInputValues(UserData contactFormData)
+        public override void SetInputValues(CustomerData contactFormData)
         {
             SetUserEmail(contactFormData);
             SetUserName(contactFormData);
@@ -24,13 +24,13 @@ namespace demoblaze_selenium_csharp.Pages
         public bool IsMessageSentSuccessfully()
             => Alert.IsBrowserAlertContainsExpectedMessage(MessageSentAlert);
 
-        private void SetUserEmail(UserData contactFormData) =>
+        private void SetUserEmail(CustomerData contactFormData) =>
             SetText(EmailInputLocator, contactFormData.Email);
 
-        private void SetUserName(UserData contactFormData)
+        private void SetUserName(CustomerData contactFormData)
             => SetText(NameInputLocator, contactFormData.Name);
 
-        private void SetUserMessage(UserData contactFormData)
+        private void SetUserMessage(CustomerData contactFormData)
             => SetText(MessageInputLocator, contactFormData.Message);
 
         public override void ClickCloseWindow() => base.ClickCloseWindow();
