@@ -24,7 +24,7 @@ namespace demoblaze_selenium_csharp.Tests
         }
 
         [Test, Order(13)]
-        public void WhenUserDidNotFillOutLogInFormAndAcceptIt_ThenRequestToCompleteFormAlertIsShowed()
+        public void WhenUserDidNotFillOutLogInFormAndAcceptIt_ThenCompleteFormAlertIsShowed()
         {
             LogInWindow.FillOutFormWithBrowserAlert(TestCustomerWithMissingData);
 

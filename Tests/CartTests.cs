@@ -22,12 +22,12 @@ namespace demoblaze_selenium_csharp.Tests
             foreach (var product in productList)
             {
                 ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(product);
-                TotalOrder += ProductPage.AddProductToCart();
+                TotalAmount += ProductPage.AddProductToCart();
                 Assert.That(ProductPage.IsProductAddedAlertShowed(), Is.True);
 
                 CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
                 Assert.That(CartPage.IsProductAddedToCart(product.ProductName), Is.True);
-                Assert.That(TotalOrder == CartPage.GetTotalPrice, Is.True);
+                Assert.That(TotalAmount == CartPage.GetTotalPrice, Is.True);
 
                 DemoBlazeHomePage.GoTo();
             }
@@ -38,7 +38,7 @@ namespace demoblaze_selenium_csharp.Tests
         {
             ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(NewNotebook);
 
-            TotalOrder = ProductPage.AddProductToCart();
+            TotalAmount = ProductPage.AddProductToCart();
             Assert.That(ProductPage.IsProductAddedAlertShowed(), Is.True);
 
             CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
@@ -55,7 +55,7 @@ namespace demoblaze_selenium_csharp.Tests
         {
             ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(NewPhone);
 
-            TotalOrder = ProductPage.AddProductToCart();
+            TotalAmount = ProductPage.AddProductToCart();
             Assert.That(ProductPage.IsProductAddedAlertShowed(), Is.True);
 
             CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);

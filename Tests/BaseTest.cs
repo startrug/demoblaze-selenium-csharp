@@ -54,6 +54,6 @@ namespace demoblaze_selenium_csharp.Tests
         public ProductPage ProductPage { get; set; }
         public OrderWindow OrderWindow { get; set; }
         public PurchaseAlert PurchaseAlert { get; set; }
-        public int TotalOrder { get; set; } = 0;
+        public int TotalAmount { get; set; } = 0;
     }
 }
