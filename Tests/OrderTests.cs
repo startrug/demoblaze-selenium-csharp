@@ -43,7 +43,7 @@ namespace demoblaze_selenium_csharp.Tests
             OrderWindow = CartPage.PlaceOrder();
             OrderWindow.FillOutFormWithBrowserAlert(TestCustomerWithMissingData);
 
-            Assert.That(OrderWindow.IsEnterRequiredDataAlertIsShowed(), Is.True);
+            Assert.That(OrderWindow.IsEnterRequiredDataAlertShowed(), Is.True);
         }
 
         private void ValidatePurchaseAlertMessage()

@@ -48,7 +48,7 @@ namespace demoblaze_selenium_csharp.Pages
         private void SetCustomerCreditCard(CustomerData customerData)
             => SetText(WindowInputLocator("card"), customerData.CreditCardNumber);
 
-        internal bool IsEnterRequiredDataAlertIsShowed()
+        internal bool IsEnterRequiredDataAlertShowed()
             => Alert.IsBrowserAlertContainsExpectedMessage(EnterRequiredDataAlert);
 
         public void SetCustomerName(CustomerData customerData)
