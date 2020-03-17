@@ -13,18 +13,18 @@ namespace demoblaze_selenium_csharp.Pages
 
         public override void FillOutFormWithBrowserAlert(CustomerData userData) => base.FillOutFormWithBrowserAlert(userData);
 
-        public override void SetInputValues(CustomerData userData)
+        public override void SetInputValues(CustomerData customerData)
         {
-            SetUserName(userData);
-            SetUserPassword(userData);
+            SetUserName(customerData);
+            SetUserPassword(customerData);
         }
 
-        public LoggedInUserHomePage FillOutFormAndLogIn(CustomerData userData)
+        public LoggedInUserHomePage FillOutFormAndLogIn(CustomerData customerData)
         {
             IsElementDisplayedAfterWaiting(CurrentWindowLocator);
-            SetInputValues(userData);
+            SetInputValues(customerData);
             Click(SubmitWindowButtonLocator);
-            return new LoggedInUserHomePage(Driver, userData);
+            return new LoggedInUserHomePage(Driver, customerData);
         }
 
         public bool IsWrongPasswordAlertShowed()

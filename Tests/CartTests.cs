@@ -15,7 +15,7 @@ namespace demoblaze_selenium_csharp.Tests
         }
 
         [Test, Order(7)]
-        public void GivenListOfProducts_WhenUserAddProductsToCart_ThenProductAddedSuccesfullyAlertShowedAndProductIsPresentInCartAndCorrectPriceIsDisplayed()
+        public void GivenListOfProducts_WhenCustomerAddProductsToCart_ThenProductAddedSuccesfullyAlertShowedAndProductIsPresentInCartAndCorrectPriceIsDisplayed()
         {
             var productList = GnerateListOfProducts(NewMonitor, NewPhone);
 
@@ -34,7 +34,7 @@ namespace demoblaze_selenium_csharp.Tests
         }
 
         [Test, Order(8)]
-        public void GivenProduct_WhenUserAddsProductsToCartAndRemovesThem_ThenTotalOfTheOrderEqualsZero()
+        public void GivenProduct_WhenCustomerAddsProductsToCartAndRemovesThem_ThenTotalOfTheOrderIsNotDisplayed()
         {
             ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(NewNotebook);
 
@@ -51,7 +51,7 @@ namespace demoblaze_selenium_csharp.Tests
         }
 
         [Test, Order(9)]
-        public void GivenProduct_WhenUserAddsProductToCartAndConfirmsOrder_ThenOrderWindowDisplayed()
+        public void GivenProduct_WhenCustomerAddsProductToCartAndConfirmsOrder_ThenOrderWindowIsDisplayed()
         {
             ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(NewPhone);
 

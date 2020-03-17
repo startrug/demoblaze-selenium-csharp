@@ -9,13 +9,13 @@ namespace demoblaze_selenium_csharp.Tests
         public override void SetupBeforeEveryLogInTest() => base.SetupBeforeEveryLogInTest();
 
         [Test, Order(11)]
-        public void WhenUserOpensLogInWindow_ThenWindowIsOpened()
+        public void WhenCustomerOpensLogInWindow_ThenWindowIsOpened()
         {
             Assert.That(LogInWindow.IsWindowOpened(), Is.True);
         }
 
         [Test, Order(12)]
-        public void GivenSignedUpUserNameAndWrongPassword_WhenUserFilledOutLogInFormUsingIncorrectPassword_ThenFailedWrongPasswordAlertIsShowed()
+        public void GivenSignedUpCustomerNameAndWrongPassword_WhenCustomerFilledOutLogInFormUsingIncorrectPassword_ThenFailedWrongPasswordAlertIsShowed()
         {
             TestCustomerData.Password = "qwerty123";
             LogInWindow.FillOutFormWithBrowserAlert(TestCustomerData);
@@ -24,7 +24,7 @@ namespace demoblaze_selenium_csharp.Tests
         }
 
         [Test, Order(13)]
-        public void WhenUserDidNotFillOutLogInFormAndAcceptIt_ThenCompleteFormAlertIsShowed()
+        public void WhenCustomerDidNotFillOutLogInFormAndAcceptIt_ThenCompleteFormAlertIsShowed()
         {
             LogInWindow.FillOutFormWithBrowserAlert(TestCustomerWithMissingData);
 
@@ -32,7 +32,7 @@ namespace demoblaze_selenium_csharp.Tests
         }
 
         [Test, Order(14)]
-        public void GivenSignedUpUserNameAndPassword_WhenUserFilledOutLogInForm_ThenSuccessfullloggedInInAlertIsShowed()
+        public void GivenSignedUpUserNameAndPassword_WhenUserFilledOutLogInForm_ThenSuccessfullLoggedInInAlertIsShowed()
         {
             LoggedInUserHomePage = LogInWindow.FillOutFormAndLogIn(TestCustomerData);
 
