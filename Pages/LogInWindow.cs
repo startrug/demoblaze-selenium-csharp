@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using demoblaze_selenium_csharp.Values;
+using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -6,24 +7,24 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public LogInWindow(IWebDriver driver) : base(driver) { }
 
-        public override bool IsWindowOpened() => WaitForElementVisibility(CurrentWindowLocator);
+        public override bool IsWindowOpened() => IsElementDisplayedAfterWaiting(CurrentWindowLocator);
 
         public override void ClickCloseWindow() => base.ClickCloseWindow();
 
-        public override void FillOutForm(UserData userData) => base.FillOutForm(userData);
+        public override void FillOutFormWithBrowserAlert(CustomerData userData) => base.FillOutFormWithBrowserAlert(userData);
 
-        public override void SetInputValues(UserData userData)
+        public override void SetInputValues(CustomerData customerData)
         {
-            SetUserName(userData);
-            SetUserPassword(userData);
+            SetUserName(customerData);
+            SetUserPassword(customerData);
         }
 
-        public LoggedInUserHomePage FillOutFormAndLogIn(UserData userData)
+        public LoggedInUserHomePage FillOutFormAndLogIn(CustomerData customerData)
         {
-            WaitForElementVisibility(CurrentWindowLocator);
-            SetInputValues(userData);
+            IsElementDisplayedAfterWaiting(CurrentWindowLocator);
+            SetInputValues(customerData);
             Click(SubmitWindowButtonLocator);
-            return new LoggedInUserHomePage(Driver, userData);
+            return new LoggedInUserHomePage(Driver, customerData);
         }
 
         public bool IsWrongPasswordAlertShowed()
@@ -32,16 +33,13 @@ namespace demoblaze_selenium_csharp.Pages
         internal bool IsRequestToCompleteFormAlertIsShowed()
             => Alert.IsBrowserAlertContainsExpectedMessage(RequestToCompleteFormAlert);
 
-        private void SetUserName(UserData userData)
-            => SetText(LogInUserNameInputLocator, userData.Name);
+        private void SetUserName(CustomerData userData)
+            => SetText(WindowInputLocator("loginusername"), userData.Name);
 
-        private void SetUserPassword(UserData userData)
-            => SetText(LogInPasswordInputLocator, userData.Password);
+        private void SetUserPassword(CustomerData userData)
+            => SetText(WindowInputLocator("loginpassword"), userData.Password);
 
         public override string CurrentWindowId => "#logInModal";
-
-        private By LogInPasswordInputLocator => By.Id("loginpassword");
-        private By LogInUserNameInputLocator => By.Id("loginusername");
 
         public override string WindowSubmitAction => "logIn()";
 

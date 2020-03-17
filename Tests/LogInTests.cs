@@ -9,32 +9,32 @@ namespace demoblaze_selenium_csharp.Tests
         public override void SetupBeforeEveryLogInTest() => base.SetupBeforeEveryLogInTest();
 
         [Test, Order(11)]
-        public void WhenUserOpensLogInWindow_ThenWindowIsOpened()
+        public void WhenCustomerOpensLogInWindow_ThenWindowIsOpened()
         {
             Assert.That(LogInWindow.IsWindowOpened(), Is.True);
         }
 
         [Test, Order(12)]
-        public void GivenSignedUpUserNameAndWrongPassword_WhenUserFilledOutLogInFormUsingIncorrectPassword_ThenFailedWrongPasswordAlertIsShowed()
+        public void GivenSignedUpCustomerNameAndWrongPassword_WhenCustomerFilledOutLogInFormUsingIncorrectPassword_ThenFailedWrongPasswordAlertIsShowed()
         {
-            TestUserData.Password = "qwerty123";
-            LogInWindow.FillOutForm(TestUserData);
+            TestCustomerData.Password = "qwerty123";
+            LogInWindow.FillOutFormWithBrowserAlert(TestCustomerData);
 
             Assert.That(LogInWindow.IsWrongPasswordAlertShowed(), Is.True);
         }
 
         [Test, Order(13)]
-        public void WhenUserDidNotFillOutLogInFormAndAcceptIt_ThenRequestToCompleteFormAlertIsShowed()
+        public void WhenCustomerDidNotFillOutLogInFormAndAcceptIt_ThenCompleteFormAlertIsShowed()
         {
-            LogInWindow.FillOutForm(TestUserWithMissingData);
+            LogInWindow.FillOutFormWithBrowserAlert(TestCustomerWithMissingData);
 
             Assert.That(LogInWindow.IsRequestToCompleteFormAlertIsShowed(), Is.True);
         }
 
         [Test, Order(14)]
-        public void GivenSignedUpUserNameAndPassword_WhenUserFilledOutLogInForm_ThenSuccessfullloggedInInAlertIsShowed()
+        public void GivenSignedUpUserNameAndPassword_WhenUserFilledOutLogInForm_ThenSuccessfullLoggedInInAlertIsShowed()
         {
-            LoggedInUserHomePage = LogInWindow.FillOutFormAndLogIn(TestUserData);
+            LoggedInUserHomePage = LogInWindow.FillOutFormAndLogIn(TestCustomerData);
 
             Assert.That(LoggedInUserHomePage.IsUserLoggedInSuccessfully(), Is.True);
         }

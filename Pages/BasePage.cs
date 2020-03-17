@@ -34,15 +34,15 @@ namespace demoblaze_selenium_csharp.Pages
 
         protected IWebElement LocateElement(By locator) => Driver.FindElement(locator);
 
-        protected bool IsElementDisplayed(By locator) => LocateElement(locator).Displayed;
+        protected bool IsElementDisplayedImmediately(By locator) => LocateElement(locator).Displayed;
 
-        protected bool WaitForElementVisibility(By locator)
+        protected bool IsElementDisplayedAfterWaiting(By locator)
         {
             Wait.Until(EC.ElementIsVisible(locator));
             return LocateElement(locator).Displayed;
         }
 
-        public bool WaitForElementDisappear(By locator)
+        public bool IsElementDisappearedAfterWaiting(By locator)
         {
             try
             {
@@ -55,10 +55,7 @@ namespace demoblaze_selenium_csharp.Pages
             }
         }
 
-        public void WaitForElementAndClickOnIt(By locator)
-        {
-            Wait.Until(EC.ElementIsVisible(locator)).Click();
-        }
+        public void ClickOnElementAfterWaiting(By locator) => Wait.Until(EC.ElementIsVisible(locator)).Click();
 
         protected void WaitForBrowserAlert() => Wait.Until(EC.AlertIsPresent());
     }

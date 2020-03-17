@@ -1,6 +1,8 @@
 ﻿using System;
-using demoblaze_selenium_csharp.Enum;
+using System.Threading;
+using demoblaze_selenium_csharp.Enums;
 using demoblaze_selenium_csharp.Tests;
+using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -32,6 +34,7 @@ namespace demoblaze_selenium_csharp.Pages
                     return (T)Convert.ChangeType(new AboutUsWindow(Driver), typeof(T));
                 case LinkText.Cart:
                     Click(CartLinkLocator);
+                    Thread.Sleep(500);
                     return (T)Convert.ChangeType(new CartPage(Driver), typeof(T));
                 case LinkText.LogIn:
                     Click(LogInLinkLocator);
@@ -47,7 +50,7 @@ namespace demoblaze_selenium_csharp.Pages
         public ProductPage SelectProductAndOpenProductPage(Product product)
         {
             SelectCategory(product.Category);
-            WaitForElementAndClickOnIt(ProductLocator(product.ProductName));
+            ClickOnElementAfterWaiting(ProductLocator(product.ProductName));
             return new ProductPage(Driver);
         }
 

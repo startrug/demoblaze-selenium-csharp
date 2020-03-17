@@ -1,4 +1,4 @@
-﻿using demoblaze_selenium_csharp.Enum;
+﻿using demoblaze_selenium_csharp.Enums;
 using demoblaze_selenium_csharp.Pages;
 using NUnit.Framework;
 
@@ -15,30 +15,30 @@ namespace demoblaze_selenium_csharp.Tests
         }
 
         [Test, Order(7)]
-        public void GivenListOfProducts_WhenUserAddProductsToCart_ThenProductAddedSuccesfullyAlertShowedAndProductIsPresentInCartAndCorrectPriceIsDisplayed()
+        public void GivenListOfProducts_WhenCustomerAddProductsToCart_ThenProductAddedSuccesfullyAlertShowedAndProductIsPresentInCartAndCorrectPriceIsDisplayed()
         {
             var productList = GnerateListOfProducts(NewMonitor, NewPhone);
 
             foreach (var product in productList)
             {
                 ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(product);
-                TotalOrder += ProductPage.AddProductToCart();
+                TotalAmount += ProductPage.AddProductToCart();
                 Assert.That(ProductPage.IsProductAddedAlertShowed(), Is.True);
 
                 CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
                 Assert.That(CartPage.IsProductAddedToCart(product.ProductName), Is.True);
-                Assert.That(TotalOrder == CartPage.GetTotalPrice, Is.True);
+                Assert.That(TotalAmount == CartPage.GetTotalPrice, Is.True);
 
                 DemoBlazeHomePage.GoTo();
             }
         }
 
         [Test, Order(8)]
-        public void GivenProduct_WhenUserAddsProductsToCartAndRemovesThem_ThenTotalOfTheOrderEqualsZero()
+        public void GivenProduct_WhenCustomerAddsProductsToCartAndRemovesThem_ThenTotalOfTheOrderIsNotDisplayed()
         {
             ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(NewNotebook);
 
-            TotalOrder = ProductPage.AddProductToCart();
+            TotalAmount = ProductPage.AddProductToCart();
             Assert.That(ProductPage.IsProductAddedAlertShowed(), Is.True);
 
             CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
@@ -51,11 +51,11 @@ namespace demoblaze_selenium_csharp.Tests
         }
 
         [Test, Order(9)]
-        public void GivenProduct_WhenUserAddsProductToCartAndConfirmsOrder_ThenOrderWindowDisplayed()
+        public void GivenProduct_WhenCustomerAddsProductToCartAndConfirmsOrder_ThenOrderWindowIsDisplayed()
         {
             ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(NewPhone);
 
-            TotalOrder = ProductPage.AddProductToCart();
+            TotalAmount = ProductPage.AddProductToCart();
             Assert.That(ProductPage.IsProductAddedAlertShowed(), Is.True);
 
             CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);

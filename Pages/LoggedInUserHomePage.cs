@@ -1,19 +1,20 @@
-﻿using OpenQA.Selenium;
+﻿using demoblaze_selenium_csharp.Values;
+using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
 {
     public class LoggedInUserHomePage : HomePage
     {
-        private readonly UserData loggedInUserData;
+        private readonly CustomerData loggedInUserData;
 
-        public LoggedInUserHomePage(IWebDriver driver, UserData userData) : base(driver)
+        public LoggedInUserHomePage(IWebDriver driver, CustomerData userData) : base(driver)
         {
             loggedInUserData = userData;
         }
 
         internal bool IsUserLoggedInSuccessfully()
         {
-            WaitForElementVisibility(WelcomeUserLocator);
+            IsElementDisplayedAfterWaiting(WelcomeUserLocator);
             return GetTextOfElement(WelcomeUserLocator) == WelcomeUserText;
         }
 

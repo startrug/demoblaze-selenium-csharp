@@ -1,4 +1,4 @@
-﻿using demoblaze_selenium_csharp.Enum;
+﻿using demoblaze_selenium_csharp.Enums;
 using demoblaze_selenium_csharp.Pages;
 using NUnit.Framework;
 
