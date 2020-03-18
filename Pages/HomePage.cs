@@ -9,7 +9,7 @@ namespace demoblaze_selenium_csharp.Pages
 {
     public class HomePage : BasePage
     {
-        public const string HomePageTitle = "STORE";
+        public const string HomePageTitle = "STORE9";
 
         public HomePage(IWebDriver driver) : base(driver) { }
 
@@ -17,7 +17,12 @@ namespace demoblaze_selenium_csharp.Pages
 
         internal bool IsPageOpened() => Driver.FindElement(HomeLinkLocator).Displayed;
 
-        internal bool IsPageTitleCorrect() => Driver.Title == HomePageTitle;
+        internal bool IsPageTitleCorrect()
+        {
+            var isTitleCorrect = Driver.Title == HomePageTitle;
+            Reporter.LogPassingTestStepForBugLogger($"Navigate to Page with title: {HomePageTitle}");
+            return isTitleCorrect;
+        }
 
         public T ClickLink<T>(LinkText link)
         {
