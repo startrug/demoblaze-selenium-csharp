@@ -4,6 +4,7 @@ using demoblaze_selenium_csharp.Enums;
 using demoblaze_selenium_csharp.Tests;
 using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
+using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Pages
 {

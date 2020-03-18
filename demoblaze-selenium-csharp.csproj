@@ -44,9 +44,6 @@
     <Reference Include="DnsClient, Version=1.0.7.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
       <HintPath>packages\DnsClient.1.0.7\lib\net45\DnsClient.dll</HintPath>
     </Reference>
-    <Reference Include="ExtentReports, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\ExtentReports.4.0.3\lib\ExtentReports.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
@@ -115,8 +112,6 @@
     <Compile Include="Pages\LoggedInUserHomePage.cs" />
     <Compile Include="Pages\ProductPage.cs" />
     <Compile Include="Pages\PurchaseAlert.cs" />
-    <Compile Include="Reporter.cs" />
-    <Compile Include="ScreenshotTaker.cs" />
     <Compile Include="Values\CustomerData.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\ContactWindow.cs" />
@@ -147,7 +142,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ReportingLibrary\ReportingLibrary.csproj">
+      <Project>{8D78EE0C-E79F-4258-80BC-479332851C92}</Project>
+      <Name>ReportingLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

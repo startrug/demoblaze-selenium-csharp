@@ -6,6 +6,7 @@ using NLog;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Tests
 {
