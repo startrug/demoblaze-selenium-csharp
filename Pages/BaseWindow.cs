@@ -1,5 +1,6 @@
 ﻿using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
+using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -25,7 +26,11 @@ namespace demoblaze_selenium_csharp.Pages
             Click(CloseWindowButton);
         }
 
-        public virtual bool IsWindowOpened() => IsElementDisplayedImmediately(CurrentWindowLocator);
+        public virtual bool IsWindowOpened()
+        {
+            return IsElementDisplayedImmediately(CurrentWindowLocator);
+        }
+
         public virtual bool IsWindowClosed() => IsElementDisplayedImmediately(CurrentWindowLocator);
 
         public virtual By CloseWindowButton => By.CssSelector($"{CurrentWindowId} .close");

@@ -1,5 +1,6 @@
 ﻿using demoblaze_selenium_csharp.Pages;
 using OpenQA.Selenium;
+using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Tests
 {
@@ -7,9 +8,17 @@ namespace demoblaze_selenium_csharp.Tests
     {
         public AboutUsWindow(IWebDriver driver) : base(driver) {}
 
-        internal bool IsVideoAvailable() => IsElementDisplayedAfterWaiting(ExampleVideoLocator);
+        internal bool IsVideoAvailable()
+        {
+            Reporter.LogPassingTestStepForBugLogger("Sample video was displayed");
+            return IsElementDisplayedAfterWaiting(ExampleVideoLocator);
+        }
 
-        public override bool IsWindowOpened() => IsElementDisplayedAfterWaiting(CurrentWindowLocator);
+        public override bool IsWindowOpened()
+        {
+            Reporter.LogPassingTestStepForBugLogger("About us window was opened successfully");
+            return IsElementDisplayedAfterWaiting(CurrentWindowLocator);
+        }
 
         public override void ClickCloseWindow() => base.ClickCloseWindow();
 
