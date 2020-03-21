@@ -1,5 +1,6 @@
 ﻿using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
+using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -7,31 +8,42 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public ContactWindow(IWebDriver driver) : base(driver) { }
 
-        public override bool IsWindowOpened() => IsElementDisplayedAfterWaiting(CurrentWindowLocator);
-
-        public override bool IsWindowClosed() => IsElementDisplayedImmediately(CurrentWindowLocator);
-
-        public override void FillOutFormWithBrowserAlert(User customerData)
-            => base.FillOutFormWithBrowserAlert(customerData);
-
-        public override void SetInputValues(User customerData)
+        public override bool IsWindowOpened()
         {
-            SetUserEmail(customerData);
-            SetUserName(customerData);
-            SetUserMessage(customerData);
+            Reporter.LogPassingTestStep("Contact window has been opened successfully");
+            return IsElementDisplayedAfterWaiting(CurrentWindowLocator);
+        }
+
+        public override bool IsWindowClosed()
+        {
+            Reporter.LogPassingTestStep("Contact window has been closed successfully");
+            return IsElementDisplayedImmediately(CurrentWindowLocator);
+        }
+
+        public override void FillOutFormWithBrowserAlert(User userData)
+            => base.FillOutFormWithBrowserAlert(userData);
+
+        public override void SetInputValues(User userData)
+        {
+            SetUserEmail(userData);
+            Reporter.LogPassingTestStep($"User email was successfully set to \"{userData.Email}\"");
+            SetUserName(userData);
+            Reporter.LogPassingTestStep($"User name was successfully set to \"{userData.Name}\"");
+            SetUserMessage(userData);
+            Reporter.LogPassingTestStep($"User message was successfully set to \"{userData.Message}\"");
         }
 
         public bool IsMessageSentSuccessfully()
             => Alert.IsBrowserAlertContainsExpectedMessage(MessageSentAlert);
 
-        private void SetUserEmail(User customerData) =>
-            SetText(WindowInputLocator("recipient-email"), customerData.Email);
+        private void SetUserEmail(User userData) =>
+            SetText(WindowInputLocator("recipient-email"), userData.Email);
 
-        private void SetUserName(User customerData)
-            => SetText(WindowInputLocator("recipient-name"), customerData.Name);
+        private void SetUserName(User userData)
+            => SetText(WindowInputLocator("recipient-name"), userData.Name);
 
-        private void SetUserMessage(User customerData)
-            => SetText(WindowInputLocator("message-text"), customerData.Message);
+        private void SetUserMessage(User userData)
+            => SetText(WindowInputLocator("message-text"), userData.Message);
 
         public override void ClickCloseWindow() => base.ClickCloseWindow();
 

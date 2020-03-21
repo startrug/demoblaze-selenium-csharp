@@ -14,7 +14,11 @@ namespace demoblaze_selenium_csharp.Pages
 
         public HomePage(IWebDriver driver) : base(driver) { }
 
-        internal void GoTo() => Driver.Navigate().GoToUrl(HomePageUrl);
+        internal void GoTo()
+        {
+            Driver.Navigate().GoToUrl(HomePageUrl);
+            Reporter.LogPassingTestStep($"Opening demoblaze.com homepage: {HomePageUrl}");
+        }
 
         internal bool IsPageOpened()
         {
