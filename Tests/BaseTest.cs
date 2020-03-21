@@ -25,20 +25,26 @@ namespace demoblaze_selenium_csharp.Tests
         [SetUp]
         public void SetupBeforeEverySingleTest()
         {
-            TestCustomerData = new CustomerData(
-                "anowak@poczta.pl",
-                "Anna Nowak",
-                "Sample message",
-                "Test123!",
-                "4551831919693310",
-                "2",
-                "2025",
-                "Canada",
-                "Vancouver");
-            TestCustomerWithMissingData = new CustomerData("", "", "", "", "", "", "", "", "");
+            TestUser = new User
+            {
+                Email = "anowak@poczta.pl",
+                Name = "Anna Nowak",
+                Message = "Sample message",
+                Password = "Test123!",
+                CreditCardNumber = "4551831919693310",
+                ExpirationMonth = "2",
+                ExpirationYear = "2025",
+                Country = "Canada",
+                City = "Vancouver"
+            };
 
-            Logger.Debug("*************************************** TEST STARTED");
-            Logger.Debug("*************************************** TEST STARTED");
+            TestUserWithMissingData = new User
+            {
+                Name = "",
+                Password = "",
+            };
+
+            Logger.Debug("*** TEST STARTED ***");
             Reporter.AddTestCaseMetadataToHtmlReports(TestContext.CurrentContext);
 
             Driver = new ChromeDriver();
@@ -68,8 +74,7 @@ namespace demoblaze_selenium_csharp.Tests
             {
                 StopBrowser();
                 Logger.Debug(TestContext.CurrentContext.Test.Name);
-                Logger.Debug("*************************************** TEST STOPPED");
-                Logger.Debug("*************************************** TEST STOPPED");
+                Logger.Debug("*** TEST STOPPED ***");
             }
         }
 
@@ -102,8 +107,8 @@ namespace demoblaze_selenium_csharp.Tests
         public CartPage CartPage { get; set; }
         public LogInWindow LogInWindow { get; set; }
         public SignUpWindow SignUpWindow { get; set; }
-        public CustomerData TestCustomerData { get; private set; }
-        public CustomerData TestCustomerWithMissingData { get; private set; }
+        public User TestUser { get; private set; }
+        public User TestUserWithMissingData { get; private set; }
         public LoggedInUserHomePage LoggedInUserHomePage { get; set; }
         public ProductPage ProductPage { get; set; }
         public OrderWindow OrderWindow { get; set; }

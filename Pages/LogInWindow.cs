@@ -11,15 +11,15 @@ namespace demoblaze_selenium_csharp.Pages
 
         public override void ClickCloseWindow() => base.ClickCloseWindow();
 
-        public override void FillOutFormWithBrowserAlert(CustomerData userData) => base.FillOutFormWithBrowserAlert(userData);
+        public override void FillOutFormWithBrowserAlert(User userData) => base.FillOutFormWithBrowserAlert(userData);
 
-        public override void SetInputValues(CustomerData customerData)
+        public override void SetInputValues(User customerData)
         {
             SetUserName(customerData);
             SetUserPassword(customerData);
         }
 
-        public LoggedInUserHomePage FillOutFormAndLogIn(CustomerData customerData)
+        public LoggedInUserHomePage FillOutFormAndLogIn(User customerData)
         {
             IsElementDisplayedAfterWaiting(CurrentWindowLocator);
             SetInputValues(customerData);
@@ -33,10 +33,10 @@ namespace demoblaze_selenium_csharp.Pages
         internal bool IsRequestToCompleteFormAlertIsShowed()
             => Alert.IsBrowserAlertContainsExpectedMessage(RequestToCompleteFormAlert);
 
-        private void SetUserName(CustomerData userData)
+        private void SetUserName(User userData)
             => SetText(WindowInputLocator("loginusername"), userData.Name);
 
-        private void SetUserPassword(CustomerData userData)
+        private void SetUserPassword(User userData)
             => SetText(WindowInputLocator("loginpassword"), userData.Password);
 
         public override string CurrentWindowId => "#logInModal";

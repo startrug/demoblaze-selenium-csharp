@@ -10,7 +10,7 @@ namespace demoblaze_selenium_csharp.Pages
 
         public By WindowInputLocator(string id) => By.Id($"{id}");
 
-        public virtual void FillOutFormWithBrowserAlert(CustomerData customerData)
+        public virtual void FillOutFormWithBrowserAlert(User customerData)
         {
             IsElementDisplayedAfterWaiting(CurrentWindowLocator);
             SetInputValues(customerData);
@@ -18,7 +18,7 @@ namespace demoblaze_selenium_csharp.Pages
             WaitForBrowserAlert();
         }
 
-        public virtual void SetInputValues(CustomerData customerData) { }
+        public virtual void SetInputValues(User customerData) { }
 
         public virtual void ClickCloseWindow()
         {

@@ -11,19 +11,19 @@ namespace demoblaze_selenium_csharp.Pages
 
         public override void ClickCloseWindow() => base.ClickCloseWindow();
 
-        public override void FillOutFormWithBrowserAlert(CustomerData customerData)
+        public override void FillOutFormWithBrowserAlert(User customerData)
             => base.FillOutFormWithBrowserAlert(customerData);
 
-        public override void SetInputValues(CustomerData customerData)
+        public override void SetInputValues(User customerData)
         {
             SetUserName(customerData);
             SetUserPassword(customerData);
         }
 
-        private void SetUserPassword(CustomerData customerData)
+        private void SetUserPassword(User customerData)
             => SetText(WindowInputLocator("sign-password"), customerData.Password);
 
-        private void SetUserName(CustomerData customerData)
+        private void SetUserName(User customerData)
             => SetText(WindowInputLocator("sign-username"), customerData.Name);
 
         public bool IsUserSignedInSuccessfullyAlertShowed()

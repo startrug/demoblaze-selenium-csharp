@@ -9,7 +9,7 @@ namespace demoblaze_selenium_csharp.Pages
 
         public override bool IsWindowOpened() => IsElementDisplayedAfterWaiting(CurrentWindowLocator);
 
-        public PurchaseAlert FillOutFormAndPurchase(CustomerData customerData)
+        public PurchaseAlert FillOutFormAndPurchase(User customerData)
         {
             IsElementDisplayedAfterWaiting(CurrentWindowLocator);
             SetInputValues(customerData);
@@ -17,7 +17,7 @@ namespace demoblaze_selenium_csharp.Pages
             return new PurchaseAlert(Driver);
         }
 
-        public override void SetInputValues(CustomerData customerData)
+        public override void SetInputValues(User customerData)
         {
             SetCustomerName(customerData);
             SetCustomerCountry(customerData);
@@ -27,10 +27,10 @@ namespace demoblaze_selenium_csharp.Pages
             SetCustomerCreditCardExpirationYear(customerData);
         }
 
-        private void SetCustomerCreditCardExpirationYear(CustomerData customerData)
+        private void SetCustomerCreditCardExpirationYear(User customerData)
             => SetText(WindowInputLocator("year"), customerData.ExpirationYear);
 
-        private void SetCustomerCreditCardExpirationMonth(CustomerData customerData)
+        private void SetCustomerCreditCardExpirationMonth(User customerData)
             => SetText(WindowInputLocator("month"), customerData.ExpirationMonth);
 
         internal int GetTotalAmountFromOrderWindow()
@@ -39,19 +39,19 @@ namespace demoblaze_selenium_csharp.Pages
             return int.Parse(GetTextOfElement(TotalAmountLocator).Substring(7));
         }
 
-        private void SetCustomerCity(CustomerData customerData)
+        private void SetCustomerCity(User customerData)
             => SetText(WindowInputLocator("city"), customerData.City);
 
-        private void SetCustomerCountry(CustomerData customerData)
+        private void SetCustomerCountry(User customerData)
             => SetText(WindowInputLocator("country"), customerData.Country);
 
-        private void SetCustomerCreditCard(CustomerData customerData)
+        private void SetCustomerCreditCard(User customerData)
             => SetText(WindowInputLocator("card"), customerData.CreditCardNumber);
 
         internal bool IsEnterRequiredDataAlertShowed()
             => Alert.IsBrowserAlertContainsExpectedMessage(EnterRequiredDataAlert);
 
-        public void SetCustomerName(CustomerData customerData)
+        public void SetCustomerName(User customerData)
             => SetText(WindowInputLocator("name"), customerData.Name);
 
         public override string CurrentWindowId => "#orderModal";
