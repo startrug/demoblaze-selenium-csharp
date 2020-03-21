@@ -18,13 +18,13 @@ namespace demoblaze_selenium_csharp.Pages
 
         internal bool IsPageOpened()
         {
-            Reporter.LogPassingTestStepForBugLogger($"Homepage demolaze.com opened successfully");
+            Reporter.LogPassingTestStep($"Homepage demolaze.com opened successfully");
             return Driver.FindElement(HomeLinkLocator).Displayed;
         }
 
         internal bool IsPageTitleCorrect()
         {
-            Reporter.LogPassingTestStepForBugLogger($"Expected page title: {HomePageTitle} is correct");
+            Reporter.LogPassingTestStep($"Expected page title: {HomePageTitle} is correct");
             return Driver.Title == HomePageTitle;
         }
 
@@ -59,9 +59,9 @@ namespace demoblaze_selenium_csharp.Pages
         public ProductPage SelectProductAndOpenProductPage(Product product)
         {
             SelectCategory(product.Category);
-            Reporter.LogPassingTestStepForBugLogger($"Category: {product.Category} was selected");
+            Reporter.LogPassingTestStep($"Category \"{product.Category}\" was selected");
             ClickOnElementAfterWaiting(ProductLocator(product.ProductName));
-            Reporter.LogPassingTestStepForBugLogger($"Product: {product.ProductName} was selected");
+            Reporter.LogPassingTestStep($"Product \"{product.ProductName}\" was selected");
             return new ProductPage(Driver);
         }
 

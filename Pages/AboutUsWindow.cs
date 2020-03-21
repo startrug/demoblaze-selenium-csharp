@@ -10,13 +10,13 @@ namespace demoblaze_selenium_csharp.Tests
 
         internal bool IsVideoAvailable()
         {
-            Reporter.LogPassingTestStepForBugLogger("Sample video was displayed");
+            Reporter.LogPassingTestStep("Sample video was displayed");
             return IsElementDisplayedAfterWaiting(ExampleVideoLocator);
         }
 
         public override bool IsWindowOpened()
         {
-            Reporter.LogPassingTestStepForBugLogger("About us window was opened successfully");
+            Reporter.LogPassingTestStep("About us window was opened successfully");
             return IsElementDisplayedAfterWaiting(CurrentWindowLocator);
         }
 

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -6,10 +7,17 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public CartPage(IWebDriver driver) : base(driver) { }
 
-        internal bool IsCartPageOpened() => IsElementDisplayedAfterWaiting(PlaceOrderButtonLocator);
+        internal bool IsCartPageOpened()
+        {
+            Reporter.LogPassingTestStep("Cart page opened successfully");
+            return IsElementDisplayedAfterWaiting(PlaceOrderButtonLocator);
+        }
 
         internal bool IsProductAddedToCart(string productName)
-            => IsElementDisplayedAfterWaiting(ProductNameInCartLocator(productName));
+        {
+            Reporter.LogPassingTestStep($"Product \"{productName}\" added successfully to the cart");
+            return IsElementDisplayedAfterWaiting(ProductNameInCartLocator(productName));
+        }
 
         public void RemoveProductFromCart() => ClickOnElementAfterWaiting(DeleteProductLocator);
 
@@ -17,13 +25,17 @@ namespace demoblaze_selenium_csharp.Pages
             => By.XPath($"//td[text()='{productName}']");
 
         internal bool IsProductRemovedFromCart(string productName)
-            => IsElementDisappearedAfterWaiting(ProductNameInCartLocator(productName));
+        {
+            Reporter.LogPassingTestStep($"Product \"{productName}\" removed successfully from the cart");
+            return IsElementDisappearedAfterWaiting(ProductNameInCartLocator(productName));
+        }
 
         internal bool IsTotalOrderVisible() => IsElementDisplayedImmediately(TotalPriceLocator);
 
         public OrderWindow PlaceOrder()
         {
             ClickOnElementAfterWaiting(PlaceOrderButtonLocator);
+            Reporter.LogPassingTestStep($"Order was submitted");
             return new OrderWindow(Driver);
         }
 

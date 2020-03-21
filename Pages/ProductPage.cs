@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -11,6 +12,7 @@ namespace demoblaze_selenium_csharp.Pages
             var productPrice = GetProductPrice();
             ClickOnElementAfterWaiting(AddToCartButtonlocator);
             WaitForBrowserAlert();
+            Reporter.LogPassingTestStep($"Selected product price is ${productPrice}");
             return productPrice;
         }
 
