@@ -9,14 +9,24 @@ namespace demoblaze_selenium_csharp.Pages
 
         internal bool IsCartPageOpened()
         {
-            Reporter.LogPassingTestStep("Cart page opened successfully");
-            return IsElementDisplayedAfterWaiting(PlaceOrderButtonLocator);
+            var testStepResult = IsElementDisplayedAfterWaiting(PlaceOrderButtonLocator);
+            Reporter.LogTestStep(
+                testStepResult,
+                "Cart page has been opened successfully",
+                "Cart page has not been opened"
+                );
+            return testStepResult;
         }
 
         internal bool IsProductAddedToCart(string productName)
         {
-            Reporter.LogPassingTestStep($"Product \"{productName}\" added successfully to the cart");
-            return IsElementDisplayedAfterWaiting(ProductNameInCartLocator(productName));
+            var testStepResult = IsElementDisplayedAfterWaiting(ProductNameInCartLocator(productName));
+            Reporter.LogTestStep(
+                testStepResult,
+                $"Product \"{productName}\" has been added successfully to the cart",
+                $"Product \"{productName}\" has not been added to the cart"
+                );
+            return testStepResult;
         }
 
         public void RemoveProductFromCart() => ClickOnElementAfterWaiting(DeleteProductLocator);
@@ -26,8 +36,13 @@ namespace demoblaze_selenium_csharp.Pages
 
         internal bool IsProductRemovedFromCart(string productName)
         {
-            Reporter.LogPassingTestStep($"Product \"{productName}\" removed successfully from the cart");
-            return IsElementDisappearedAfterWaiting(ProductNameInCartLocator(productName));
+            var testStepResult = IsElementDisappearedAfterWaiting(ProductNameInCartLocator(productName));
+            Reporter.LogTestStep(
+                testStepResult,
+                $"Product \"{productName}\" has been removed successfully from the cart",
+                $"Product \"{productName}\" has not been removed from the cart"
+                );
+            return testStepResult;
         }
 
         internal bool IsTotalOrderVisible() => IsElementDisplayedImmediately(TotalPriceLocator);

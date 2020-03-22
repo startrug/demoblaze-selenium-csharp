@@ -10,7 +10,7 @@ namespace demoblaze_selenium_csharp.Pages
 {
     public class HomePage : BasePage
     {
-        public const string HomePageTitle = "STORE99";
+        public const string HomePageTitle = "STORE";
 
         public HomePage(IWebDriver driver) : base(driver) { }
 
@@ -22,8 +22,13 @@ namespace demoblaze_selenium_csharp.Pages
 
         internal bool IsPageOpened()
         {
-            Reporter.LogPassingTestStep($"Homepage demolaze.com opened successfully");
-            return Driver.FindElement(HomeLinkLocator).Displayed;
+            var testStepResult = Driver.FindElement(HomeLinkLocator).Displayed;
+            Reporter.LogTestStep(
+                testStepResult,
+                $"Homepage demolaze.com has been opened successfully",
+                $"Homepage demolaze.com has not been opened"
+                );
+            return testStepResult;
         }
 
         internal bool IsPageTitleCorrect()
@@ -68,9 +73,9 @@ namespace demoblaze_selenium_csharp.Pages
         public ProductPage SelectProductAndOpenProductPage(Product product)
         {
             SelectCategory(product.Category);
-            Reporter.LogPassingTestStep($"Category \"{product.Category}\" was selected");
+            Reporter.LogPassingTestStep($"Category \"{product.Category}\" has been selected");
             ClickOnElementAfterWaiting(ProductLocator(product.ProductName));
-            Reporter.LogPassingTestStep($"Product \"{product.ProductName}\" was selected");
+            Reporter.LogPassingTestStep($"Product \"{product.ProductName}\" has been selected");
             return new ProductPage(Driver);
         }
 

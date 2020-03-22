@@ -10,14 +10,24 @@ namespace demoblaze_selenium_csharp.Pages
 
         public override bool IsWindowOpened()
         {
-            Reporter.LogPassingTestStep("Contact window has been opened successfully");
-            return IsElementDisplayedAfterWaiting(CurrentWindowLocator);
+            var testStepResult = IsElementDisplayedAfterWaiting(CurrentWindowLocator);
+            Reporter.LogTestStep(
+                testStepResult,
+                "Contact window has been opened successfully",
+                "Contact window has not been opened"
+                );
+            return testStepResult;
         }
 
         public override bool IsWindowClosed()
         {
-            Reporter.LogPassingTestStep("Contact window has been closed successfully");
-            return IsElementDisplayedImmediately(CurrentWindowLocator);
+            var testStepResult = IsElementDisplayedImmediately(CurrentWindowLocator);
+            Reporter.LogTestStep(
+                testStepResult,
+                "Contact window has been closed successfully",
+                "Contact window has not been closed"
+                );
+            return testStepResult;
         }
 
         public override void FillOutFormWithBrowserAlert(User userData)
