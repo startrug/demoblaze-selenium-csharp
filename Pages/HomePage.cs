@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using demoblaze_selenium_csharp.Enums;
+using demoblaze_selenium_csharp.Helpers;
 using demoblaze_selenium_csharp.Tests;
 using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
@@ -48,22 +49,28 @@ namespace demoblaze_selenium_csharp.Pages
             {
                 case LinkText.Home:
                     Click(HomeLinkLocator);
+                    LoggerHelpers.LogInfoAboutOpenedPageOrWindow("Homepage");
                     return (T)Convert.ChangeType(new HomePage(Driver), typeof(T));
                 case LinkText.Contact:
                     Click(ContactLinkLocator);
+                    LoggerHelpers.LogInfoAboutOpenedPageOrWindow("Contact window");
                     return (T)Convert.ChangeType(new ContactWindow(Driver), typeof(T));
                 case LinkText.AboutUs:
                     Click(AboutUsLinkLocator);
+                    LoggerHelpers.LogInfoAboutOpenedPageOrWindow("About us window");
                     return (T)Convert.ChangeType(new AboutUsWindow(Driver), typeof(T));
                 case LinkText.Cart:
                     Click(CartLinkLocator);
+                    LoggerHelpers.LogInfoAboutOpenedPageOrWindow("Cart page");
                     Thread.Sleep(500);
                     return (T)Convert.ChangeType(new CartPage(Driver), typeof(T));
                 case LinkText.LogIn:
                     Click(LogInLinkLocator);
+                    LoggerHelpers.LogInfoAboutOpenedPageOrWindow("Log in window");
                     return (T)Convert.ChangeType(new LogInWindow(Driver), typeof(T));
                 case LinkText.SignUp:
                     Click(SignUpLinkLocator);
+                    LoggerHelpers.LogInfoAboutOpenedPageOrWindow("Sign up window");
                     return (T)Convert.ChangeType(new SignUpWindow(Driver), typeof(T));
                 default:
                     throw new Exception("No such link text");

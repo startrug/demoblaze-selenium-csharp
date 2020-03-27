@@ -1,6 +1,6 @@
-﻿using demoblaze_selenium_csharp.Values;
+﻿using demoblaze_selenium_csharp.Helpers;
+using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
-using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -26,9 +26,13 @@ namespace demoblaze_selenium_csharp.Pages
             Click(CloseWindowButton);
         }
 
-        public virtual bool IsWindowOpened()
+        public virtual bool IsWindowOpened() => IsElementDisplayedImmediately(CurrentWindowLocator);
+
+        public bool IsAlertShowed(string alertType)
         {
-            return IsElementDisplayedImmediately(CurrentWindowLocator);
+            var testStepResult = Alert.IsBrowserAlertContainsExpectedMessage(alertType);
+            LoggerHelpers.LogInfoAboutAlertShowed(testStepResult);
+            return testStepResult;
         }
 
         public virtual bool IsWindowClosed() => IsElementDisplayedImmediately(CurrentWindowLocator);

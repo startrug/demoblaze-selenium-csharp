@@ -1,5 +1,6 @@
 ﻿using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
+using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -25,13 +26,8 @@ namespace demoblaze_selenium_csharp.Pages
             SetCustomerCreditCard(customerData);
             SetCustomerCreditCardExpirationMonth(customerData);
             SetCustomerCreditCardExpirationYear(customerData);
+            Reporter.LogPassingTestStep($"Form has been filled out using customer data: {customerData.Name}");
         }
-
-        private void SetCustomerCreditCardExpirationYear(User customerData)
-            => SetText(WindowInputLocator("year"), customerData.ExpirationYear);
-
-        private void SetCustomerCreditCardExpirationMonth(User customerData)
-            => SetText(WindowInputLocator("month"), customerData.ExpirationMonth);
 
         internal int GetTotalAmountFromOrderWindow()
         {
@@ -39,26 +35,23 @@ namespace demoblaze_selenium_csharp.Pages
             return int.Parse(GetTextOfElement(TotalAmountLocator).Substring(7));
         }
 
+        internal bool IsEnterRequiredDataAlertShowed() => IsAlertShowed(AlertType.EnterRequiredDataAlert);
+
+        private void SetCustomerName(User customerData)
+            => SetText(WindowInputLocator("name"), customerData.Name);
         private void SetCustomerCity(User customerData)
             => SetText(WindowInputLocator("city"), customerData.City);
-
         private void SetCustomerCountry(User customerData)
             => SetText(WindowInputLocator("country"), customerData.Country);
-
         private void SetCustomerCreditCard(User customerData)
             => SetText(WindowInputLocator("card"), customerData.CreditCardNumber);
-
-        internal bool IsEnterRequiredDataAlertShowed()
-            => Alert.IsBrowserAlertContainsExpectedMessage(EnterRequiredDataAlert);
-
-        public void SetCustomerName(User customerData)
-            => SetText(WindowInputLocator("name"), customerData.Name);
+        private void SetCustomerCreditCardExpirationYear(User customerData)
+            => SetText(WindowInputLocator("year"), customerData.ExpirationYear);
+        private void SetCustomerCreditCardExpirationMonth(User customerData)
+            => SetText(WindowInputLocator("month"), customerData.ExpirationMonth);
 
         public override string CurrentWindowId => "#orderModal";
-
         public override string WindowSubmitAction => "purchaseOrder()";
-
-        public string EnterRequiredDataAlert => "Please fill out Name and Creditcard.";
 
         public By TotalAmountLocator => By.Id("totalm");
     }

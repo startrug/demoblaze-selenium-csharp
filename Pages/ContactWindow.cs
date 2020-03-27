@@ -36,15 +36,14 @@ namespace demoblaze_selenium_csharp.Pages
         public override void SetInputValues(User userData)
         {
             SetUserEmail(userData);
-            Reporter.LogPassingTestStep($"User email was successfully set to \"{userData.Email}\"");
+            Reporter.LogPassingTestStep($"User email has been successfully set to \"{userData.Email}\"");
             SetUserName(userData);
-            Reporter.LogPassingTestStep($"User name was successfully set to \"{userData.Name}\"");
+            Reporter.LogPassingTestStep($"User name has been successfully set to \"{userData.Name}\"");
             SetUserMessage(userData);
-            Reporter.LogPassingTestStep($"User message was successfully set to \"{userData.Message}\"");
+            Reporter.LogPassingTestStep($"User message has been successfully set to \"{userData.Message}\"");
         }
 
-        public bool IsMessageSentSuccessfully()
-            => Alert.IsBrowserAlertContainsExpectedMessage(MessageSentAlert);
+        public bool IsMessageSentSuccessfully() => IsAlertShowed(AlertType.MessageSentAlert);
 
         private void SetUserEmail(User userData) =>
             SetText(WindowInputLocator("recipient-email"), userData.Email);
@@ -59,7 +58,5 @@ namespace demoblaze_selenium_csharp.Pages
 
         public override string CurrentWindowId => "#exampleModal";
         public override string WindowSubmitAction => "send()";
-
-        private string MessageSentAlert => "Thanks for the message!!";
     }
 }

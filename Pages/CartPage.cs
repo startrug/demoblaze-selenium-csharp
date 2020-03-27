@@ -50,7 +50,7 @@ namespace demoblaze_selenium_csharp.Pages
         public OrderWindow PlaceOrder()
         {
             ClickOnElementAfterWaiting(PlaceOrderButtonLocator);
-            Reporter.LogPassingTestStep($"Order was submitted");
+            Reporter.LogPassingTestStep($"The \"Place Order\" button has been clicked");
             return new OrderWindow(Driver);
         }
 

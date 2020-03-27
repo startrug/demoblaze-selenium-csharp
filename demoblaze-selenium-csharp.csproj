@@ -111,6 +111,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\Alerts.cs" />
+    <Compile Include="Helpers\LoggerHelpers.cs" />
+    <Compile Include="Values\AlertType.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\BaseWindow.cs" />
     <Compile Include="Enums\LinkText.cs" />
