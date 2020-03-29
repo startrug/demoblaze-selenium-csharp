@@ -55,6 +55,13 @@ namespace demoblaze_selenium_csharp.Pages
             }
         }
 
+        public bool IsBrowserAlertShowed(string alertType)
+        {
+            var testStepResult = Alert.IsBrowserAlertContainsExpectedMessage(alertType);
+            LoggerHelpers.LogInfoAboutAlertShowed(testStepResult);
+            return testStepResult;
+        }
+
         public void ClickOnElementAfterWaiting(By locator) => Wait.Until(EC.ElementIsVisible(locator)).Click();
 
         protected void WaitForBrowserAlert() => Wait.Until(EC.AlertIsPresent());

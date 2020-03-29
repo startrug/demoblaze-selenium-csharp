@@ -41,7 +41,7 @@ namespace demoblaze_selenium_csharp.Tests
             CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
 
             OrderWindow = CartPage.PlaceOrder();
-            OrderWindow.FillOutFormWithBrowserAlert(TestUserWithMissingData);
+            OrderWindow.SubmitOrderWindow();
 
             Assert.That(OrderWindow.IsEnterRequiredDataAlertShowed(), Is.True);
         }

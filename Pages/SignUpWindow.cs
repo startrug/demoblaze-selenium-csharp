@@ -1,4 +1,5 @@
-﻿using demoblaze_selenium_csharp.Values;
+﻿using demoblaze_selenium_csharp.Helpers;
+using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -7,39 +8,27 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public SignUpWindow(IWebDriver driver) : base(driver) { }
 
-        public override bool IsWindowOpened() => IsElementDisplayedAfterWaiting(CurrentWindowLocator);
-
-        public override void ClickCloseWindow() => base.ClickCloseWindow();
-
-        public override void FillOutFormWithBrowserAlert(User customerData)
-            => base.FillOutFormWithBrowserAlert(customerData);
-
-        public override void SetInputValues(User customerData)
+        public override void SetUserPassword(User userData)
         {
-            SetUserName(customerData);
-            SetUserPassword(customerData);
+            SetText(WindowInputLocator("sign-password"), userData.Password);
+            LoggerHelpers.LogInfoAboutEnteredUserData("sign up password", userData.Password);
         }
 
-        private void SetUserPassword(User customerData)
-            => SetText(WindowInputLocator("sign-password"), customerData.Password);
+        public override void SetUserName(User userData)
+        {
+            SetText(WindowInputLocator("sign-username"), userData.Name);
+            LoggerHelpers.LogInfoAboutEnteredUserData("sign up name", userData.Name);
+        }
 
-        private void SetUserName(User customerData)
-            => SetText(WindowInputLocator("sign-username"), customerData.Name);
+        public bool IsUserSignedInSuccessfullyAlertShowed() => IsBrowserAlertShowed(AlertType.SignUpSuccessfullAlert);
 
-        public bool IsUserSignedInSuccessfullyAlertShowed()
-            => Alert.IsBrowserAlertContainsExpectedMessage(SignUpSuccessfullMessage);
+        public bool IsUserAlreadyExistaAlertShowed() => IsBrowserAlertShowed(AlertType.UserAlreadyExistsAlert);
 
-        public bool IsUserAlreadyExistaAlertShowed()
-            => Alert.IsBrowserAlertContainsExpectedMessage(UserExistsMessage);
-
-        public bool IsRequestToCompleteFormAlertIsShowed()
-            => Alert.IsBrowserAlertContainsExpectedMessage(RequestToCompleteFormAlert);
+        public bool IsRequestToCompleteFormAlertIsShowed() => IsBrowserAlertShowed(AlertType.RequestToCompleteFormAlert);
 
         public override string CurrentWindowId => "#signInModal";
         public override string WindowSubmitAction => "register()";
 
-        public string SignUpSuccessfullMessage => "Sign up successful.";
-        public string UserExistsMessage => "This user already exist.";
-        public string RequestToCompleteFormAlert => "Please fill out Username and Password.";
+        public override string CurrentWindowName => "Sign up window";
     }
 }

@@ -1,4 +1,5 @@
-﻿using demoblaze_selenium_csharp.Values;
+﻿using demoblaze_selenium_csharp.Helpers;
+using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
 using ReportingLibrary;
 
@@ -8,14 +9,18 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public OrderWindow(IWebDriver driver) : base(driver) { }
 
-        public override bool IsWindowOpened() => IsElementDisplayedAfterWaiting(CurrentWindowLocator);
-
         public PurchaseAlert FillOutFormAndPurchase(User customerData)
         {
             IsElementDisplayedAfterWaiting(CurrentWindowLocator);
             SetInputValues(customerData);
-            Click(SubmitWindowButtonLocator);
+            SubmitOrderWindow();
             return new PurchaseAlert(Driver);
+        }
+
+        public void SubmitOrderWindow()
+        {
+            ClickOnElementAfterWaiting(SubmitWindowButtonLocator);
+            LoggerHelpers.LogInfoAboutWindowSubmitted("Order window");
         }
 
         public override void SetInputValues(User customerData)
@@ -35,7 +40,7 @@ namespace demoblaze_selenium_csharp.Pages
             return int.Parse(GetTextOfElement(TotalAmountLocator).Substring(7));
         }
 
-        internal bool IsEnterRequiredDataAlertShowed() => IsAlertShowed(AlertType.EnterRequiredDataAlert);
+        internal bool IsEnterRequiredDataAlertShowed() => IsBrowserAlertShowed(AlertType.EnterRequiredDataAlert);
 
         private void SetCustomerName(User customerData)
             => SetText(WindowInputLocator("name"), customerData.Name);
@@ -54,5 +59,6 @@ namespace demoblaze_selenium_csharp.Pages
         public override string WindowSubmitAction => "purchaseOrder()";
 
         public By TotalAmountLocator => By.Id("totalm");
+        public override string CurrentWindowName => "Order window";
     }
 }

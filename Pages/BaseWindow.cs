@@ -15,10 +15,22 @@ namespace demoblaze_selenium_csharp.Pages
             IsElementDisplayedAfterWaiting(CurrentWindowLocator);
             SetInputValues(customerData);
             Click(SubmitWindowButtonLocator);
+            LoggerHelpers.LogInfoAboutWindowSubmitted(CurrentWindowName);
             WaitForBrowserAlert();
         }
 
-        public virtual void SetInputValues(User customerData) { }
+        public virtual void SetInputValues(User userData)
+        {
+            SetUserName(userData);
+            SetUserPassword(userData);
+            SetUserEmail(userData);
+            SetUserMessage(userData);
+        }
+
+        public virtual void SetUserEmail(User userData) { }
+        public virtual void SetUserPassword(User userData) { }
+        public virtual void SetUserName(User userData) { }
+        public virtual void SetUserMessage(User userData) { }
 
         public virtual void ClickCloseWindow()
         {
@@ -26,16 +38,19 @@ namespace demoblaze_selenium_csharp.Pages
             Click(CloseWindowButton);
         }
 
-        public virtual bool IsWindowOpened() => IsElementDisplayedImmediately(CurrentWindowLocator);
-
-        public bool IsAlertShowed(string alertType)
+        public virtual bool IsWindowOpened()
         {
-            var testStepResult = Alert.IsBrowserAlertContainsExpectedMessage(alertType);
-            LoggerHelpers.LogInfoAboutAlertShowed(testStepResult);
+            var testStepResult = IsElementDisplayedAfterWaiting(CurrentWindowLocator);
+            LoggerHelpers.LogInfoAboutPageOrWindowOpened(testStepResult, CurrentWindowName);
             return testStepResult;
         }
 
-        public virtual bool IsWindowClosed() => IsElementDisplayedImmediately(CurrentWindowLocator);
+        public virtual bool IsWindowClosed()
+        {
+            var testStepResult = IsElementDisplayedImmediately(CurrentWindowLocator);
+            LoggerHelpers.LogInfoAboutWindowClosed(testStepResult, CurrentWindowName);
+            return testStepResult;
+        }
 
         public virtual By CloseWindowButton => By.CssSelector($"{CurrentWindowId} .close");
         public virtual By CurrentWindowLocator => By.CssSelector($"{CurrentWindowId} .modal-content");
@@ -44,5 +59,7 @@ namespace demoblaze_selenium_csharp.Pages
         public virtual string WindowSubmitAction {get; set;}
 
         public virtual string CurrentWindowId { get; set; }
+
+        public virtual string CurrentWindowName { get; set; }
     }
 }

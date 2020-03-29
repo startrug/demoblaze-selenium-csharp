@@ -18,17 +18,13 @@ namespace demoblaze_selenium_csharp.Pages
         internal void GoTo()
         {
             Driver.Navigate().GoToUrl(HomePageUrl);
-            Reporter.LogPassingTestStep($"Opening demoblaze.com homepage: {HomePageUrl}");
+            Reporter.LogPassingTestStep($"Opening demoblaze.com homepage");
         }
 
         internal bool IsPageOpened()
         {
             var testStepResult = Driver.FindElement(HomeLinkLocator).Displayed;
-            Reporter.LogTestStep(
-                testStepResult,
-                $"Homepage demolaze.com has been opened successfully",
-                $"Homepage demolaze.com has not been opened"
-                );
+            LoggerHelpers.LogInfoAboutPageOrWindowOpening("Homepage");
             return testStepResult;
         }
 
@@ -49,28 +45,28 @@ namespace demoblaze_selenium_csharp.Pages
             {
                 case LinkText.Home:
                     Click(HomeLinkLocator);
-                    LoggerHelpers.LogInfoAboutOpenedPageOrWindow("Homepage");
+                    LoggerHelpers.LogInfoAboutPageOrWindowOpening("Homepage");
                     return (T)Convert.ChangeType(new HomePage(Driver), typeof(T));
                 case LinkText.Contact:
                     Click(ContactLinkLocator);
-                    LoggerHelpers.LogInfoAboutOpenedPageOrWindow("Contact window");
+                    LoggerHelpers.LogInfoAboutPageOrWindowOpening("Contact window");
                     return (T)Convert.ChangeType(new ContactWindow(Driver), typeof(T));
                 case LinkText.AboutUs:
                     Click(AboutUsLinkLocator);
-                    LoggerHelpers.LogInfoAboutOpenedPageOrWindow("About us window");
+                    LoggerHelpers.LogInfoAboutPageOrWindowOpening("About us window");
                     return (T)Convert.ChangeType(new AboutUsWindow(Driver), typeof(T));
                 case LinkText.Cart:
                     Click(CartLinkLocator);
-                    LoggerHelpers.LogInfoAboutOpenedPageOrWindow("Cart page");
+                    LoggerHelpers.LogInfoAboutPageOrWindowOpening("Cart page");
                     Thread.Sleep(500);
                     return (T)Convert.ChangeType(new CartPage(Driver), typeof(T));
                 case LinkText.LogIn:
                     Click(LogInLinkLocator);
-                    LoggerHelpers.LogInfoAboutOpenedPageOrWindow("Log in window");
+                    LoggerHelpers.LogInfoAboutPageOrWindowOpening("Log in window");
                     return (T)Convert.ChangeType(new LogInWindow(Driver), typeof(T));
                 case LinkText.SignUp:
                     Click(SignUpLinkLocator);
-                    LoggerHelpers.LogInfoAboutOpenedPageOrWindow("Sign up window");
+                    LoggerHelpers.LogInfoAboutPageOrWindowOpening("Sign up window");
                     return (T)Convert.ChangeType(new SignUpWindow(Driver), typeof(T));
                 default:
                     throw new Exception("No such link text");

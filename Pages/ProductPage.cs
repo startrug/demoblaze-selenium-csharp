@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using demoblaze_selenium_csharp.Helpers;
+using demoblaze_selenium_csharp.Values;
+using OpenQA.Selenium;
 using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -7,10 +9,18 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public ProductPage(IWebDriver driver) : base(driver) { }
 
+        internal bool IsCartPageOpened()
+        {
+            var testStepResult = IsElementDisplayedAfterWaiting(AddToCartButtonlocator);
+            LoggerHelpers.LogInfoAboutPageOrWindowOpened(testStepResult, "Product page");
+            return testStepResult;
+        }
+
         public int AddProductToCart()
         {
             var productPrice = GetProductPrice();
             ClickOnElementAfterWaiting(AddToCartButtonlocator);
+            Reporter.LogPassingTestStep("Adding selected product to the cart");
             WaitForBrowserAlert();
             Reporter.LogPassingTestStep($"Selected product price is ${productPrice}");
             return productPrice;
@@ -23,12 +33,9 @@ namespace demoblaze_selenium_csharp.Pages
             return int.Parse(priceText);
         }
 
-        public bool IsProductAddedAlertShowed()
-            => Alert.IsBrowserAlertContainsExpectedMessage(ProductAddedSuccesfullyAlert);
+        public bool IsProductAddedAlertShowed() => IsBrowserAlertShowed(AlertType.ProductAddedSuccesfullyAlert);
 
         public By AddToCartButtonlocator => By.CssSelector("[onclick^='addToCart']");
-
-        public string ProductAddedSuccesfullyAlert => "Product added";
 
         public By ProductPriceLocator => By.CssSelector("h3.price-container");
     }

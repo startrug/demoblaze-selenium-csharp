@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using demoblaze_selenium_csharp.Helpers;
+using OpenQA.Selenium;
 using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -10,22 +11,14 @@ namespace demoblaze_selenium_csharp.Pages
         internal bool IsCartPageOpened()
         {
             var testStepResult = IsElementDisplayedAfterWaiting(PlaceOrderButtonLocator);
-            Reporter.LogTestStep(
-                testStepResult,
-                "Cart page has been opened successfully",
-                "Cart page has not been opened"
-                );
+            LoggerHelpers.LogInfoAboutPageOrWindowOpened(testStepResult, "Cart page");
             return testStepResult;
         }
 
         internal bool IsProductAddedToCart(string productName)
         {
             var testStepResult = IsElementDisplayedAfterWaiting(ProductNameInCartLocator(productName));
-            Reporter.LogTestStep(
-                testStepResult,
-                $"Product \"{productName}\" has been added successfully to the cart",
-                $"Product \"{productName}\" has not been added to the cart"
-                );
+            LoggerHelpers.LogInfoAboutProductAddedToCart(testStepResult, productName);
             return testStepResult;
         }
 
@@ -37,11 +30,7 @@ namespace demoblaze_selenium_csharp.Pages
         internal bool IsProductRemovedFromCart(string productName)
         {
             var testStepResult = IsElementDisappearedAfterWaiting(ProductNameInCartLocator(productName));
-            Reporter.LogTestStep(
-                testStepResult,
-                $"Product \"{productName}\" has been removed successfully from the cart",
-                $"Product \"{productName}\" has not been removed from the cart"
-                );
+            LoggerHelpers.LogInfoAboutProductRemovedFromCart(testStepResult, productName);
             return testStepResult;
         }
 

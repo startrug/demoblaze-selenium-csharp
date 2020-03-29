@@ -19,20 +19,8 @@ namespace demoblaze_selenium_csharp.Tests
             return testStepResult;
         }
 
-        public override bool IsWindowOpened()
-        {
-            var testStepResult = IsElementDisplayedAfterWaiting(CurrentWindowLocator);
-            Reporter.LogTestStep(
-                testStepResult,
-                "About us window has been opened successfully",
-                "About us window has not been opened"
-                );
-            return testStepResult;
-        }
-
-        public override void ClickCloseWindow() => base.ClickCloseWindow();
-
         public override string CurrentWindowId => "[id='videoModal']";
         public By ExampleVideoLocator => By.Id("example-video_html5_api");
+        public override string CurrentWindowName => "About us window";
     }
 }
