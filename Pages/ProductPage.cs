@@ -13,6 +13,7 @@ namespace demoblaze_selenium_csharp.Pages
         {
             var testStepResult = IsElementDisplayedAfterWaiting(AddToCartButtonlocator);
             LoggerHelpers.LogInfoAboutPageOrWindowOpened(testStepResult, "Product page");
+
             return testStepResult;
         }
 
@@ -23,6 +24,7 @@ namespace demoblaze_selenium_csharp.Pages
             Reporter.LogPassingTestStep("Adding selected product to the cart");
             WaitForBrowserAlert();
             Reporter.LogPassingTestStep($"Selected product price is ${productPrice}");
+
             return productPrice;
         }
 
@@ -30,6 +32,7 @@ namespace demoblaze_selenium_csharp.Pages
         {
             IsElementDisplayedAfterWaiting(ProductPriceLocator);
             string priceText = GetTextOfElement(ProductPriceLocator).Substring(1, 3);
+
             return int.Parse(priceText);
         }
 

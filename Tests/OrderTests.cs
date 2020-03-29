@@ -41,7 +41,7 @@ namespace demoblaze_selenium_csharp.Tests
             CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
 
             OrderWindow = CartPage.PlaceOrder();
-            OrderWindow.SubmitOrderWindow();
+            OrderWindow.SubmitWindow();
 
             Assert.That(OrderWindow.IsEnterRequiredDataAlertShowed(), Is.True);
         }

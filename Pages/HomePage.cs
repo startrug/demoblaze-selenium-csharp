@@ -25,6 +25,7 @@ namespace demoblaze_selenium_csharp.Pages
         {
             var testStepResult = Driver.FindElement(HomeLinkLocator).Displayed;
             LoggerHelpers.LogInfoAboutPageOrWindowOpening("Homepage");
+
             return testStepResult;
         }
 
@@ -36,6 +37,7 @@ namespace demoblaze_selenium_csharp.Pages
                 "Page title is correct",
                 $"Expected page title was {HomePageTitle} but actual page title is: {Driver.Title}"
                 );
+
             return testStepResult;
         }
 
@@ -79,6 +81,7 @@ namespace demoblaze_selenium_csharp.Pages
             Reporter.LogPassingTestStep($"Category \"{product.Category}\" has been selected");
             ClickOnElementAfterWaiting(ProductLocator(product.ProductName));
             Reporter.LogPassingTestStep($"Product \"{product.ProductName}\" has been selected");
+
             return new ProductPage(Driver);
         }
 

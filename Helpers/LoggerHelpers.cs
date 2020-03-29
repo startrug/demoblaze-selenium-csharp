@@ -27,6 +27,15 @@ namespace demoblaze_selenium_csharp.Helpers
                 );
         }
 
+        public static void LogInfoAboutLoggedInUser(bool testStepResult, string loggedInUserName)
+        {
+            Reporter.LogTestStep(
+                testStepResult,
+                $"The user {loggedInUserName} has been logged in successfully",
+                $"The user {loggedInUserName} has not been logged in"
+                );
+        }
+
         public static void LogInfoAboutWindowSubmitted(string windowName)
         {
             Reporter.LogPassingTestStep($"{windowName} has been submitted");
@@ -59,9 +68,18 @@ namespace demoblaze_selenium_csharp.Helpers
                 );
         }
 
-        public static void LogInfoAboutEnteredUserData(string infoType, string userData)
+        public static void LogInfoAboutValueEnteredIntoFormField(string textValue)
         {
-            Reporter.LogPassingTestStep($"User {infoType} has been successfully set to \"{userData}\"");
+            Reporter.LogPassingTestStep($"Value \"{textValue}\" has been entered to form field");
+        }
+
+        public static void LogInfoAboutWebElementDisplayed(bool testStepResult, string webElementName)
+        {
+            Reporter.LogTestStep(
+                testStepResult,
+                $"{webElementName} has been displayed",
+                $"{webElementName} has not been displayed"
+                );
         }
     }
 }

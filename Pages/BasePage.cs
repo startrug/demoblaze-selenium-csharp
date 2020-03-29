@@ -25,6 +25,7 @@ namespace demoblaze_selenium_csharp.Pages
         {
             IWebElement webElement = LocateElement(locator);
             webElement.SendKeys(text);
+            LoggerHelpers.LogInfoAboutValueEnteredIntoFormField(text);
         }
 
         public string GetTextOfElement(By locator)

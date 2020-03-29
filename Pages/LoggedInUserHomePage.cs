@@ -1,6 +1,6 @@
-﻿using demoblaze_selenium_csharp.Values;
+﻿using demoblaze_selenium_csharp.Helpers;
+using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
-using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -17,11 +17,8 @@ namespace demoblaze_selenium_csharp.Pages
         {
             IsElementDisplayedAfterWaiting(WelcomeUserLocator);
             var testStepResult = GetTextOfElement(WelcomeUserLocator) == WelcomeUserText;
-            Reporter.LogTestStep(
-                testStepResult,
-                $"The user {loggedInUserData.Name} has been logged in successfully",
-                $"The user {loggedInUserData.Name} has not been logged in"
-                );
+            LoggerHelpers.LogInfoAboutLoggedInUser(testStepResult, loggedInUserData.Name);
+
             return testStepResult;
         }
 

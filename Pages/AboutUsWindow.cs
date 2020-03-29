@@ -1,6 +1,6 @@
-﻿using demoblaze_selenium_csharp.Pages;
+﻿using demoblaze_selenium_csharp.Helpers;
+using demoblaze_selenium_csharp.Pages;
 using OpenQA.Selenium;
-using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Tests
 {
@@ -11,11 +11,7 @@ namespace demoblaze_selenium_csharp.Tests
         internal bool IsVideoAvailable()
         {
             var testStepResult = IsElementDisplayedAfterWaiting(ExampleVideoLocator);
-            Reporter.LogTestStep(
-                testStepResult,
-                "Sample video has been displayed",
-                "Sample video has not been displayed"
-                );
+            LoggerHelpers.LogInfoAboutWebElementDisplayed(testStepResult, "Sample video");
             return testStepResult;
         }
 

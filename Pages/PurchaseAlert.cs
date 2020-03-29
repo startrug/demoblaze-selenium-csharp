@@ -18,6 +18,7 @@ namespace demoblaze_selenium_csharp.Pages
         {
             var testStepResult = IsElementDisplayedAfterWaiting(PurchaseAlertLocator);
             LoggerHelpers.LogInfoAboutPageOrWindowOpened(testStepResult, "Purchase alert");
+
             return testStepResult;
         }
 
@@ -29,6 +30,7 @@ namespace demoblaze_selenium_csharp.Pages
         {
             var purchaseMessage = GetTextOfElement(PurchaseIdLocator);
             string[] sep = new string[] { "\r\n" };
+
             return purchaseMessage.Split(sep, StringSplitOptions.RemoveEmptyEntries);
         }
 
@@ -41,6 +43,7 @@ namespace demoblaze_selenium_csharp.Pages
         internal string GetPurchaseData(int[] dataType)
         {
             var idLine = GetPurchaseMessageInLines()[dataType[0]];
+
             return idLine.Substring(dataType[1]);
         }
     }

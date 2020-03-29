@@ -59,6 +59,7 @@ namespace demoblaze_selenium_csharp.Tests
         public void CleanUpAfterEverySingleTest()
         {
             Logger.Debug(GetType().FullName + " started a method tear down");
+
             try
             {
                 TakeScreenshotForTestFailure();
@@ -95,6 +96,7 @@ namespace demoblaze_selenium_csharp.Tests
         {
             if (Driver == null)
                 return;
+
             Driver.Quit();
             Driver = null;
             Logger.Trace("Browser stopped successfully.");
