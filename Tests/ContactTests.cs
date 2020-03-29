@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests
 {
-    [TestFixture]
+    [TestFixture, Category("ContactTests")]
     public class ContactTests : ContactBaseTest
     {
         public override void SetupBeforeEveryContactTest() => base.SetupBeforeEveryContactTest();
