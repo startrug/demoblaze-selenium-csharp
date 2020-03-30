@@ -7,44 +7,25 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public LogInWindow(IWebDriver driver) : base(driver) { }
 
-        public override bool IsWindowOpened() => IsElementDisplayedAfterWaiting(CurrentWindowLocator);
-
-        public override void ClickCloseWindow() => base.ClickCloseWindow();
-
-        public override void FillOutFormWithBrowserAlert(CustomerData userData) => base.FillOutFormWithBrowserAlert(userData);
-
-        public override void SetInputValues(CustomerData customerData)
-        {
-            SetUserName(customerData);
-            SetUserPassword(customerData);
-        }
-
-        public LoggedInUserHomePage FillOutFormAndLogIn(CustomerData customerData)
+        public LoggedInUserHomePage FillOutFormAndLogIn(User customerData)
         {
             IsElementDisplayedAfterWaiting(CurrentWindowLocator);
             SetInputValues(customerData);
             Click(SubmitWindowButtonLocator);
+
             return new LoggedInUserHomePage(Driver, customerData);
         }
 
-        public bool IsWrongPasswordAlertShowed()
-            => Alert.IsBrowserAlertContainsExpectedMessage(WrongPasswordAlert);
+        public bool IsWrongPasswordAlertShowed() => IsBrowserAlertShowed(AlertType.WrongPasswordAlert);
 
-        internal bool IsRequestToCompleteFormAlertIsShowed()
-            => Alert.IsBrowserAlertContainsExpectedMessage(RequestToCompleteFormAlert);
+        internal bool IsRequestToCompleteFormAlertIsShowed() => IsBrowserAlertShowed(AlertType.RequestToCompleteFormAlert);
 
-        private void SetUserName(CustomerData userData)
-            => SetText(WindowInputLocator("loginusername"), userData.Name);
+        public override void SetUserName(User userData) => SetText(WindowInputLocator("loginusername"), userData.Name);
 
-        private void SetUserPassword(CustomerData userData)
-            => SetText(WindowInputLocator("loginpassword"), userData.Password);
+        public override void SetUserPassword(User userData) => SetText(WindowInputLocator("loginpassword"), userData.Password);
 
         public override string CurrentWindowId => "#logInModal";
-
         public override string WindowSubmitAction => "logIn()";
-
-        public string WrongPasswordAlert => "Wrong password.";
-
-        public string RequestToCompleteFormAlert => "Please fill out Username and Password.";
+        public override string CurrentWindowName => "Log in window";
     }
 }

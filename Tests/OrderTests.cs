@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests
 {
-    [TestFixture]
+    [TestFixture, Category("OrderTests")]
     public class OrderTests : BaseTest
     {
         [Test, Order(10)]
@@ -15,7 +15,7 @@ namespace demoblaze_selenium_csharp.Tests
             CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
 
             OrderWindow = CartPage.PlaceOrder();
-            PurchaseAlert = OrderWindow.FillOutFormAndPurchase(TestCustomerData);
+            PurchaseAlert = OrderWindow.FillOutFormAndPurchase(TestUser);
 
             ValidatePurchaseAlertMessage();
         }
@@ -30,7 +30,7 @@ namespace demoblaze_selenium_csharp.Tests
             CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
             OrderWindow = CartPage.PlaceOrder();
             Assert.That(OrderWindow.GetTotalAmountFromOrderWindow() == TotalAmount, Is.True);
-            PurchaseAlert = OrderWindow.FillOutFormAndPurchase(TestCustomerData);
+            PurchaseAlert = OrderWindow.FillOutFormAndPurchase(TestUser);
 
             ValidatePurchaseAlertMessage();
         }
@@ -41,7 +41,7 @@ namespace demoblaze_selenium_csharp.Tests
             CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
 
             OrderWindow = CartPage.PlaceOrder();
-            OrderWindow.FillOutFormWithBrowserAlert(TestCustomerWithMissingData);
+            OrderWindow.SubmitWindow();
 
             Assert.That(OrderWindow.IsEnterRequiredDataAlertShowed(), Is.True);
         }
@@ -50,9 +50,9 @@ namespace demoblaze_selenium_csharp.Tests
         {
             var currentDate = DateTime.Today.AddMonths(-1).ToString("dd/M/yyyy", CultureInfo.CreateSpecificCulture("en-US"));
             Assert.That(PurchaseAlert.IsPurchaseAlertDisplayed(), Is.True);
-            Assert.That(PurchaseAlert.GetPurchaseUserName() == TestCustomerData.Name, Is.True);
+            Assert.That(PurchaseAlert.GetPurchaseUserName() == TestUser.Name, Is.True);
             Assert.That(PurchaseAlert.GetPurchaseTotalAmount() == TotalAmount + " USD", Is.True);
-            Assert.That(PurchaseAlert.GetPurchaseCreditCardNumber() == TestCustomerData.CreditCardNumber, Is.True);
+            Assert.That(PurchaseAlert.GetPurchaseCreditCardNumber() == TestUser.CreditCardNumber, Is.True);
             Assert.That(PurchaseAlert.GetPurchaseDate() == currentDate, Is.True);
         }
     }

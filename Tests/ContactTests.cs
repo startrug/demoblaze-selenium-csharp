@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests
 {
-    [TestFixture]
+    [TestFixture, Category("ContactTests")]
     public class ContactTests : ContactBaseTest
     {
         public override void SetupBeforeEveryContactTest() => base.SetupBeforeEveryContactTest();
@@ -17,7 +17,7 @@ namespace demoblaze_selenium_csharp.Tests
         [Test, Order(3)]
         public void GivenCustomerContactFormData_WhenCustomerFillOutContactFormAndClickSendMessageButton_ThenMessageIsSent()
         {
-            ContactWindow.FillOutFormWithBrowserAlert(TestCustomerData);
+            ContactWindow.FillOutFormWithBrowserAlert(TestUser);
 
             Assert.That(ContactWindow.IsMessageSentSuccessfully, Is.True);
         }

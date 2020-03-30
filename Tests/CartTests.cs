@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests
 {
-    [TestFixture]
+    [TestFixture, Category("CartTests")]
     public class CartTests : CartBaseTest
     {
         [Test, Order(6)]

@@ -25,6 +25,7 @@ namespace demoblaze_selenium_csharp.Pages
         {
             IWebElement webElement = LocateElement(locator);
             webElement.SendKeys(text);
+            LoggerHelpers.LogInfoAboutValueEnteredIntoFormField(text);
         }
 
         public string GetTextOfElement(By locator)
@@ -53,6 +54,13 @@ namespace demoblaze_selenium_csharp.Pages
             {
                 throw new Exception("Element is still visible");
             }
+        }
+
+        public bool IsBrowserAlertShowed(string alertType)
+        {
+            var testStepResult = Alert.IsBrowserAlertContainsExpectedMessage(alertType);
+            LoggerHelpers.LogInfoAboutAlertShowed(testStepResult);
+            return testStepResult;
         }
 
         public void ClickOnElementAfterWaiting(By locator) => Wait.Until(EC.ElementIsVisible(locator)).Click();

@@ -7,39 +7,19 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public SignUpWindow(IWebDriver driver) : base(driver) { }
 
-        public override bool IsWindowOpened() => IsElementDisplayedAfterWaiting(CurrentWindowLocator);
+        public override void SetUserPassword(User userData) => SetText(WindowInputLocator("sign-password"), userData.Password);
 
-        public override void ClickCloseWindow() => base.ClickCloseWindow();
+        public override void SetUserName(User userData) => SetText(WindowInputLocator("sign-username"), userData.Name);
 
-        public override void FillOutFormWithBrowserAlert(CustomerData customerData)
-            => base.FillOutFormWithBrowserAlert(customerData);
+        public bool IsUserSignedInSuccessfullyAlertShowed() => IsBrowserAlertShowed(AlertType.SignUpSuccessfullAlert);
 
-        public override void SetInputValues(CustomerData customerData)
-        {
-            SetUserName(customerData);
-            SetUserPassword(customerData);
-        }
+        public bool IsUserAlreadyExistaAlertShowed() => IsBrowserAlertShowed(AlertType.UserAlreadyExistsAlert);
 
-        private void SetUserPassword(CustomerData customerData)
-            => SetText(WindowInputLocator("sign-password"), customerData.Password);
-
-        private void SetUserName(CustomerData customerData)
-            => SetText(WindowInputLocator("sign-username"), customerData.Name);
-
-        public bool IsUserSignedInSuccessfullyAlertShowed()
-            => Alert.IsBrowserAlertContainsExpectedMessage(SignUpSuccessfullMessage);
-
-        public bool IsUserAlreadyExistaAlertShowed()
-            => Alert.IsBrowserAlertContainsExpectedMessage(UserExistsMessage);
-
-        public bool IsRequestToCompleteFormAlertIsShowed()
-            => Alert.IsBrowserAlertContainsExpectedMessage(RequestToCompleteFormAlert);
+        public bool IsRequestToCompleteFormAlertIsShowed() => IsBrowserAlertShowed(AlertType.RequestToCompleteFormAlert);
 
         public override string CurrentWindowId => "#signInModal";
         public override string WindowSubmitAction => "register()";
 
-        public string SignUpSuccessfullMessage => "Sign up successful.";
-        public string UserExistsMessage => "This user already exist.";
-        public string RequestToCompleteFormAlert => "Please fill out Username and Password.";
+        public override string CurrentWindowName => "Sign up window";
     }
 }

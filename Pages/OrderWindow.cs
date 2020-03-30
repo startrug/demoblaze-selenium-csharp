@@ -7,59 +7,41 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public OrderWindow(IWebDriver driver) : base(driver) { }
 
-        public override bool IsWindowOpened() => IsElementDisplayedAfterWaiting(CurrentWindowLocator);
-
-        public PurchaseAlert FillOutFormAndPurchase(CustomerData customerData)
+        public PurchaseAlert FillOutFormAndPurchase(User customerData)
         {
             IsElementDisplayedAfterWaiting(CurrentWindowLocator);
             SetInputValues(customerData);
             Click(SubmitWindowButtonLocator);
+
             return new PurchaseAlert(Driver);
         }
-
-        public override void SetInputValues(CustomerData customerData)
-        {
-            SetCustomerName(customerData);
-            SetCustomerCountry(customerData);
-            SetCustomerCity(customerData);
-            SetCustomerCreditCard(customerData);
-            SetCustomerCreditCardExpirationMonth(customerData);
-            SetCustomerCreditCardExpirationYear(customerData);
-        }
-
-        private void SetCustomerCreditCardExpirationYear(CustomerData customerData)
-            => SetText(WindowInputLocator("year"), customerData.ExpirationYear);
-
-        private void SetCustomerCreditCardExpirationMonth(CustomerData customerData)
-            => SetText(WindowInputLocator("month"), customerData.ExpirationMonth);
 
         internal int GetTotalAmountFromOrderWindow()
         {
             IsElementDisplayedAfterWaiting(CurrentWindowLocator);
+
             return int.Parse(GetTextOfElement(TotalAmountLocator).Substring(7));
         }
 
-        private void SetCustomerCity(CustomerData customerData)
-            => SetText(WindowInputLocator("city"), customerData.City);
+        internal bool IsEnterRequiredDataAlertShowed() => IsBrowserAlertShowed(AlertType.EnterRequiredDataAlert);
 
-        private void SetCustomerCountry(CustomerData customerData)
-            => SetText(WindowInputLocator("country"), customerData.Country);
-
-        private void SetCustomerCreditCard(CustomerData customerData)
-            => SetText(WindowInputLocator("card"), customerData.CreditCardNumber);
-
-        internal bool IsEnterRequiredDataAlertShowed()
-            => Alert.IsBrowserAlertContainsExpectedMessage(EnterRequiredDataAlert);
-
-        public void SetCustomerName(CustomerData customerData)
-            => SetText(WindowInputLocator("name"), customerData.Name);
+        public override void SetUserName(User userData)
+            => SetText(WindowInputLocator("name"), userData.Name);
+        public override void SetUserCity(User userData)
+            => SetText(WindowInputLocator("city"), userData.City);
+        public override void SetUserCountry(User userData)
+            => SetText(WindowInputLocator("country"), userData.Country);
+        public override void SetUserCreditCard(User userData)
+            => SetText(WindowInputLocator("card"), userData.CreditCardNumber);
+        public override void SetUserCreditCardExpirationYear(User userData)
+            => SetText(WindowInputLocator("year"), userData.ExpirationYear);
+        public override void SetUserCreditCardExpirationMonth(User userData)
+            => SetText(WindowInputLocator("month"), userData.ExpirationMonth);
 
         public override string CurrentWindowId => "#orderModal";
-
         public override string WindowSubmitAction => "purchaseOrder()";
 
-        public string EnterRequiredDataAlert => "Please fill out Name and Creditcard.";
-
         public By TotalAmountLocator => By.Id("totalm");
+        public override string CurrentWindowName => "Order window";
     }
 }

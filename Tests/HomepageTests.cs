@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests
 {
-    [TestFixture]
+    [TestFixture, Category("HomepageTests")]
     public class HomepageTests : BaseTest
     {
         [Test, Order(1)]
