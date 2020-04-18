@@ -23,15 +23,12 @@ namespace demoblaze_selenium_csharp.Pages
 
         protected void SetText(By locator, string text)
         {
-            IWebElement webElement = LocateElement(locator);
-            webElement.SendKeys(text);
+            LocateElement(locator).SendKeys(text);
+
             LoggerHelpers.LogInfoAboutValueEnteredIntoFormField(text);
         }
 
-        public string GetTextOfElement(By locator)
-        {
-            return LocateElement(locator).Text;
-        }
+        public string GetTextOfElement(By locator) => LocateElement(locator).Text;
 
         protected IWebElement LocateElement(By locator) => Driver.FindElement(locator);
 
@@ -40,6 +37,7 @@ namespace demoblaze_selenium_csharp.Pages
         protected bool IsElementDisplayedAfterWaiting(By locator)
         {
             Wait.Until(EC.ElementIsVisible(locator));
+
             return LocateElement(locator).Displayed;
         }
 
@@ -60,6 +58,7 @@ namespace demoblaze_selenium_csharp.Pages
         {
             var testStepResult = Alert.IsBrowserAlertContainsExpectedMessage(alertType);
             LoggerHelpers.LogInfoAboutAlertShowed(testStepResult);
+
             return testStepResult;
         }
 

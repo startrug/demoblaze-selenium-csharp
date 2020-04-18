@@ -1,6 +1,7 @@
 ﻿using System;
 using demoblaze_selenium_csharp.Enums;
 using demoblaze_selenium_csharp.Pages;
+using demoblaze_selenium_csharp.Resources;
 using demoblaze_selenium_csharp.Values;
 using NLog;
 using NUnit.Framework;
@@ -47,8 +48,8 @@ namespace demoblaze_selenium_csharp.Tests
             Logger.Debug("*** TEST STARTED ***");
             Reporter.AddTestCaseMetadataToHtmlReports(TestContext.CurrentContext);
 
-            Driver = new ChromeDriver();
-            Driver.Manage().Window.Maximize();
+            Driver = new WebDriverFactory().Create(BrowserType.Chrome);
+            //Driver.Manage().Window.Maximize();
             ScreenshotTaker = new ScreenshotTaker(Driver);
 
             DemoBlazeHomePage = new HomePage(Driver);
