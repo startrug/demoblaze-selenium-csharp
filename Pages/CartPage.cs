@@ -12,6 +12,7 @@ namespace demoblaze_selenium_csharp.Pages
         {
             var testStepResult = IsElementDisplayedAfterWaiting(PlaceOrderButtonLocator);
             LoggerHelpers.LogInfoAboutPageOrWindowOpened(testStepResult, "Cart page");
+
             return testStepResult;
         }
 
@@ -19,6 +20,7 @@ namespace demoblaze_selenium_csharp.Pages
         {
             var testStepResult = IsElementDisplayedAfterWaiting(ProductNameInCartLocator(productName));
             LoggerHelpers.LogInfoAboutProductAddedToCart(testStepResult, productName);
+
             return testStepResult;
         }
 
@@ -31,6 +33,7 @@ namespace demoblaze_selenium_csharp.Pages
         {
             var testStepResult = IsElementDisappearedAfterWaiting(ProductNameInCartLocator(productName));
             LoggerHelpers.LogInfoAboutProductRemovedFromCart(testStepResult, productName);
+
             return testStepResult;
         }
 
@@ -40,6 +43,7 @@ namespace demoblaze_selenium_csharp.Pages
         {
             ClickOnElementAfterWaiting(PlaceOrderButtonLocator);
             Reporter.LogPassingTestStep($"The \"Place Order\" button has been clicked");
+
             return new OrderWindow(Driver);
         }
 
