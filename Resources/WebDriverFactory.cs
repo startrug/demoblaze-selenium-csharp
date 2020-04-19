@@ -68,7 +68,7 @@ namespace demoblaze_selenium_csharp.Resources
             return new EdgeDriver(directoryWithEdgeDriver);
         }
         private static string CreateFilePath(string outputDirectory)
-            => Path.GetFullPath(Path.Combine(outputDirectory ?? throw new InvalidOperationException(), @"..\..\..\AutomationResources\bin\Debug"));
+            => Path.GetFullPath(Path.Combine(outputDirectory ?? throw new InvalidOperationException(), @"..\..\..\demoblaze-selenium-csharp\bin\Debug\Resources"));
 
         private static string GetAssemblysOutputDirectory() => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
     }
