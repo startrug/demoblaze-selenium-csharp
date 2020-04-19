@@ -11,7 +11,7 @@ namespace demoblaze_selenium_csharp.Pages
         public BasePage(IWebDriver driver)
         {
             Driver = driver;
-            Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             Alert = new Alerts(driver);
         }
 
