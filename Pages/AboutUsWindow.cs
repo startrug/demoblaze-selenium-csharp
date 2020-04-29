@@ -12,6 +12,7 @@ namespace demoblaze_selenium_csharp.Tests
         {
             var testStepResult = IsElementDisplayedAfterWaiting(ExampleVideoLocator);
             LoggerHelpers.LogInfoAboutWebElementDisplayed(testStepResult, "Sample video");
+
             return testStepResult;
         }
 

@@ -6,7 +6,6 @@ using demoblaze_selenium_csharp.Values;
 using NLog;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Tests
@@ -49,7 +48,6 @@ namespace demoblaze_selenium_csharp.Tests
             Reporter.AddTestCaseMetadataToHtmlReports(TestContext.CurrentContext);
 
             Driver = new WebDriverFactory().Create(BrowserType.Chrome);
-            //Driver.Manage().Window.Maximize();
             ScreenshotTaker = new ScreenshotTaker(Driver);
 
             DemoBlazeHomePage = new HomePage(Driver);
@@ -117,9 +115,10 @@ namespace demoblaze_selenium_csharp.Tests
         public OrderWindow OrderWindow { get; set; }
         public PurchaseAlert PurchaseAlert { get; set; }
         public int TotalAmount { get; set; } = 0;
+        public TestContext TestContext { get; set; }
 
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        public TestContext TestContext { get; set; }
+
         private ScreenshotTaker ScreenshotTaker { get; set; }
     }
 }

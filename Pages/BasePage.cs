@@ -28,7 +28,7 @@ namespace demoblaze_selenium_csharp.Pages
             LoggerHelpers.LogInfoAboutValueEnteredIntoFormField(text);
         }
 
-        public string GetTextOfElement(By locator) => LocateElement(locator).Text;
+        protected string GetTextOfElement(By locator) => LocateElement(locator).Text;
 
         protected IWebElement LocateElement(By locator) => Driver.FindElement(locator);
 
@@ -41,11 +41,12 @@ namespace demoblaze_selenium_csharp.Pages
             return LocateElement(locator).Displayed;
         }
 
-        public bool IsElementDisappearedAfterWaiting(By locator)
+        protected bool IsElementDisappearedAfterWaiting(By locator)
         {
             try
             {
                 Wait.Until(EC.InvisibilityOfElementLocated(locator));
+
                 return true;
             }
             catch (Exception)
@@ -54,7 +55,7 @@ namespace demoblaze_selenium_csharp.Pages
             }
         }
 
-        public bool IsBrowserAlertShowed(string alertType)
+        protected bool IsBrowserAlertShowed(string alertType)
         {
             var testStepResult = Alert.IsBrowserAlertContainsExpectedMessage(alertType);
             LoggerHelpers.LogInfoAboutAlertShowed(testStepResult);
@@ -62,7 +63,7 @@ namespace demoblaze_selenium_csharp.Pages
             return testStepResult;
         }
 
-        public void ClickOnElementAfterWaiting(By locator) => Wait.Until(EC.ElementIsVisible(locator)).Click();
+        protected void ClickOnElementAfterWaiting(By locator) => Wait.Until(EC.ElementIsVisible(locator)).Click();
 
         protected void WaitForBrowserAlert() => Wait.Until(EC.AlertIsPresent());
     }

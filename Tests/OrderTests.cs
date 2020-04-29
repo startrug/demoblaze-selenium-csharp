@@ -49,6 +49,7 @@ namespace demoblaze_selenium_csharp.Tests
         private void ValidatePurchaseAlertMessage()
         {
             var currentDate = DateTime.Today.AddMonths(-1).ToString("dd/M/yyyy", CultureInfo.CreateSpecificCulture("en-US"));
+
             Assert.That(PurchaseAlert.IsPurchaseAlertDisplayed(), Is.True);
             Assert.That(PurchaseAlert.GetPurchaseUserName() == TestUser.Name, Is.True);
             Assert.That(PurchaseAlert.GetPurchaseTotalAmount() == TotalAmount + " USD", Is.True);
