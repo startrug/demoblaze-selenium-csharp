@@ -1,42 +1,39 @@
-﻿using demoblaze_selenium_csharp.Pages;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests
 {
     [TestFixture, Category("LogInTests")]
     public class LogInTests : LogInBaseTest
     {
-        public override void SetupBeforeEveryLogInTest() => base.SetupBeforeEveryLogInTest();
-
-        [Test, Order(11)]
+        [Test, Order(1)]
         public void WhenCustomerOpensLogInWindow_ThenWindowIsOpened()
         {
-            Assert.That(LogInWindow.IsWindowOpened(), Is.True);
+            Assert.That(TestedPageOrWindow.IsWindowOpened(), Is.True);
         }
 
-        [Test, Order(12)]
+        [Test, Order(2)]
         public void GivenSignedUpCustomerNameAndWrongPassword_WhenCustomerFilledOutLogInFormUsingIncorrectPassword_ThenFailedWrongPasswordAlertIsShowed()
         {
             TestUser.Password = "qwerty123";
-            LogInWindow.FillOutFormWithBrowserAlert(TestUser);
+            TestedPageOrWindow.FillOutFormWithBrowserAlert(TestUser);
 
-            Assert.That(LogInWindow.IsWrongPasswordAlertShowed(), Is.True);
+            Assert.That(TestedPageOrWindow.IsWrongPasswordAlertShowed(), Is.True);
         }
 
-        [Test, Order(13)]
+        [Test, Order(3)]
         public void WhenCustomerDidNotFillOutLogInFormAndAcceptIt_ThenCompleteFormAlertIsShowed()
         {
-            LogInWindow.FillOutFormWithBrowserAlert(TestUserWithMissingData);
+            TestedPageOrWindow.FillOutFormWithBrowserAlert(TestUserWithMissingData);
 
-            Assert.That(LogInWindow.IsRequestToCompleteFormAlertIsShowed(), Is.True);
+            Assert.That(TestedPageOrWindow.IsRequestToCompleteFormAlertIsShowed(), Is.True);
         }
 
-        [Test, Order(14)]
+        [Test, Order(4)]
         public void GivenSignedUpUserNameAndPassword_WhenUserFilledOutLogInForm_ThenSuccessfullLoggedInInAlertIsShowed()
         {
-            LoggedInUserHomePage = LogInWindow.FillOutFormAndLogIn(TestUser);
+            var loggedInUserHomePage = TestedPageOrWindow.FillOutFormAndLogIn(TestUser);
 
-            Assert.That(LoggedInUserHomePage.IsUserLoggedInSuccessfully(), Is.True);
+            Assert.That(loggedInUserHomePage.IsUserLoggedInSuccessfully(), Is.True);
         }
     }
 }

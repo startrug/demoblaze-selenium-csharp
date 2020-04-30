@@ -10,11 +10,15 @@ using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Tests
 {
-    public class BaseTest
+    public abstract class BaseTest<TTestedAppPage>
     {
-        protected Product NewMonitor = new Product(Category.Monitors, "ASUS Full HD");
-        protected Product NewPhone = new Product(Category.Phones, "Samsung galaxy s6");
-        protected Product NewNotebook = new Product(Category.Laptops, "MacBook Pro");
+        public OrderWindow OrderWindow { get; set; }
+
+        public IWebDriver Driver { get; private set; }
+        public HomePage DemoBlazeHomePage { get; private set; }
+
+        public User TestUser { get; private set; }
+        public User TestUserWithMissingData { get; private set; }
 
         [OneTimeSetUp]
         public void SetupBeforeAllTests()
@@ -49,9 +53,11 @@ namespace demoblaze_selenium_csharp.Tests
 
             Driver = new WebDriverFactory().Create(BrowserType.Chrome);
             ScreenshotTaker = new ScreenshotTaker(Driver);
-
             DemoBlazeHomePage = new HomePage(Driver);
+            NavigationBar = new NavigationBar(Driver);
+
             DemoBlazeHomePage.GoTo();
+            TestedPageOrWindow = SelectTestedAppPage();
         }
 
         [TearDown]
@@ -78,6 +84,8 @@ namespace demoblaze_selenium_csharp.Tests
             }
         }
 
+        protected abstract TTestedAppPage SelectTestedAppPage();
+
         private void TakeScreenshotForTestFailure()
         {
             if (ScreenshotTaker != null)
@@ -101,24 +109,16 @@ namespace demoblaze_selenium_csharp.Tests
             Logger.Trace("Browser stopped successfully.");
         }
 
-        public IWebDriver Driver { get; private set; }
-        public HomePage DemoBlazeHomePage { get; private set; }
-        public ContactWindow ContactWindow { get; set; }
-        public AboutUsWindow AboutUsWindow { get; set; }
-        public CartPage CartPage { get; set; }
-        public LogInWindow LogInWindow { get; set; }
-        public SignUpWindow SignUpWindow { get; set; }
-        public User TestUser { get; private set; }
-        public User TestUserWithMissingData { get; private set; }
-        public LoggedInUserHomePage LoggedInUserHomePage { get; set; }
-        public ProductPage ProductPage { get; set; }
-        public OrderWindow OrderWindow { get; set; }
-        public PurchaseAlert PurchaseAlert { get; set; }
-        public int TotalAmount { get; set; } = 0;
-        public TestContext TestContext { get; set; }
+        protected TTestedAppPage TestedPageOrWindow { get; set; }
 
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        protected NavigationBar NavigationBar { get; set; }
 
         private ScreenshotTaker ScreenshotTaker { get; set; }
+
+        protected Product NewMonitor = new Product(Category.Monitors, "ASUS Full HD");
+        protected Product NewPhone = new Product(Category.Phones, "Samsung galaxy s6");
+        protected Product NewNotebook = new Product(Category.Laptops, "MacBook Pro");
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     }
 }

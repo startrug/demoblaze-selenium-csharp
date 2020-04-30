@@ -7,54 +7,60 @@ using NUnit.Framework;
 namespace demoblaze_selenium_csharp.Tests
 {
     [TestFixture, Category("OrderTests")]
-    public class OrderTests : BaseTest
+    public class OrderTests : CartAndOrderTestsBase
     {
-        [Test, Order(10)]
+        [Test]
         public void GivenRequiredCustomerData_WhenCustomerFillsOutOrderForm_ThenPurchaseAlertWithInputtedDataIsShowed()
         {
-            CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
+            var orderWindow = ClickPlaceOrder();
+            var purchaseAlert = orderWindow.FillOutFormAndPurchase(TestUser);
 
-            OrderWindow = CartPage.PlaceOrder();
-            PurchaseAlert = OrderWindow.FillOutFormAndPurchase(TestUser);
-
-            ValidatePurchaseAlertMessage();
+            ValidatePurchaseAlertMessage(purchaseAlert);
         }
 
-        [Test, Order(11)]
+        [Test]
         public void GivenProductAndAllCustomerData_WhenCustomerAddsProductToCartFillsOutOrderFormAndConfirmsIt_ThenPurchaseAlertWithInputtedDataIsShowed()
         {
-            ProductPage = DemoBlazeHomePage.SelectProductAndOpenProductPage(NewMonitor);
+            var productPage = TestedPageOrWindow.SelectProductAndOpenProductPage(NewMonitor);
 
-            TotalAmount = ProductPage.AddProductToCart();
-            Assert.That(ProductPage.IsProductAddedAlertShowed, Is.True);
-            CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
-            OrderWindow = CartPage.PlaceOrder();
-            Assert.That(OrderWindow.GetTotalAmountFromOrderWindow() == TotalAmount, Is.True);
-            PurchaseAlert = OrderWindow.FillOutFormAndPurchase(TestUser);
+            totalAmount = productPage.AddProductToCart();
 
-            ValidatePurchaseAlertMessage();
+            Assert.That(productPage.IsProductAddedAlertShowed, Is.True);
+
+            var orderWindow = ClickPlaceOrder();
+
+            Assert.That(orderWindow.GetTotalAmountFromOrderWindow() == totalAmount, Is.True);
+
+            var purchaseAlert = orderWindow.FillOutFormAndPurchase(TestUser);
+
+            ValidatePurchaseAlertMessage(purchaseAlert);
         }
 
-        [Test, Order(12)]
+        [Test]
         public void WhenCustomerDidNotFillOutRequiredFildsOfOrderFormAndAcceptIt_ThenEnterRequiredDataAlertIsShowed()
         {
-            CartPage = DemoBlazeHomePage.ClickLink<CartPage>(LinkText.Cart);
+            var orderWindow = ClickPlaceOrder();
+            orderWindow.SubmitWindow();
 
-            OrderWindow = CartPage.PlaceOrder();
-            OrderWindow.SubmitWindow();
-
-            Assert.That(OrderWindow.IsEnterRequiredDataAlertShowed(), Is.True);
+            Assert.That(orderWindow.IsEnterRequiredDataAlertShowed(), Is.True);
         }
 
-        private void ValidatePurchaseAlertMessage()
+        private OrderWindow ClickPlaceOrder()
         {
-            var currentDate = DateTime.Today.AddMonths(-1).ToString("dd/M/yyyy", CultureInfo.CreateSpecificCulture("en-US"));
+            var cartPage = NavigationBar.ClickCartLink();
 
-            Assert.That(PurchaseAlert.IsPurchaseAlertDisplayed(), Is.True);
-            Assert.That(PurchaseAlert.GetPurchaseUserName() == TestUser.Name, Is.True);
-            Assert.That(PurchaseAlert.GetPurchaseTotalAmount() == TotalAmount + " USD", Is.True);
-            Assert.That(PurchaseAlert.GetPurchaseCreditCardNumber() == TestUser.CreditCardNumber, Is.True);
-            Assert.That(PurchaseAlert.GetPurchaseDate() == currentDate, Is.True);
+            return cartPage.PlaceOrder();
+        }
+
+        private void ValidatePurchaseAlertMessage(PurchaseAlert purchaseAlert)
+        {
+            var currentDate = DateTime.Today.AddMonths(-1).ToString("d/M/yyyy", CultureInfo.CreateSpecificCulture("en-US"));
+
+            Assert.That(purchaseAlert.IsPurchaseAlertDisplayed(), Is.True);
+            Assert.AreEqual(TestUser.Name, purchaseAlert.GetPurchaseUserName());
+            Assert.AreEqual(totalAmount + " USD", purchaseAlert.GetPurchaseTotalAmount());
+            Assert.AreEqual(TestUser.CreditCardNumber, purchaseAlert.GetPurchaseCreditCardNumber());
+            Assert.AreEqual(currentDate, purchaseAlert.GetPurchaseDate());
         }
     }
 }

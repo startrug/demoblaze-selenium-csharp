@@ -1,15 +1,10 @@
-﻿using demoblaze_selenium_csharp.Enums;
-using demoblaze_selenium_csharp.Pages;
-using NUnit.Framework;
+﻿using demoblaze_selenium_csharp.Pages;
 
 namespace demoblaze_selenium_csharp.Tests
 {
-    public abstract class LogInBaseTest : BaseTest
+    public class LogInBaseTest : BaseTest<LogInWindow>
     {
-        [SetUp]
-        public virtual void SetupBeforeEveryLogInTest()
-        {
-            LogInWindow = DemoBlazeHomePage.ClickLink<LogInWindow>(LinkText.LogIn);
-        }
+        protected override LogInWindow SelectTestedAppPage()
+            => NavigationBar.ClickLogInLink();
     }
 }

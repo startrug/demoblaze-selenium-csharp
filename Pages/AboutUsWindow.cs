@@ -1,12 +1,11 @@
 ﻿using demoblaze_selenium_csharp.Helpers;
-using demoblaze_selenium_csharp.Pages;
 using OpenQA.Selenium;
 
-namespace demoblaze_selenium_csharp.Tests
+namespace demoblaze_selenium_csharp.Pages
 {
     public class AboutUsWindow : BaseWindow
     {
-        public AboutUsWindow(IWebDriver driver) : base(driver) {}
+        public AboutUsWindow(IWebDriver driver) : base(driver) { }
 
         internal bool IsVideoAvailable()
         {
