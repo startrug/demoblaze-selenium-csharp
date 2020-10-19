@@ -12,8 +12,6 @@ namespace demoblaze_selenium_csharp.Tests
 {
     public abstract class BaseTest<TTestedAppPage>
     {
-        public OrderWindow OrderWindow { get; set; }
-
         public IWebDriver Driver { get; private set; }
         public HomePage DemoBlazeHomePage { get; private set; }
 

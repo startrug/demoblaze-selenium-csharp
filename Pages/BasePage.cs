@@ -32,6 +32,11 @@ namespace demoblaze_selenium_csharp.Pages
 
         protected IWebElement LocateElement(By locator) => Driver.FindElement(locator);
 
+        protected IWebElement GetElementAfterWaiting(By locator)
+        {
+            return Wait.Until(EC.ElementIsVisible(locator));
+        }
+
         protected bool IsElementDisplayedImmediately(By locator) => LocateElement(locator).Displayed;
 
         protected bool IsElementDisplayedAfterWaiting(By locator)
@@ -66,5 +71,7 @@ namespace demoblaze_selenium_csharp.Pages
         protected void ClickOnElementAfterWaiting(By locator) => Wait.Until(EC.ElementIsVisible(locator)).Click();
 
         protected void WaitForBrowserAlert() => Wait.Until(EC.AlertIsPresent());
+
+        protected By HomeLinkLocator => By.PartialLinkText("Home");
     }
 }

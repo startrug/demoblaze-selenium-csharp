@@ -7,20 +7,26 @@ namespace demoblaze_selenium_csharp.Tests
     [TestFixture, Category("HomepageTests")]
     public class HomepageTests : BaseTest<HomePage>
     {
-        [Test, Order(1)]
+        [Test]
         public void WhenCustomerOpensHomepage_ThenHomepageIsOpenedAndPageTitleIsCorrect()
         {
             Assert.That(TestedPageOrWindow.IsPageOpened(), Is.True);
             Assert.That(TestedPageOrWindow.IsPageTitleCorrect(), Is.True);
         }
 
-        [Test, Order(2)]
+        [Test]
         public void WhenCustomerOpensAboutUsPage_ThenWindowIsOpenedVideoIsAvailable()
         {
             var aboutUsWindow = NavigationBar.ClickAboutLink();
 
             Assert.That(aboutUsWindow.IsWindowOpened(), Is.True);
             Assert.That(aboutUsWindow.IsVideoAvailable(), Is.True);
+        }
+
+        [Test]
+        public void WhenCustomerClicksNextButtonOnSlider_ThenImageChanges()
+        {
+            Assert.That(TestedPageOrWindow.Slider.IsImageChanged(), Is.True);
         }
 
         protected override HomePage SelectTestedAppPage()

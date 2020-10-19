@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="Helpers\Alerts.cs" />
     <Compile Include="Helpers\LoggerHelpers.cs" />
+    <Compile Include="Pages\Slider.cs" />
     <Compile Include="Resources\BrowserType.cs" />
     <Compile Include="Resources\WebDriverFactory.cs" />
     <Compile Include="Pages\NavigationBar.cs" />

@@ -9,9 +9,10 @@ namespace demoblaze_selenium_csharp.Pages
 {
     public class HomePage : BasePage
     {
-        public const string HomePageTitle = "STORE";
-
-        public HomePage(IWebDriver driver) : base(driver) { }
+        public HomePage(IWebDriver driver) : base(driver)
+        {
+            Slider = new Slider(driver);
+        }
 
         internal void GoTo()
         {
@@ -49,7 +50,7 @@ namespace demoblaze_selenium_csharp.Pages
             return new ProductPage(Driver);
         }
 
-        public void SelectCategory(Category category)
+        private void SelectCategory(Category category)
         {
             switch (category)
             {
@@ -67,14 +68,15 @@ namespace demoblaze_selenium_csharp.Pages
             }
         }
 
-        public By ProductLocator(string productName) => By.XPath($"//a[text()='{productName}']");
+        private By ProductLocator(string productName) => By.XPath($"//a[text()='{productName}']");
 
-        public string HomePageUrl => "https://www.demoblaze.com/index.html";
+        private By PhonesCategoryLocator => By.CssSelector("[onclick=\"byCat('phone')\"]");
+        private By LaptopsCategoryLocator => By.CssSelector("[onclick=\"byCat('notebook')\"]");
+        private By MonitorsCategoryLocator => By.CssSelector("[onclick=\"byCat('monitor')\"]");
 
-        public By HomeLinkLocator => By.PartialLinkText("Home");
+        public Slider Slider { get; private set; }
 
-        public By PhonesCategoryLocator => By.CssSelector("[onclick=\"byCat('phone')\"]");
-        public By LaptopsCategoryLocator => By.CssSelector("[onclick=\"byCat('notebook')\"]");
-        public By MonitorsCategoryLocator => By.CssSelector("[onclick=\"byCat('monitor')\"]");
+        private const string HomePageTitle = "STORE";
+        private const string HomePageUrl = "https://www.demoblaze.com/index.html";
     }
 }

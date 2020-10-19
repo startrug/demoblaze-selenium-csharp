@@ -38,7 +38,7 @@ namespace demoblaze_selenium_csharp.Pages
 
         internal HomePage ClickHomeLink()
         {
-            Click(By.PartialLinkText("Home"));
+            Click(HomeLinkLocator);
 
             return new HomePage(Driver);
         }
