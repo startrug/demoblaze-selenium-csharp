@@ -1,5 +1,4 @@
-﻿using demoblaze_selenium_csharp.Helpers;
-using demoblaze_selenium_csharp.Values;
+﻿using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -14,10 +13,8 @@ namespace demoblaze_selenium_csharp.Pages
         internal bool IsUserLoggedInSuccessfully()
         {
             IsElementDisplayedAfterWaiting(WelcomeUserLocator);
-            var testStepResult = GetTextOfElement(WelcomeUserLocator) == WelcomeUserText;
-            LoggerHelpers.LogInfoAboutLoggedInUser(testStepResult, loggedInUserData.Name);
 
-            return testStepResult;
+            return GetTextOfElement(WelcomeUserLocator).Equals(WelcomeUserText);
         }
 
         public By WelcomeUserLocator => By.Id("nameofuser");

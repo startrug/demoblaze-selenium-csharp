@@ -1,7 +1,5 @@
-﻿using demoblaze_selenium_csharp.Helpers;
-using demoblaze_selenium_csharp.Values;
+﻿using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
-using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -9,21 +7,14 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public ProductPage(IWebDriver driver) : base(driver) { }
 
-        internal bool IsCartPageOpened()
-        {
-            var testStepResult = IsElementDisplayedAfterWaiting(AddToCartButtonlocator);
-            LoggerHelpers.LogInfoAboutPageOrWindowOpened(testStepResult, "Product page");
-
-            return testStepResult;
-        }
+        internal bool IsCartPageOpened() => IsElementDisplayedAfterWaiting(AddToCartButtonlocator);
 
         public int AddProductToCart()
         {
             var productPrice = GetProductPrice();
+
             ClickOnElementAfterWaiting(AddToCartButtonlocator);
-            Reporter.LogPassingTestStep("Adding selected product to the cart");
             WaitForBrowserAlert();
-            Reporter.LogPassingTestStep($"Selected product price is ${productPrice}");
 
             return productPrice;
         }
