@@ -1,25 +1,36 @@
 ﻿using demoblaze_selenium_csharp.Enums;
+using demoblaze_selenium_csharp.Pages;
 using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests
 {
     [TestFixture, Category("HomepageTests")]
-    public class HomepageTests : BaseTest
+    public class HomepageTests : BaseTest<HomePage>
     {
-        [Test, Order(1)]
+        [Test]
         public void WhenCustomerOpensHomepage_ThenHomepageIsOpenedAndPageTitleIsCorrect()
         {
-            Assert.That(DemoBlazeHomePage.IsPageOpened(), Is.True);
-            Assert.That(DemoBlazeHomePage.IsPageTitleCorrect(), Is.True);
+            Assert.That(TestedPageOrWindow.IsPageOpened(), Is.True);
+            Assert.That(TestedPageOrWindow.IsPageTitleCorrect(), Is.True);
         }
 
-        [Test, Order(5)]
+        [Test]
         public void WhenCustomerOpensAboutUsPage_ThenWindowIsOpenedVideoIsAvailable()
         {
-            AboutUsWindow = DemoBlazeHomePage.ClickLink<AboutUsWindow>(LinkText.AboutUs);
+            var aboutUsWindow = NavigationBar.ClickAboutLink();
 
-            Assert.That(AboutUsWindow.IsWindowOpened(), Is.True);
-            Assert.That(AboutUsWindow.IsVideoAvailable(), Is.True);
+            Assert.That(aboutUsWindow.IsWindowOpened(), Is.True);
+            Assert.That(aboutUsWindow.IsVideoAvailable(), Is.True);
         }
+
+        [Test]
+        public void WhenCustomerClicksNextButtonOnSlider_ThenImageChanges()
+        {
+            Assert.That(TestedPageOrWindow.Slider.IsImageChanged(), Is.True);
+        }
+
+        protected override HomePage SelectTestedAppPage()
+            => NavigationBar.ClickHomeLink();
+
     }
 }
