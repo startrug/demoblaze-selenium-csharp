@@ -21,12 +21,7 @@ namespace demoblaze_selenium_csharp.Pages
 
         protected void Click(By locator) => Driver.FindElement(locator).Click();
 
-        protected void SetText(By locator, string text)
-        {
-            LocateElement(locator).SendKeys(text);
-
-            LoggerHelpers.LogInfoAboutValueEnteredIntoFormField(text);
-        }
+        protected void SetText(By locator, string text) => LocateElement(locator).SendKeys(text);
 
         protected string GetTextOfElement(By locator) => LocateElement(locator).Text;
 
@@ -60,13 +55,7 @@ namespace demoblaze_selenium_csharp.Pages
             }
         }
 
-        protected bool IsBrowserAlertShowed(string alertType)
-        {
-            var testStepResult = Alert.IsBrowserAlertContainsExpectedMessage(alertType);
-            LoggerHelpers.LogInfoAboutAlertShowed(testStepResult);
-
-            return testStepResult;
-        }
+        protected bool IsBrowserAlertShowed(string alertType) => Alert.IsBrowserAlertContainsExpectedMessage(alertType);
 
         protected void ClickOnElementAfterWaiting(By locator) => Wait.Until(EC.ElementIsVisible(locator)).Click();
 

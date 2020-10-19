@@ -1,5 +1,4 @@
 ﻿using System;
-using demoblaze_selenium_csharp.Helpers;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -14,13 +13,7 @@ namespace demoblaze_selenium_csharp.Pages
 
         public PurchaseAlert(IWebDriver driver) : base(driver) { }
 
-        public bool IsPurchaseAlertDisplayed()
-        {
-            var testStepResult = IsElementDisplayedAfterWaiting(PurchaseAlertLocator);
-            LoggerHelpers.LogInfoAboutPageOrWindowOpened(testStepResult, "Purchase alert");
-
-            return testStepResult;
-        }
+        public bool IsPurchaseAlertDisplayed() => IsElementDisplayedAfterWaiting(PurchaseAlertLocator);
 
         public By PurchaseAlertLocator => By.CssSelector(".sweet-alert");
 

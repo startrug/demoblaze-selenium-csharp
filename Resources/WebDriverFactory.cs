@@ -26,10 +26,10 @@ namespace demoblaze_selenium_csharp.Resources
         }
         private IWebDriver GetChromeDriver()
         {
-            ChromeOptions _options = new ChromeOptions();
+            ChromeOptions options = new ChromeOptions();
 
-            _options.AddArguments("start-maximized");
-            _options.AddArguments("--disable-extensions");
+            options.AddArguments("start-maximized");
+            options.AddArguments("--disable-extensions");
 
             var outputDirectory = GetAssemblysOutputDirectory();
             var directoryWithChromeDriver = CreateFilePath(outputDirectory);
@@ -39,7 +39,7 @@ namespace demoblaze_selenium_csharp.Resources
                 directoryWithChromeDriver = CreateFilePath(outputDirectory);
             }
 
-            return new ChromeDriver(directoryWithChromeDriver, _options);
+            return new ChromeDriver(directoryWithChromeDriver, options);
         }
 
         private IWebDriver GetFirefoxDriver()
@@ -68,7 +68,7 @@ namespace demoblaze_selenium_csharp.Resources
             return new EdgeDriver(directoryWithEdgeDriver);
         }
         private static string CreateFilePath(string outputDirectory)
-            => Path.GetFullPath(Path.Combine(outputDirectory ?? throw new InvalidOperationException(), @"..\..\..\demoblaze-selenium-csharp\bin\Debug\Resources"));
+            => Path.GetFullPath(Path.Combine(outputDirectory ?? throw new InvalidOperationException(), @"..\..\..\demoblaze-selenium-csharp\bin\Debug"));
 
         private static string GetAssemblysOutputDirectory() => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
     }

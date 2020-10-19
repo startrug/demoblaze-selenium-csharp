@@ -1,9 +1,7 @@
 ﻿using System;
 using demoblaze_selenium_csharp.Enums;
-using demoblaze_selenium_csharp.Helpers;
 using demoblaze_selenium_csharp.Values;
 using OpenQA.Selenium;
-using ReportingLibrary;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -17,35 +15,16 @@ namespace demoblaze_selenium_csharp.Pages
         internal void GoTo()
         {
             Driver.Navigate().GoToUrl(HomePageUrl);
-            Reporter.LogPassingTestStep($"Opening demoblaze.com homepage");
         }
 
-        internal bool IsPageOpened()
-        {
-            var testStepResult = Driver.FindElement(HomeLinkLocator).Displayed;
-            LoggerHelpers.LogInfoAboutPageOrWindowOpening("Homepage");
+        internal bool IsPageOpened() => Driver.FindElement(HomeLinkLocator).Displayed;
 
-            return testStepResult;
-        }
-
-        internal bool IsPageTitleCorrect()
-        {
-            var testStepResult = Driver.Title == HomePageTitle;
-            Reporter.LogTestStep(
-                testStepResult,
-                "Page title is correct",
-                $"Expected page title was {HomePageTitle} but actual page title is: {Driver.Title}"
-                );
-
-            return testStepResult;
-        }
+        internal bool IsPageTitleCorrect() => Driver.Title == HomePageTitle;
 
         public ProductPage SelectProductAndOpenProductPage(Product product)
         {
             SelectCategory(product.Category);
-            Reporter.LogPassingTestStep($"Category \"{product.Category}\" has been selected");
             ClickOnElementAfterWaiting(ProductLocator(product.ProductName));
-            Reporter.LogPassingTestStep($"Product \"{product.ProductName}\" has been selected");
 
             return new ProductPage(Driver);
         }
