@@ -6,19 +6,19 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 
-namespace demoblaze_selenium_csharp.Resources
+namespace demoblaze_selenium_csharp.Helpers
 {
     public class WebDriverFactory
     {
-        public IWebDriver Create(BrowserType browserType)
+        public IWebDriver Create(BrowserName browserName)
         {
-            switch (browserType)
+            switch (browserName)
             {
-                case BrowserType.Chrome:
+                case BrowserName.Chrome:
                     return GetChromeDriver();
-                case BrowserType.Firefox:
+                case BrowserName.Firefox:
                     return GetFirefoxDriver();
-                case BrowserType.Edge:
+                case BrowserName.Edge:
                     return GetEdgeDriver();
                 default:
                     throw new ArgumentOutOfRangeException("No such browser exist");

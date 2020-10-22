@@ -9,14 +9,14 @@ namespace demoblaze_selenium_csharp.Pages
 
         internal bool IsCartPageOpened() => IsElementDisplayedAfterWaiting(AddToCartButtonlocator);
 
-        public int AddProductToCart()
+        public void AddProductToCart()
         {
             var productPrice = GetProductPrice();
 
             ClickOnElementAfterWaiting(AddToCartButtonlocator);
             WaitForBrowserAlert();
 
-            return productPrice;
+            CartPage.TotalAmount += productPrice;
         }
 
         public int GetProductPrice()

@@ -9,15 +9,15 @@ namespace demoblaze_selenium_csharp.Tests
         [Test]
         public void WhenCustomerOpensContactPage_ThenPageIsOpened()
         {
-            Assert.That(TestedPageOrWindow.IsWindowOpened(), Is.True);
+            Assert.IsTrue(TestedPageOrWindow.IsWindowOpened());
         }
 
         [Test]
         public void GivenCustomerContactFormData_WhenCustomerFillOutContactFormAndClickSendMessageButton_ThenMessageIsSent()
         {
-            TestedPageOrWindow.FillOutFormWithBrowserAlert(TestUser);
+            TestedPageOrWindow.FillOutFormWithBrowserAlert(User);
 
-            Assert.That(TestedPageOrWindow.IsMessageSentSuccessfully, Is.True);
+            Assert.IsTrue(TestedPageOrWindow.IsMessageSentSuccessfully());
         }
 
         [Test]
@@ -25,7 +25,7 @@ namespace demoblaze_selenium_csharp.Tests
         {
             TestedPageOrWindow.ClickCloseWindow();
 
-            Assert.That(TestedPageOrWindow.IsWindowClosed(), Is.True);
+            Assert.IsTrue(TestedPageOrWindow.IsWindowClosed());
         }
 
         protected override ContactWindow SelectTestedAppPage()

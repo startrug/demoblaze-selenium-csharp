@@ -1,0 +1,11 @@
+﻿{
+  "Email": "anowak@poczta.pl",
+  "Name": "Anna Nowak",
+  "Message": "Sample message",
+  "Password": "Test123!",
+  "CreditCardNumber": "4551831919693310",
+  "ExpirationMonth": "2",
+  "ExpirationYear": "2025",
+  "Country": "Canada",
+  "City": "Vancouver"
+}

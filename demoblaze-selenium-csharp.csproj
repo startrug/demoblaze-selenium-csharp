@@ -41,8 +41,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp, Version=0.14.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>packages\AngleSharp.0.14.0\lib\net472\AngleSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Bogus, Version=31.0.3.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
+      <HintPath>packages\Bogus.31.0.3\lib\net40\Bogus.dll</HintPath>
+    </Reference>
     <Reference Include="DnsClient, Version=1.0.7.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
       <HintPath>packages\DnsClient.1.0.7\lib\net45\DnsClient.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -50,6 +59,9 @@
     </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Win32.Registry.4.7.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\MongoDB.Bson.2.7.2\lib\net45\MongoDB.Bson.dll</HintPath>
@@ -81,13 +93,25 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
@@ -99,12 +123,16 @@
     <Reference Include="WebDriver.Support, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Selenium.Support.3.141.0\lib\net45\WebDriver.Support.dll</HintPath>
     </Reference>
+    <Reference Include="WebDriverManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\WebDriverManager.2.11.0\lib\netstandard2.0\WebDriverManager.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\Alerts.cs" />
     <Compile Include="Pages\Slider.cs" />
-    <Compile Include="Resources\BrowserType.cs" />
-    <Compile Include="Resources\WebDriverFactory.cs" />
+    <Compile Include="Providers\DataProvider.cs" />
+    <Compile Include="Helpers\BrowserName.cs" />
+    <Compile Include="Helpers\WebDriverFactory.cs" />
     <Compile Include="Pages\NavigationBar.cs" />
     <Compile Include="Values\AlertType.cs" />
     <Compile Include="Pages\BasePage.cs" />
@@ -121,12 +149,10 @@
     <Compile Include="Pages\LogInWindow.cs" />
     <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="Pages\CartPage.cs" />
-    <Compile Include="Tests\CartAndOrderTestsBase.cs" />
     <Compile Include="Tests\HomepageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\SignUpWindow.cs" />
     <Compile Include="Tests\ContactTests.cs" />
-    <Compile Include="Tests\LogInBaseTest.cs" />
     <Compile Include="Pages\OrderWindow.cs" />
     <Compile Include="Values\Product.cs" />
     <Compile Include="Tests\SignUpTests.cs" />
@@ -135,6 +161,8 @@
     <Compile Include="Tests\OrderTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Data\Products.json" />
+    <None Include="Data\User.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
@@ -152,4 +180,5 @@
   </Target>
   <Import Project="packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets" Condition="Exists('packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="packages\Selenium.WebDriver.ChromeDriver.86.0.4240.2200\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('packages\Selenium.WebDriver.ChromeDriver.86.0.4240.2200\build\Selenium.WebDriver.ChromeDriver.targets')" />
+  <ProjectExtensions />
 </Project>

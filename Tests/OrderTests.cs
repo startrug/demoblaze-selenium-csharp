@@ -7,13 +7,23 @@ using NUnit.Framework;
 namespace demoblaze_selenium_csharp.Tests
 {
     [TestFixture, Category("OrderTests")]
-    public class OrderTests : CartAndOrderTestsBase
+    public class OrderTests : BaseTest<HomePage>
     {
+        [SetUp]
+        public void ResetTotalAmount()
+        {
+            CartPage.Reset();
+        }
+
         [Test]
         public void GivenRequiredCustomerData_WhenCustomerFillsOutOrderForm_ThenPurchaseAlertWithInputtedDataIsShowed()
         {
-            var orderWindow = ClickPlaceOrder();
-            var purchaseAlert = orderWindow.FillOutFormAndPurchase(TestUser);
+            var cartPage = NavigationBar.ClickCartLink();
+
+            Assert.IsTrue(cartPage.IsCartPageOpened());
+
+            var orderWindow = cartPage.PlaceOrder();
+            var purchaseAlert = orderWindow.FillOutFormAndPurchase(User);
 
             ValidatePurchaseAlertMessage(purchaseAlert);
         }
@@ -21,17 +31,20 @@ namespace demoblaze_selenium_csharp.Tests
         [Test]
         public void GivenProductAndAllCustomerData_WhenCustomerAddsProductToCartFillsOutOrderFormAndConfirmsIt_ThenPurchaseAlertWithInputtedDataIsShowed()
         {
-            var productPage = TestedPageOrWindow.SelectProductAndOpenProductPage(NewMonitor);
+            var productPage = TestedPageOrWindow.SelectProductAndOpenProductPage(Products[0]);
+            productPage.AddProductToCart();
 
-            totalAmount = productPage.AddProductToCart();
+            Assert.IsTrue(productPage.IsProductAddedAlertShowed());
 
-            Assert.That(productPage.IsProductAddedAlertShowed, Is.True);
+            var cartPage = NavigationBar.ClickCartLink();
 
-            var orderWindow = ClickPlaceOrder();
+            Assert.IsTrue(cartPage.IsProductAddedToCart(Products[0].ProductName));
 
-            Assert.That(orderWindow.GetTotalAmountFromOrderWindow() == totalAmount, Is.True);
+            var orderWindow = cartPage.PlaceOrder();
 
-            var purchaseAlert = orderWindow.FillOutFormAndPurchase(TestUser);
+            Assert.AreEqual(orderWindow.GetTotalAmountFromOrderWindow(), CartPage.TotalAmount);
+
+            var purchaseAlert = orderWindow.FillOutFormAndPurchase(User);
 
             ValidatePurchaseAlertMessage(purchaseAlert);
         }
@@ -39,27 +52,24 @@ namespace demoblaze_selenium_csharp.Tests
         [Test]
         public void WhenCustomerDidNotFillOutRequiredFildsOfOrderFormAndAcceptIt_ThenEnterRequiredDataAlertIsShowed()
         {
-            var orderWindow = ClickPlaceOrder();
+            var cartPage = NavigationBar.ClickCartLink();
+            cartPage.CheckProductsTable();
+            var orderWindow = cartPage.PlaceOrder();
             orderWindow.SubmitWindow();
 
-            Assert.That(orderWindow.IsEnterRequiredDataAlertShowed(), Is.True);
+            Assert.IsTrue(orderWindow.IsEnterRequiredDataAlertShowed());
         }
 
-        private OrderWindow ClickPlaceOrder()
-        {
-            var cartPage = NavigationBar.ClickCartLink();
-
-            return cartPage.PlaceOrder();
-        }
+        protected override HomePage SelectTestedAppPage() => NavigationBar.ClickHomeLink();
 
         private void ValidatePurchaseAlertMessage(PurchaseAlert purchaseAlert)
         {
             var currentDate = DateTime.Today.AddMonths(-1).ToString("d/M/yyyy", CultureInfo.CreateSpecificCulture("en-US"));
 
             Assert.That(purchaseAlert.IsPurchaseAlertDisplayed(), Is.True);
-            Assert.AreEqual(TestUser.Name, purchaseAlert.GetPurchaseUserName());
-            Assert.AreEqual(totalAmount + " USD", purchaseAlert.GetPurchaseTotalAmount());
-            Assert.AreEqual(TestUser.CreditCardNumber, purchaseAlert.GetPurchaseCreditCardNumber());
+            Assert.AreEqual(User.Name, purchaseAlert.GetPurchaseUserName());
+            Assert.AreEqual(CartPage.TotalAmount + " USD", purchaseAlert.GetPurchaseTotalAmount());
+            Assert.AreEqual(User.CreditCardNumber, purchaseAlert.GetPurchaseCreditCardNumber());
             Assert.AreEqual(currentDate, purchaseAlert.GetPurchaseDate());
         }
     }
