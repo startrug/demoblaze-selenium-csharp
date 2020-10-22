@@ -1,38 +1,46 @@
-﻿using demoblaze_selenium_csharp.Enums;
+﻿using System.Collections.Generic;
+using System.Linq;
+using demoblaze_selenium_csharp.Enums;
 using demoblaze_selenium_csharp.Pages;
+using demoblaze_selenium_csharp.Values;
 using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests
 {
     [TestFixture, Category("CartTests")]
-    public class CartTests : CartAndOrderTestsBase
+    public class CartTests : BaseTest<HomePage>
     {
+        [SetUp]
+        public void ResetTotalAmount()
+        {
+            CartPage.Reset();
+        }
+
         [Test]
         public void WhenUserOpensCartPage_ThenPageIsOpened()
         {
             var cartPage = NavigationBar.ClickCartLink();
 
-            Assert.That(cartPage.IsCartPageOpened(), Is.True);
+            Assert.IsTrue(cartPage.IsCartPageOpened());
         }
 
-        [Test, Order(7)]
+        [Test]
         public void GivenListOfProducts_WhenCustomerAddProductsToCart_ThenProductAddedSuccesfullyAlertShowedAndProductIsPresentInCartAndCorrectPriceIsDisplayed()
         {
-            var productList = GnerateListOfProducts(NewMonitor, NewPhone);
             CartPage cartPage;
+            var productList = GnerateListOfProducts(Products[0], Products[1]);
 
             foreach (var product in productList)
             {
                 var productPage = TestedPageOrWindow.SelectProductAndOpenProductPage(product);
+                productPage.AddProductToCart();
 
-                totalAmount += productPage.AddProductToCart();
-
-                Assert.That(productPage.IsProductAddedAlertShowed(), Is.True);
+                Assert.IsTrue(productPage.IsProductAddedAlertShowed());
 
                 cartPage = NavigationBar.ClickCartLink();
 
-                Assert.That(cartPage.IsProductAddedToCart(product.ProductName), Is.True);
-                Assert.That(totalAmount == cartPage.GetTotalPrice, Is.True);
+                Assert.IsTrue(cartPage.IsProductAddedToCart(product.ProductName));
+                Assert.IsTrue(CartPage.TotalAmount == cartPage.GetTotalPrice);
 
                 SelectTestedAppPage();
             }
@@ -41,38 +49,41 @@ namespace demoblaze_selenium_csharp.Tests
         [Test]
         public void GivenProduct_WhenCustomerAddsProductsToCartAndRemovesThem_ThenTotalOfTheOrderIsNotDisplayed()
         {
-            var productPage = TestedPageOrWindow.SelectProductAndOpenProductPage(NewNotebook);
+            var productPage = TestedPageOrWindow.SelectProductAndOpenProductPage(Products[2]);
+            productPage.AddProductToCart();
 
-            totalAmount = productPage.AddProductToCart();
-
-            Assert.That(productPage.IsProductAddedAlertShowed(), Is.True);
+            Assert.IsTrue(productPage.IsProductAddedAlertShowed());
 
             var cartPage = NavigationBar.ClickCartLink();
 
-            Assert.That(cartPage.IsProductAddedToCart(NewNotebook.ProductName), Is.True);
+            Assert.IsTrue(cartPage.IsProductAddedToCart(Products[2].ProductName));
 
             cartPage.RemoveProductFromCart();
 
-            Assert.That(cartPage.IsProductRemovedFromCart(NewNotebook.ProductName), Is.True);
-            Assert.That(cartPage.IsTotalOrderVisible(), Is.False);
+            Assert.IsTrue(cartPage.IsProductRemovedFromCart(Products[2].ProductName));
+            Assert.IsFalse(cartPage.IsTotalOrderVisible());
         }
 
         [Test]
         public void GivenProduct_WhenCustomerAddsProductToCartAndConfirmsOrder_ThenOrderWindowIsDisplayed()
         {
-            var productPage = TestedPageOrWindow.SelectProductAndOpenProductPage(NewPhone);
+            var productPage = TestedPageOrWindow.SelectProductAndOpenProductPage(Products[1]);
+            productPage.AddProductToCart();
 
-            totalAmount = productPage.AddProductToCart();
-
-            Assert.That(productPage.IsProductAddedAlertShowed(), Is.True);
+            Assert.IsTrue(productPage.IsProductAddedAlertShowed());
 
             var cartPage = NavigationBar.ClickCartLink();
 
-            Assert.That(cartPage.IsProductAddedToCart(NewPhone.ProductName), Is.True);
+            Assert.IsTrue(cartPage.IsProductAddedToCart(Products[1].ProductName));
 
             var orderWindow = cartPage.PlaceOrder();
 
-            Assert.That(orderWindow.IsWindowOpened(), Is.True);
+            Assert.IsTrue(orderWindow.IsWindowOpened());
         }
+
+        protected override HomePage SelectTestedAppPage() => NavigationBar.ClickHomeLink();
+
+        private static List<Product> GnerateListOfProducts(params Product[] products)
+            => products.Select(p => p).ToList();
     }
 }

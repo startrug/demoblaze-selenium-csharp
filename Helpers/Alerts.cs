@@ -4,11 +4,9 @@ namespace demoblaze_selenium_csharp.Helpers
 {
     public class Alerts
     {
-        protected IWebDriver Driver { get; set; }
-
         public Alerts(IWebDriver driver)
         {
-            Driver = driver;
+            this.driver = driver;
         }
 
         public bool IsBrowserAlertContainsExpectedMessage(string exepectedAlertMessage)
@@ -19,10 +17,12 @@ namespace demoblaze_selenium_csharp.Helpers
 
         public string GetAlertTextAndAcceptAlert()
         {
-            IAlert alert = Driver.SwitchTo().Alert();
+            IAlert alert = driver.SwitchTo().Alert();
             var alertMessage = alert.Text;
             alert.Accept();
             return alertMessage;
         }
+
+        private readonly IWebDriver driver;
     }
 }

@@ -7,28 +7,28 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public NavigationBar(IWebDriver driver) : base(driver) { }
 
-        internal ContactWindow ClickContactLink()
+        public ContactWindow ClickContactLink()
         {
             Click(By.LinkText("Contact"));
 
             return new ContactWindow(Driver);
         }
 
-        internal SignUpWindow ClickSignUpLink()
+        public SignUpWindow ClickSignUpLink()
         {
             Click(By.Id("signin2"));
 
             return new SignUpWindow(Driver);
         }
 
-        internal LogInWindow ClickLogInLink()
+        public LogInWindow ClickLogInLink()
         {
             Click(By.Id("login2"));
 
             return new LogInWindow(Driver);
         }
 
-        internal CartPage ClickCartLink()
+        public CartPage ClickCartLink()
         {
             Click(By.Id("cartur"));
             Thread.Sleep(500);
@@ -36,14 +36,14 @@ namespace demoblaze_selenium_csharp.Pages
             return new CartPage(Driver);
         }
 
-        internal HomePage ClickHomeLink()
+        public HomePage ClickHomeLink()
         {
             Click(HomeLinkLocator);
 
             return new HomePage(Driver);
         }
 
-        internal AboutUsWindow ClickAboutLink()
+        public AboutUsWindow ClickAboutLink()
         {
             Click(By.LinkText("About us"));
 

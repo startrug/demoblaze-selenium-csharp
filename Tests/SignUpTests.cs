@@ -1,4 +1,6 @@
-﻿using demoblaze_selenium_csharp.Pages;
+﻿using Bogus;
+using demoblaze_selenium_csharp.Pages;
+using demoblaze_selenium_csharp.Values;
 using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests
@@ -9,34 +11,46 @@ namespace demoblaze_selenium_csharp.Tests
         [Test]
         public void WhenUserOpensSignUpWindow_ThenWindowIsOpened()
         {
-            Assert.That(TestedPageOrWindow.IsWindowOpened(), Is.True);
+            Assert.IsTrue(TestedPageOrWindow.IsWindowOpened());
         }
 
         [Test]
         public void GivenNonExistingUserNameAndPassword_WhenUserFilledOutSignUpForm_ThenSuccessfullSigningInAlertIsShowed()
         {
-            TestedPageOrWindow.FillOutFormWithBrowserAlert(TestUser);
+            var fakeUser = GenerateFakeUser();
 
-            Assert.That(TestedPageOrWindow.IsUserSignedInSuccessfullyAlertShowed, Is.False);
+            TestedPageOrWindow.FillOutFormWithBrowserAlert(fakeUser);
+
+            Assert.IsTrue(TestedPageOrWindow.IsUserSignedInSuccessfullyAlertShowed());
         }
 
         [Test]
         public void GivenExistingUserNameAndPassword_WhenUserFilledOutSignUpForm_ThenSuccessfullSigningInAlertIsShowed()
         {
-            TestedPageOrWindow.FillOutFormWithBrowserAlert(TestUser);
+            TestedPageOrWindow.FillOutFormWithBrowserAlert(User);
 
-            Assert.That(TestedPageOrWindow.IsUserAlreadyExistaAlertShowed, Is.True);
+            Assert.IsTrue(TestedPageOrWindow.IsUserAlreadyExistaAlertShowed());
         }
 
         [Test]
         public void WhenUserDidNotFillOutSignUpFormAndAcceptIt_ThenRequestToCompleteFormAlertIsShowed()
         {
-            TestedPageOrWindow.FillOutFormWithBrowserAlert(TestUserWithMissingData);
+            TestedPageOrWindow.FillOutFormWithBrowserAlert(new User() { Name = string.Empty, Password = string.Empty });
 
-            Assert.That(TestedPageOrWindow.IsRequestToCompleteFormAlertIsShowed, Is.True);
+            Assert.IsTrue(TestedPageOrWindow.IsRequestToCompleteFormAlertIsShowed());
         }
 
         protected override SignUpWindow SelectTestedAppPage()
             => NavigationBar.ClickSignUpLink();
+
+        private User GenerateFakeUser()
+        {
+            var faker = new Faker("pl");
+            return new User()
+            {
+                Name = faker.Name.FirstName(),
+                Password = faker.Internet.Password()
+            };
+        }
     }
 }

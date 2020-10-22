@@ -10,8 +10,8 @@ namespace demoblaze_selenium_csharp.Tests
         [Test]
         public void WhenCustomerOpensHomepage_ThenHomepageIsOpenedAndPageTitleIsCorrect()
         {
-            Assert.That(TestedPageOrWindow.IsPageOpened(), Is.True);
-            Assert.That(TestedPageOrWindow.IsPageTitleCorrect(), Is.True);
+            Assert.IsTrue(TestedPageOrWindow.IsPageOpened());
+            Assert.IsTrue(TestedPageOrWindow.IsPageTitleCorrect());
         }
 
         [Test]
@@ -19,14 +19,14 @@ namespace demoblaze_selenium_csharp.Tests
         {
             var aboutUsWindow = NavigationBar.ClickAboutLink();
 
-            Assert.That(aboutUsWindow.IsWindowOpened(), Is.True);
-            Assert.That(aboutUsWindow.IsVideoAvailable(), Is.True);
+            Assert.IsTrue(aboutUsWindow.IsWindowOpened());
+            Assert.IsTrue(aboutUsWindow.IsVideoAvailable());
         }
 
         [Test]
         public void WhenCustomerClicksNextButtonOnSlider_ThenImageChanges()
         {
-            Assert.That(TestedPageOrWindow.Slider.IsImageChanged(), Is.True);
+            Assert.IsTrue(TestedPageOrWindow.Slider.IsImageChanged());
         }
 
         protected override HomePage SelectTestedAppPage()

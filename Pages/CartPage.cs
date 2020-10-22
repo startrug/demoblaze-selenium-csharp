@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using System.Linq;
+using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
 {
@@ -6,29 +8,40 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public CartPage(IWebDriver driver) : base(driver) { }
 
-        internal bool IsCartPageOpened()
-        {
-            var testStepResult = IsElementDisplayedAfterWaiting(PlaceOrderButtonLocator);
+        internal bool IsCartPageOpened() => Driver.FindElement(By.TagName("h2")).Displayed;
 
-            return testStepResult;
+        public void CheckProductsTable()
+        {
+            string[] expectedHeaders = { "Pic", "Title", "Price", "x" };
+            var i = 0;
+            foreach (var item in Driver.FindElements(By.CssSelector("tr th")).Select(e => e.Text))
+            {
+                Assert.AreEqual(expectedHeaders[i], item);
+                i++;
+            }
         }
 
-        internal bool IsProductAddedToCart(string productName) => IsElementDisplayedAfterWaiting(ProductNameInCartLocator(productName));
+        public bool IsProductAddedToCart(string productName) => IsElementDisplayedAfterWaiting(ProductNameInCartLocator(productName));
 
         public void RemoveProductFromCart() => ClickOnElementAfterWaiting(DeleteProductLocator);
 
         public By ProductNameInCartLocator(string productName)
             => By.XPath($"//td[text()='{productName}']");
 
-        internal bool IsProductRemovedFromCart(string productName) => IsElementDisappearedAfterWaiting(ProductNameInCartLocator(productName));
+        public bool IsProductRemovedFromCart(string productName) => IsElementDisappearedAfterWaiting(ProductNameInCartLocator(productName));
 
-        internal bool IsTotalOrderVisible() => IsElementDisplayedImmediately(TotalPriceLocator);
+        public bool IsTotalOrderVisible() => IsElementDisplayedImmediately(TotalPriceLocator);
 
         public OrderWindow PlaceOrder()
         {
-            ClickOnElementAfterWaiting(PlaceOrderButtonLocator);
+            Click(PlaceOrderButtonLocator);
 
             return new OrderWindow(Driver);
+        }
+
+        public static void Reset()
+        {
+            TotalAmount = 0;
         }
 
         public By TotalPriceLocator => By.Id("totalp");
@@ -36,6 +49,8 @@ namespace demoblaze_selenium_csharp.Pages
 
         public int GetTotalPrice => int.Parse(GetTextOfElement(TotalPriceLocator));
 
-        public By PlaceOrderButtonLocator => By.CssSelector(".btn-success");
+        public By PlaceOrderButtonLocator => By.CssSelector("[data-target='#orderModal']");
+
+        public static int TotalAmount { get; set; }
     }
 }
