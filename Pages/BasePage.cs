@@ -17,7 +17,7 @@ namespace demoblaze_selenium_csharp.Pages
 
         protected IWebDriver Driver { get; private set; }
         protected WebDriverWait Wait { get; private set; }
-        protected Alerts Alert { get; private set; }
+        protected Alerts Alert { get; set; }
 
         protected void Click(By locator) => Driver.FindElement(locator).Click();
 

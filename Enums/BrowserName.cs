@@ -1,4 +1,4 @@
-﻿namespace demoblaze_selenium_csharp.Helpers
+﻿namespace demoblaze_selenium_csharp.Enums
 {
     public enum BrowserName
     {

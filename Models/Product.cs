@@ -1,6 +1,6 @@
 ﻿using demoblaze_selenium_csharp.Enums;
 
-namespace demoblaze_selenium_csharp.Values
+namespace demoblaze_selenium_csharp.Models
 {
     public class Product
     {
