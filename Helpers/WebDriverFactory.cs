@@ -4,7 +4,7 @@ using demoblaze_selenium_csharp.Models;
 using demoblaze_selenium_csharp.Providers;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
+using Microsoft.Edge.SeleniumTools;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using WebDriverManager;
@@ -15,11 +15,6 @@ namespace demoblaze_selenium_csharp.Helpers
     public class WebDriverFactory
     {
         public WebDriverListener GetWebDriver(WebDriverConfiguration driverConfig, Logger logger)
-        {
-            return GetLocalWebDriver(driverConfig, logger);
-        }
-
-        private WebDriverListener GetLocalWebDriver(WebDriverConfiguration driverConfig, Logger logger)
         {
             switch (driverConfig.BrowserName)
             {

@@ -1,6 +1,6 @@
 ﻿{
   "webdriver": {
-    "BrowserName": "Firefox",
+    "BrowserName": "Edge",
     "ScreenshotsPath": "C:\\screenshots\\STORE",
     "DefaultTimeout": "10",
     "BrowserLanguage": "en"

@@ -1,9 +1,9 @@
 ﻿using demoblaze_selenium_csharp.Models;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using Microsoft.Edge.SeleniumTools;
 
 namespace demoblaze_selenium_csharp.Helpers
 {
@@ -43,11 +43,13 @@ namespace demoblaze_selenium_csharp.Helpers
 
         public static EdgeOptions EdgeOptions()
         {
-            return new EdgeOptions
-            {
-                PageLoadStrategy = PageLoadStrategy.Normal,
-                UseInPrivateBrowsing = true
-            };
+            var options = new EdgeOptions();
+            options.AddArgument("start-maximized");
+            options.UseChromium = true;
+            options.PageLoadStrategy = PageLoadStrategy.Normal;
+            options.UseInPrivateBrowsing = true;
+
+            return options;
         }
     }
 }

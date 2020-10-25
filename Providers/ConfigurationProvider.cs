@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Configuration;
 using System.IO;
 using demoblaze_selenium_csharp.Models;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace demoblaze_selenium_csharp.Providers
@@ -22,16 +20,7 @@ namespace demoblaze_selenium_csharp.Providers
         public static EnvironmentConfiguration Environment =>
             Load<EnvironmentConfiguration>(EnvironmentConfigSectionName);
 
-        private static T Load<T>(string sectionName)
-        {
-            var json = File.ReadAllText(SettingsPath);
-            return JObject.Parse(json).SelectToken(sectionName).ToObject<T>();
-            //return JsonConvert.DeserializeObject<T>();
-        }
-
-        public static WebDriverConfiguration LoadDriverConfig()
-        {
-            return (WebDriverConfiguration)ConfigurationManager.GetSection(WebDriverConfigSectionName);
-        }
+        private static T Load<T>(string sectionName) =>
+            JObject.Parse(File.ReadAllText(SettingsPath)).SelectToken(sectionName).ToObject<T>();
     }
 }
