@@ -1,0 +1,12 @@
+﻿{
+  "webdriver": {
+    "BrowserName": "Edge",
+    "ScreenshotsPath": "C:\\screenshots\\STORE",
+    "DefaultTimeout": "10",
+    "BrowserLanguage": "en"
+  },
+  "environment": {
+    "ApplicationName": "STORE",
+    "ApplicationUrl": "https://www.demoblaze.com/index.html"
+  }
+}

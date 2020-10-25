@@ -1,4 +1,4 @@
-﻿using demoblaze_selenium_csharp.Values;
+﻿using demoblaze_selenium_csharp.Data;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -27,7 +27,7 @@ namespace demoblaze_selenium_csharp.Pages
             return int.Parse(priceText);
         }
 
-        public bool IsProductAddedAlertShowed() => IsBrowserAlertShowed(AlertType.ProductAddedSuccesfullyAlert);
+        public bool IsProductAddedAlertShowed() => IsBrowserAlertShowed(AlertMessages.ProductAddedSuccesfully);
 
         public By AddToCartButtonlocator => By.CssSelector("[onclick^='addToCart']");
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using demoblaze_selenium_csharp.Enums;
-using demoblaze_selenium_csharp.Values;
+using demoblaze_selenium_csharp.Models;
+using demoblaze_selenium_csharp.Providers;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -19,7 +20,7 @@ namespace demoblaze_selenium_csharp.Pages
 
         internal bool IsPageOpened() => Driver.FindElement(HomeLinkLocator).Displayed;
 
-        internal bool IsPageTitleCorrect() => Driver.Title == HomePageTitle;
+        internal bool IsPageTitleCorrect() => Driver.Title.Equals(HomePageTitle);
 
         public ProductPage SelectProductAndOpenProductPage(Product product)
         {
@@ -56,6 +57,6 @@ namespace demoblaze_selenium_csharp.Pages
         public Slider Slider { get; private set; }
 
         private const string HomePageTitle = "STORE";
-        private const string HomePageUrl = "https://www.demoblaze.com/index.html";
+        private static Uri HomePageUrl => new Uri(ConfigurationProvider.Environment.ApplicationUrl);
     }
 }

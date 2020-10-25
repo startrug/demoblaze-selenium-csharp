@@ -54,6 +54,15 @@
       <HintPath>packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Edge.SeleniumTools, Version=3.141.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Edge.SeleniumTools.3.141.2\lib\net45\Microsoft.Edge.SeleniumTools.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=3.1.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.Abstractions.3.1.9\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Primitives.3.1.9\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
     </Reference>
@@ -85,16 +94,23 @@
       <HintPath>packages\DotNetSeleniumExtras.WaitHelpers.3.11.0\lib\net45\SeleniumExtras.WaitHelpers.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.2\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
@@ -129,12 +145,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\Alerts.cs" />
+    <Compile Include="Helpers\WebDriverListener.cs" />
+    <Compile Include="Helpers\WebDriverSettings.cs" />
+    <Compile Include="Models\EnvironmentConfiguration.cs" />
+    <Compile Include="Models\WebDriverConfiguration.cs" />
     <Compile Include="Pages\Slider.cs" />
+    <Compile Include="Providers\ConfigurationProvider.cs" />
     <Compile Include="Providers\DataProvider.cs" />
-    <Compile Include="Helpers\BrowserName.cs" />
+    <Compile Include="Enums\BrowserName.cs" />
     <Compile Include="Helpers\WebDriverFactory.cs" />
     <Compile Include="Pages\NavigationBar.cs" />
-    <Compile Include="Values\AlertType.cs" />
+    <Compile Include="Data\AlertMessages.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\BaseWindow.cs" />
     <Compile Include="Enums\LinkText.cs" />
@@ -142,7 +163,7 @@
     <Compile Include="Pages\LoggedInUserHomePage.cs" />
     <Compile Include="Pages\ProductPage.cs" />
     <Compile Include="Pages\PurchaseAlert.cs" />
-    <Compile Include="Values\User.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\ContactWindow.cs" />
     <Compile Include="Pages\AboutUsWindow.cs" />
@@ -154,16 +175,18 @@
     <Compile Include="Pages\SignUpWindow.cs" />
     <Compile Include="Tests\ContactTests.cs" />
     <Compile Include="Pages\OrderWindow.cs" />
-    <Compile Include="Values\Product.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Tests\SignUpTests.cs" />
     <Compile Include="Tests\LogInTests.cs" />
     <Compile Include="Tests\CartTests.cs" />
     <Compile Include="Tests\OrderTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Data\Products.json" />
     <None Include="Data\User.json" />
     <None Include="packages.config" />
+    <None Include="TestSettings.json" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

@@ -1,4 +1,4 @@
-﻿using demoblaze_selenium_csharp.Values;
+﻿using demoblaze_selenium_csharp.Models;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages

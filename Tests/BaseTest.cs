@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using demoblaze_selenium_csharp.Helpers;
+using demoblaze_selenium_csharp.Models;
 using demoblaze_selenium_csharp.Pages;
 using demoblaze_selenium_csharp.Providers;
-using demoblaze_selenium_csharp.Values;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Tests
@@ -16,7 +18,9 @@ namespace demoblaze_selenium_csharp.Tests
             User = DataProvider.Load<User>("User");
             Products = DataProvider.Load<List<Product>>("Products");
 
-            driver = new WebDriverFactory().Create(BrowserName.Chrome);
+            var driverConfig = ConfigurationProvider.WebDriver;
+            var logger = new Logger("logger", InternalTraceLevel.Info, TextWriter.Null);
+            driver = new WebDriverFactory().GetWebDriver(driverConfig, logger);
             demoBlazeHomePage = new HomePage(driver);
             NavigationBar = new NavigationBar(driver);
 

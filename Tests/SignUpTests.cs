@@ -1,6 +1,6 @@
 ﻿using Bogus;
+using demoblaze_selenium_csharp.Models;
 using demoblaze_selenium_csharp.Pages;
-using demoblaze_selenium_csharp.Values;
 using NUnit.Framework;
 
 namespace demoblaze_selenium_csharp.Tests
