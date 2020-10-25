@@ -1,5 +1,5 @@
-﻿using demoblaze_selenium_csharp.Models;
-using demoblaze_selenium_csharp.Values;
+﻿using demoblaze_selenium_csharp.Data;
+using demoblaze_selenium_csharp.Models;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -24,7 +24,7 @@ namespace demoblaze_selenium_csharp.Pages
             return int.Parse(GetTextOfElement(TotalAmountLocator).Substring(7));
         }
 
-        internal bool IsEnterRequiredDataAlertShowed() => IsBrowserAlertShowed(AlertType.EnterRequiredDataAlert);
+        internal bool IsEnterRequiredDataAlertShowed() => IsBrowserAlertShowed(AlertMessages.RequestToEnterRequiredData);
 
         public override void SetUserName(User userData)
             => SetText(WindowInputLocator("name"), userData.Name);

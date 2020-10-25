@@ -9,10 +9,8 @@ namespace demoblaze_selenium_csharp.Providers
     {
         private const string WebDriverConfigSectionName = "webdriver";
         private const string EnvironmentConfigSectionName = "environment";
-        private static readonly string SettingsPath = Path.Combine(AppDomain
-                        .CurrentDomain
-                        .BaseDirectory,
-                        $@"..\..\TestSettings.json");
+        private const string FilePath = @"..\..\TestSettings.json";
+        private static readonly string SettingsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FilePath);
 
         public static WebDriverConfiguration WebDriver =>
             Load<WebDriverConfiguration>(WebDriverConfigSectionName);

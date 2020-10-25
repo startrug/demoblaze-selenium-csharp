@@ -155,7 +155,7 @@
     <Compile Include="Enums\BrowserName.cs" />
     <Compile Include="Helpers\WebDriverFactory.cs" />
     <Compile Include="Pages\NavigationBar.cs" />
-    <Compile Include="Values\AlertType.cs" />
+    <Compile Include="Data\AlertMessages.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\BaseWindow.cs" />
     <Compile Include="Enums\LinkText.cs" />

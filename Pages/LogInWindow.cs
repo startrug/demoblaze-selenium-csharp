@@ -1,5 +1,5 @@
-﻿using demoblaze_selenium_csharp.Models;
-using demoblaze_selenium_csharp.Values;
+﻿using demoblaze_selenium_csharp.Data;
+using demoblaze_selenium_csharp.Models;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -17,9 +17,9 @@ namespace demoblaze_selenium_csharp.Pages
             return new LoggedInUserHomePage(Driver, customerData);
         }
 
-        public bool IsWrongPasswordAlertShowed() => IsBrowserAlertShowed(AlertType.WrongPasswordAlert);
+        public bool IsWrongPasswordAlertShowed() => IsBrowserAlertShowed(AlertMessages.WrongPassword);
 
-        internal bool IsRequestToCompleteFormAlertIsShowed() => IsBrowserAlertShowed(AlertType.RequestToCompleteFormAlert);
+        internal bool IsRequestToCompleteFormAlertIsShowed() => IsBrowserAlertShowed(AlertMessages.RequestToCompleteForm);
 
         public override void SetUserName(User userData) => SetText(WindowInputLocator("loginusername"), userData.Name);
 

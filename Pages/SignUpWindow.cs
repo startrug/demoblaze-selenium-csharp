@@ -1,5 +1,5 @@
-﻿using demoblaze_selenium_csharp.Models;
-using demoblaze_selenium_csharp.Values;
+﻿using demoblaze_selenium_csharp.Data;
+using demoblaze_selenium_csharp.Models;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -12,11 +12,11 @@ namespace demoblaze_selenium_csharp.Pages
 
         public override void SetUserName(User userData) => SetText(WindowInputLocator("sign-username"), userData.Name);
 
-        public bool IsUserSignedInSuccessfullyAlertShowed() => IsBrowserAlertShowed(AlertType.SignUpSuccessfullAlert);
+        public bool IsUserSignedInSuccessfullyAlertShowed() => IsBrowserAlertShowed(AlertMessages.SignUpSuccessfull);
 
-        public bool IsUserAlreadyExistaAlertShowed() => IsBrowserAlertShowed(AlertType.UserAlreadyExistsAlert);
+        public bool IsUserAlreadyExistaAlertShowed() => IsBrowserAlertShowed(AlertMessages.UserAlreadyExists);
 
-        public bool IsRequestToCompleteFormAlertIsShowed() => IsBrowserAlertShowed(AlertType.RequestToCompleteFormAlert);
+        public bool IsRequestToCompleteFormAlertIsShowed() => IsBrowserAlertShowed(AlertMessages.RequestToCompleteForm);
 
         public override string CurrentWindowId => "#signInModal";
         public override string WindowSubmitAction => "register()";

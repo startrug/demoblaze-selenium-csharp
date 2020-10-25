@@ -1,5 +1,5 @@
-﻿using demoblaze_selenium_csharp.Models;
-using demoblaze_selenium_csharp.Values;
+﻿using demoblaze_selenium_csharp.Data;
+using demoblaze_selenium_csharp.Models;
 using OpenQA.Selenium;
 
 namespace demoblaze_selenium_csharp.Pages
@@ -8,7 +8,7 @@ namespace demoblaze_selenium_csharp.Pages
     {
         public ContactWindow(IWebDriver driver) : base(driver) { }
 
-        public bool IsMessageSentSuccessfully() => IsBrowserAlertShowed(AlertType.MessageSentAlert);
+        public bool IsMessageSentSuccessfully() => IsBrowserAlertShowed(AlertMessages.MessageSent);
 
         public override void SetUserEmail(User userData) => SetText(WindowInputLocator("recipient-email"), userData.Email);
 
